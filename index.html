@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campione Interior Solutions | Commercial Flooring Contractor — Kansas City</title>
+<meta name="description" content="Campione Interior Solutions is a commercial flooring subcontractor serving the Kansas City metro since 2008. Carpet, resilient, tile, polished concrete and resinous systems for healthcare, education, multifamily and corporate interiors.">
+
+<!--
+================================================================================
+  CAMPIONE INTERIOR SOLUTIONS — one-page site
+  Built by Matt / Wave Search. Single file, no build step, no dependencies
+  beyond one webfont. Drop it on any static host.
+
+  ⚠️  BEFORE THIS GOES LIVE — replace everything marked [[ ]] below.
+      Search the file for "[[" to find them all.
+
+  CURRENT STATE (updated 2026-08-03, after the owner-facing pass):
+    • Projects section is commented out — no real projects yet. See the comment
+      block around the old <section id="projects"> for what's needed to restore it.
+    • Credentials grid shows "Available on request" instead of [[ ]] brackets for
+      bonding, EMR, GL, workers' comp, affiliations, and certs. See the credentials
+      comment block for the exact real values still needed. The [[ ]] convention
+      still applies to the story section (real quote, real founding story).
+    • Contact section's email and hours rows are removed, not bracketed — there's
+      no honest placeholder for an unconfirmed inbox. Phone (real) plus the form
+      cover contact for now. Markup to restore both rows is commented out right
+      after the Office row in the contact section.
+    • Mobile nav is a real hamburger menu (#navToggle / #navLinks), not a hidden list.
+    • Stat bar no longer shows "7 active projects" (Procore-only, goes stale). Swapped
+      for a metro-cities-served count pulled from the footer's service-area list.
+    • Form is wired to Netlify Forms (netlify / netlify-honeypot attributes, hidden
+      form-name field, honeypot input) and submits via fetch so success shows inline
+      instead of navigating away. If the POST fails — e.g. this file opened locally
+      via file:// instead of served from Netlify — it falls back to telling the
+      visitor to call, not to a mailto: for an inbox that isn't confirmed yet.
+
+  CONFIRMED FACTS (verified from public sources, safe to keep):
+    • Founded 22 April 2008 — 18 years in business as of 2026
+    • 103 W 26th Ave, Ste 100, North Kansas City, MO 64116
+    • (816) 256-4156
+    • Commercial market sector, Specialty Contractor
+    • Business manager: William Dunn
+
+  NEEDS CONFIRMATION FROM THE UNCLE CALL (currently placeholders):
+    • The company story — who started it, why, what happened in 2008
+    • Real project names, locations, sizes, and GC partners
+    • Actual scopes of work performed (the list below is a reasonable guess)
+    • EMR / safety record, bonding capacity, insurance limits
+    • Certifications, union affiliation, manufacturer approvals
+    • Real photography — this is the single biggest upgrade available
+    • Whether they want residential inquiries at all
+
+  DELIBERATELY NOT USED (licensing — see The Pre-Built Site Play, risk #1):
+    • Google Places photos
+    • Any review text from Google, Porch, or BBB
+    • Procore's $6.79M average-project-size figure is platform-only data;
+      confirm company-wide numbers before publishing anything like it.
+
+  FORM: wired to Netlify Forms. Deploy to Netlify for submissions to be
+        captured — see the Netlify dashboard notes for how to get them emailed.
+================================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#131519;
+  --ink-2:#1c2027;
+  --ink-3:#2b3038;
+  --bone:#f7f5f1;
+  --paper:#fff;
+  --copper:#b87333;
+  --copper-lt:#d99a5b;
+  --muted:#6b7280;
+  --line:rgba(19,21,25,.12);
+  --line-lt:rgba(255,255,255,.14);
+  --maxw:1180px;
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color:var(--ink);background:var(--paper);
+  line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.num{font-family:'Inter Tight','Inter',system-ui,sans-serif;line-height:1.05;letter-spacing:-.025em;font-weight:700}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:18px;display:flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:80px}
+section{padding:clamp(64px,9vw,120px) 0}
+#capabilities,#sectors,#projects,#credentials,#story,#contact{scroll-margin-top:88px}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(19,21,25,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-lt);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;flex-shrink:0}
+.mark{width:34px;height:34px;flex-shrink:0}
+.brand b{font-family:'Inter Tight',sans-serif;font-size:16px;letter-spacing:-.02em;line-height:1.1;display:block}
+.brand span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-lt);font-weight:600}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{
+  background:var(--copper);color:#fff;text-decoration:none;padding:11px 20px;border-radius:4px;
+  font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .2s;
+}
+.nav-cta:hover{background:#a3652c}
+.nav-toggle{
+  display:none;width:40px;height:40px;flex-shrink:0;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--line-lt);border-radius:4px;color:#fff;cursor:pointer;padding:0;
+}
+.nav-toggle:hover{background:rgba(255,255,255,.08)}
+.nav-toggle svg{width:20px;height:20px}
+.nav-toggle .icon-close{display:none}
+.nav-toggle[aria-expanded="true"] .icon-open{display:none}
+.nav-toggle[aria-expanded="true"] .icon-close{display:block}
+@media(max-width:900px){
+  .nav{gap:12px}
+  .nav-toggle{display:flex;width:36px;height:36px}
+  .nav-cta{padding:11px 14px;font-size:13.5px}
+  .nav-links{
+    display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--ink);border-bottom:1px solid var(--line-lt);padding:8px var(--pad) 18px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:14px 0;border-bottom:1px solid var(--line-lt);font-size:16px}
+  .nav-links li:last-child a{border-bottom:0}
+}
+@media(max-width:480px){
+  .brand span{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  background:var(--ink);color:#fff;position:relative;overflow:hidden;
+  padding:clamp(70px,11vw,130px) 0 clamp(60px,8vw,96px);
+}
+.hero-bg{position:absolute;inset:0;opacity:.16;pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(32px,5vw,72px);align-items:end}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+h1{font-size:clamp(2.6rem,6.4vw,4.75rem);margin-bottom:24px}
+h1 em{font-style:normal;color:var(--copper-lt)}
+.hero p.lede{font-size:clamp(1.05rem,1.9vw,1.3rem);color:rgba(255,255,255,.74);max-width:56ch;line-height:1.55}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:4px;
+  text-decoration:none;font-weight:600;font-size:15.5px;transition:all .2s;border:1px solid transparent;
+}
+.btn-primary{background:var(--copper);color:#fff}
+.btn-primary:hover{background:#a3652c;transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line-lt);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.hero-card{
+  border:1px solid var(--line-lt);border-radius:6px;padding:26px;background:rgba(255,255,255,.03);
+}
+.hero-card .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-lt);font-weight:600;margin-bottom:6px}
+.hero-card .val{font-family:'Inter Tight',sans-serif;font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
+.hero-card .val a{text-decoration:none}
+.hero-card .val a:hover{color:var(--copper-lt)}
+.hero-card hr{border:0;border-top:1px solid var(--line-lt);margin:20px 0}
+.hero-card .sm{font-size:14px;color:rgba(255,255,255,.62);line-height:1.5}
+
+/* ---------- stat bar ---------- */
+.stats{background:var(--ink-2);color:#fff;padding:0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:34px 26px;border-right:1px solid var(--line-lt);border-top:1px solid var(--line-lt)}
+.stat:last-child{border-right:0}
+@media(max-width:820px){.stat:nth-child(2){border-right:0}}
+.stat .num{font-size:clamp(2rem,4vw,2.9rem);color:var(--copper-lt);font-weight:700}
+.stat .cap{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px;font-weight:500}
+
+/* ---------- generic ---------- */
+h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
+h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
+.lead{font-size:1.1rem;color:var(--muted);max-width:64ch}
+.two-col{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,80px);align-items:start}
+@media(max-width:880px){.two-col{grid-template-columns:1fr}}
+
+/* ---------- capabilities ---------- */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.cap-item{background:var(--paper);padding:30px 26px;transition:background .2s}
+.cap-item:hover{background:var(--bone)}
+.cap-item .ico{width:30px;height:30px;color:var(--copper);margin-bottom:16px}
+.cap-item p{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+/* ---------- sectors ---------- */
+.sectors{background:var(--bone)}
+.sector-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:40px}
+.sector{
+  background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:20px 22px;
+  display:flex;align-items:center;gap:14px;font-weight:600;font-size:15.5px;transition:all .2s;
+}
+.sector:hover{border-color:var(--copper);transform:translateY(-2px)}
+.sector .dot{width:7px;height:7px;border-radius:50%;background:var(--copper);flex-shrink:0}
+
+/* ---------- projects ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:26px;margin-top:46px}
+.proj{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--paper);transition:all .25s}
+.proj:hover{box-shadow:0 14px 40px rgba(19,21,25,.10);transform:translateY(-3px)}
+.proj-img{aspect-ratio:4/3;position:relative;background:var(--ink-3)}
+.proj-img svg{position:absolute;inset:0;width:100%;height:100%}
+.proj-tag{
+  position:absolute;top:14px;left:14px;background:rgba(19,21,25,.86);color:#fff;
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  padding:6px 11px;border-radius:3px;z-index:2;
+}
+.proj-body{padding:24px}
+.proj-body .meta{font-size:13px;color:var(--muted);margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.proj-body .meta span{background:var(--bone);padding:4px 10px;border-radius:3px;font-weight:500}
+.ph-note{
+  margin-top:36px;padding:16px 20px;border-left:3px solid var(--copper);background:var(--bone);
+  font-size:14px;color:var(--muted);
+}
+
+/* ---------- why us ---------- */
+.why{background:var(--ink);color:#fff}
+.why h2{color:#fff}
+.why .lead{color:rgba(255,255,255,.66)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:34px;margin-top:52px}
+.why-item{border-top:2px solid var(--copper);padding-top:22px}
+.why-item h3{color:#fff}
+.why-item p{color:rgba(255,255,255,.64);font-size:15px}
+
+/* ---------- credentials ---------- */
+.cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.cred{background:var(--paper);padding:28px 24px}
+.cred .k{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+.cred .v{font-family:'Inter Tight',sans-serif;font-size:1.28rem;font-weight:600;letter-spacing:-.02em}
+.cred .v small{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
+
+/* ---------- story ---------- */
+.story{background:var(--bone)}
+.story-inner{max-width:76ch}
+.story p{margin-bottom:20px;font-size:1.06rem}
+.story p:last-child{margin-bottom:0}
+.pull{
+  border-left:3px solid var(--copper);padding:6px 0 6px 26px;margin:34px 0;
+  font-family:'Inter Tight',sans-serif;font-size:1.42rem;font-weight:600;letter-spacing:-.02em;line-height:1.3;
+}
+
+/* ---------- contact ---------- */
+.contact{background:var(--ink);color:#fff}
+.contact h2{color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,6vw,76px);align-items:start}
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
+.cinfo{margin-top:34px}
+.cinfo .row{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line-lt);align-items:flex-start}
+.cinfo .row:first-child{border-top:1px solid var(--line-lt)}
+.cinfo .ico{width:20px;height:20px;color:var(--copper-lt);flex-shrink:0;margin-top:3px}
+.cinfo .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:4px}
+.cinfo .v{font-size:16px;font-weight:500}
+.cinfo .v a{text-decoration:none}
+.cinfo .v a:hover{color:var(--copper-lt)}
+.cinfo .note{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
+form{background:rgba(255,255,255,.04);border:1px solid var(--line-lt);border-radius:6px;padding:clamp(24px,3.4vw,36px)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.frow{grid-template-columns:1fr}}
+.field{margin-bottom:16px}
+label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.62);margin-bottom:8px}
+input,select,textarea{
+  width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line-lt);border-radius:4px;
+  padding:13px 14px;color:#fff;font-family:inherit;font-size:15.5px;transition:border-color .2s,background .2s;
+}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.34)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--copper);background:rgba(255,255,255,.09)}
+select option{background:var(--ink-2);color:#fff}
+textarea{resize:vertical;min-height:104px}
+form .btn{width:100%;justify-content:center;margin-top:8px;border:0;cursor:pointer;font-family:inherit}
+.formnote{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:14px;text-align:center}
+.okmsg{display:none;background:rgba(184,115,51,.14);border:1px solid var(--copper);border-radius:4px;padding:16px;margin-bottom:18px;font-size:15px}
+.okmsg.show{display:block}
+.hp-field{position:absolute;left:-9999px;top:auto}
+
+/* ---------- footer ---------- */
+footer{background:#0d0f12;color:rgba(255,255,255,.55);padding:52px 0 30px;font-size:14px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid var(--line-lt)}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:28px}}
+footer h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer a{text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--copper-lt)}
+.foot-bot{padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:rgba(255,255,255,.38)}
+.svc-area{font-size:13.5px;line-height:1.9;color:rgba(255,255,255,.45)}
+
+/* ---------- motion ---------- */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect width="40" height="40" rx="4" fill="#b87333"/>
+        <path d="M8 12h10v6H8zM22 12h10v6H22zM8 22h10v6H8zM22 22h10v6H22z" fill="#131519" opacity=".82"/>
+      </svg>
+      <span style="display:block">
+        <b>Campione</b>
+        <span>Interior Solutions</span>
+      </span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <!-- Projects nav link hidden along with the section below — restore both together. -->
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#story">About</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a href="#contact" class="nav-cta">Invite Us to Bid</a>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<div class="hero" id="top">
+  <svg class="hero-bg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
+    <defs>
+      <pattern id="herringbone" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect x="0" y="0" width="36" height="76" fill="none" stroke="#b87333" stroke-width="1.1"/>
+        <rect x="40" y="-38" width="36" height="76" fill="none" stroke="#b87333" stroke-width="1.1"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="600" fill="url(#herringbone)"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Commercial Flooring Contractor · Kansas City</div>
+        <h1>Flooring that's<br>ready for <em>turnover</em>.</h1>
+        <p class="lede">
+          Campione Interior Solutions has installed commercial flooring across the Kansas City
+          metro since 2008 — carpet, resilient, tile, and polished concrete for general contractors
+          who need the schedule held and the punch list short.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            Invite Us to Bid
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="tel:+18162564156" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>
+            (816) 256-4156
+          </a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="lbl">Bid Desk</div>
+        <div class="val"><a href="tel:+18162564156">(816) 256-4156</a></div>
+        <hr>
+        <div class="lbl">Office</div>
+        <div class="sm">103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</div>
+        <hr>
+        <div class="lbl">Serving</div>
+        <div class="sm">Greater Kansas City metro — Missouri &amp; Kansas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ STATS ============================ -->
+<div class="stats">
+  <div class="wrap" style="padding-inline:0">
+    <div class="stats-grid">
+      <div class="stat" style="padding-left:var(--pad)">
+        <div class="num">18</div>
+        <div class="cap">Years in business</div>
+      </div>
+      <div class="stat">
+        <div class="num">2008</div>
+        <div class="cap">Established</div>
+      </div>
+      <!-- keep this count in sync with the service-area city list in the footer -->
+      <div class="stat">
+        <div class="num">16</div>
+        <div class="cap">Metro cities served</div>
+      </div>
+      <div class="stat" style="padding-right:var(--pad)">
+        <div class="num">100%</div>
+        <div class="cap">Commercial</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ CAPABILITIES ============================ -->
+<section id="capabilities">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">Scopes of Work</div>
+      <h2>What we install</h2>
+      <p class="lead">
+        Full-scope commercial flooring — from demolition and substrate prep through
+        final transitions and closeout documentation. One sub, one schedule, one point of contact.
+      </p>
+    </div>
+
+    <div class="cap-grid rv">
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+        <h3>Carpet Tile &amp; Broadloom</h3>
+        <p>Modular carpet tile, walk-off systems, and broadloom for corporate, education, and hospitality interiors.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h18M3 12h18M3 19h18" stroke-linecap="round"/><path d="M7 5v14M17 5v14" opacity=".45"/></svg>
+        <h3>Luxury Vinyl &amp; Resilient</h3>
+        <p>LVT and LVP, sheet vinyl, rubber tile, and homogeneous sheet goods with heat-welded seams.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="8" height="8" rx=".5"/><rect x="13" y="3" width="8" height="8" rx=".5"/><rect x="3" y="13" width="8" height="8" rx=".5"/><rect x="13" y="13" width="8" height="8" rx=".5"/></svg>
+        <h3>Ceramic, Porcelain &amp; Stone</h3>
+        <p>Floor and wall tile, large-format porcelain, waterproofing and crack-isolation membranes.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18" opacity=".45"/><circle cx="12" cy="12" r="3.4"/></svg>
+        <h3>Polished Concrete</h3>
+        <p>Grind, densify, and polish to specified gloss and clarity. Dyes, joint fill, and guard systems.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18c3-5 5-7 8-7s5 2 8 7"/><path d="M4 12c3-5 5-7 8-7s5 2 8 7" opacity=".45"/></svg>
+        <h3>Resinous &amp; Epoxy Systems</h3>
+        <p>Epoxy, urethane cement, and MMA systems for kitchens, labs, and industrial environments.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M5 8l7-5 7 5"/><path d="M5 8v8l7 5 7-5V8" opacity=".45"/></svg>
+        <h3>Floor Prep &amp; Demolition</h3>
+        <p>Selective demo, shot blasting, grinding, self-leveling underlayment, and substrate remediation.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18"/><circle cx="8" cy="12" r="2.6"/><circle cx="16" cy="12" r="2.6" opacity=".45"/></svg>
+        <h3>Moisture Mitigation</h3>
+        <p>RH testing per ASTM F2170, calcium chloride testing, and vapor-barrier systems on slab.</p>
+      </div>
+      <div class="cap-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V6a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M15 4v5h5" opacity=".45"/></svg>
+        <h3>Base, Trim &amp; Transitions</h3>
+        <p>Rubber and vinyl wall base, stair treads and nosings, reducers, and ADA-compliant transitions.</p>
+      </div>
+    </div>
+
+    <!--
+      [[ CONFIRM ]] These are standard scopes for a commercial flooring sub in this market —
+      confirm with the owner what Campione actually self-performs versus subs out. That
+      distinction matters to a GC reading this page.
+    -->
+  </div>
+</section>
+
+<!-- ============================ SECTORS ============================ -->
+<section class="sectors" id="sectors">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">Market Sectors</div>
+      <h2>Where we work</h2>
+      <p class="lead">
+        Commercial construction across the metro — ground-up, tenant finish, and occupied
+        renovation where phasing and dust control aren't optional.
+      </p>
+    </div>
+    <div class="sector-list rv">
+      <div class="sector"><span class="dot"></span>Healthcare &amp; Medical</div>
+      <div class="sector"><span class="dot"></span>K–12 &amp; Higher Education</div>
+      <div class="sector"><span class="dot"></span>Corporate Interiors</div>
+      <div class="sector"><span class="dot"></span>Multifamily</div>
+      <div class="sector"><span class="dot"></span>Senior Living</div>
+      <div class="sector"><span class="dot"></span>Hospitality</div>
+      <div class="sector"><span class="dot"></span>Retail &amp; Restaurant</div>
+      <div class="sector"><span class="dot"></span>Industrial &amp; Warehouse</div>
+      <div class="sector"><span class="dot"></span>Government &amp; Municipal</div>
+    </div>
+  </div>
+</section>
+
+<!--
+  PROJECTS SECTION — hidden until there are real projects to show.
+  An empty portfolio with placeholder cards is worse than no portfolio section at all.
+  Restore this section (and its nav link in the header) once we have 2-3 real projects:
+  name, city, square footage, GC name, and real jobsite photos.
+
+<section id="projects">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">Selected Work</div>
+      <h2>Recent projects</h2>
+      <p class="lead">
+        A sample of commercial work completed across the Kansas City metro.
+      </p>
+    </div>
+
+    <div class="proj-grid rv">
+      <article class="proj">
+        <div class="proj-img">
+          <span class="proj-tag">Healthcare</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="400" height="300" fill="#1c2027"/>
+            <g stroke="#b87333" stroke-width="1" opacity=".38">
+              <path d="M0 60h400M0 120h400M0 180h400M0 240h400"/>
+              <path d="M50 0v300M150 0v300M250 0v300M350 0v300"/>
+            </g>
+            <g fill="#b87333" opacity=".14">
+              <rect x="50" y="60" width="100" height="60"/><rect x="250" y="180" width="100" height="60"/>
+            </g>
+          </svg>
+        </div>
+        <div class="proj-body">
+          <h3>[[ Project Name ]]</h3>
+          <div class="meta"><span>[[ City, MO ]]</span><span>[[ 42,000 SF ]]</span><span>[[ GC: Name ]]</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-img">
+          <span class="proj-tag">Education</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="400" height="300" fill="#1c2027"/>
+            <g stroke="#b87333" stroke-width="1" opacity=".38" transform="rotate(30 200 150)">
+              <path d="M-100 40h600M-100 100h600M-100 160h600M-100 220h600M-100 280h600"/>
+            </g>
+            <g fill="#b87333" opacity=".13" transform="rotate(30 200 150)">
+              <rect x="60" y="100" width="120" height="60"/>
+            </g>
+          </svg>
+        </div>
+        <div class="proj-body">
+          <h3>[[ Project Name ]]</h3>
+          <div class="meta"><span>[[ City, KS ]]</span><span>[[ 18,500 SF ]]</span><span>[[ GC: Name ]]</span></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-img">
+          <span class="proj-tag">Corporate Interiors</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="400" height="300" fill="#1c2027"/>
+            <g stroke="#b87333" stroke-width="1.1" opacity=".4">
+              <path d="M0 0l400 300M0 300L400 0M0 150h400M200 0v300"/>
+            </g>
+            <circle cx="200" cy="150" r="70" fill="#b87333" opacity=".12"/>
+          </svg>
+        </div>
+        <div class="proj-body">
+          <h3>[[ Project Name ]]</h3>
+          <div class="meta"><span>[[ Overland Park, KS ]]</span><span>[[ 65,000 SF ]]</span><span>[[ GC: Name ]]</span></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="ph-note">
+      <strong>[[ Placeholder projects. ]]</strong> The abstract graphics above are stand-ins, not photos —
+      no images have been taken from anyone's listing. Three real project photos with the GC named
+      will do more for this page than everything else on it combined. Ask for jobsite photos off
+      the crew's phones; they always exist.
+    </p>
+  </div>
+</section>
+-->
+
+<!-- ============================ WHY ============================ -->
+<section class="why">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">For General Contractors</div>
+      <h2>Why GCs keep us on the list</h2>
+      <p class="lead">
+        Flooring lands at the end of the schedule, when the float is gone and the
+        certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
+      </p>
+    </div>
+    <div class="why-grid rv">
+      <div class="why-item">
+        <h3>We hold the date</h3>
+        <p>Flooring is the last trade in and the first one blamed. We staff to the schedule we signed, including nights and weekends when the turnover date demands it.</p>
+      </div>
+      <div class="why-item">
+        <h3>Submittals that don't bounce</h3>
+        <p>Complete submittal packages, product data, and samples returned on time — not three RFIs later.</p>
+      </div>
+      <div class="why-item">
+        <h3>Substrate problems caught early</h3>
+        <p>Moisture testing before material hits the floor. Finding a failing slab in week two is a schedule item; finding it after install is a claim.</p>
+      </div>
+      <div class="why-item">
+        <h3>Short punch lists</h3>
+        <p>We walk our own work before the architect does, and we close out with the O&amp;M manuals and warranties in hand.</p>
+      </div>
+      <div class="why-item">
+        <h3>Occupied-space experience</h3>
+        <p>Phasing, containment, and after-hours work in hospitals, schools, and offices that never actually close.</p>
+      </div>
+      <div class="why-item">
+        <h3>Local, and staying that way</h3>
+        <p>North Kansas City since 2008. Our crews live here, our references are down the road, and we'll still be here for the warranty call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CREDENTIALS ============================ -->
+<section id="credentials">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow">Prequalification</div>
+      <h2>Credentials</h2>
+      <p class="lead">
+        The information a GC needs before sending a bid invitation. Full prequal package
+        and certificates of insurance available on request.
+      </p>
+    </div>
+    <div class="cred-grid rv">
+      <div class="cred">
+        <div class="k">Entity</div>
+        <div class="v">Campione Interior Solutions LLC<small>Missouri LLC, formed April 2008</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">Bonding Capacity</div>
+        <div class="v">Available on request<small>Surety details provided during prequalification</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">EMR</div>
+        <div class="v">Available on request<small>Provided during prequalification</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">General Liability</div>
+        <div class="v">Available on request<small>Certificate of insurance provided on request</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">Workers' Comp</div>
+        <div class="v">Available on request<small>Certificate of insurance provided on request</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">Affiliations</div>
+        <div class="v">Available on request<small>Provided during prequalification</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">Certifications</div>
+        <div class="v">Available on request<small>Provided during prequalification</small></div>
+      </div>
+      <div class="cred">
+        <div class="k">Project Management</div>
+        <div class="v">Procore</div>
+        <small style="display:block;font-size:13px;color:var(--muted);margin-top:6px">Submittals, RFIs, and closeout in your system</small>
+      </div>
+    </div>
+    <!--
+      [[ CONFIRM — needed from the owner interview before these can show real numbers ]]
+        - Bonding: single/aggregate limits + surety company name
+        - EMR: current value, year, carrier
+        - General liability: coverage limit
+        - Workers' comp: carrier + limits
+        - Affiliations: union local / association (INSTALL, Fuse Alliance, etc.), if any
+        - Certifications: manufacturer certs (e.g. Mohawk, Shaw, Ardex, Mapei)
+      A GC's prequal form asks for exactly these fields. Get the real numbers on the call —
+      especially the EMR, which is the single figure a GC's risk manager looks for.
+    -->
+  </div>
+</section>
+
+<!-- ============================ STORY ============================ -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-inner rv">
+      <div class="eyebrow">Our Story</div>
+      <h2>Built in North Kansas City, one floor at a time</h2>
+
+      <!--
+        [[ CONFIRM ]] The real story goes here — the most important paragraph on the page, and
+        the only part no competitor can copy. Get it on the call: Who started the company? What
+        were they doing before April 2008? Why start a flooring business in the middle of a
+        housing collapse? What was the first job? What's the job they're proudest of? Who works
+        here now — family, long-tenured crew? Write it in his words, not marketing words.
+      -->
+
+      <p>
+        Campione Interior Solutions was founded in 2008 and has worked out of North Kansas City
+        ever since. What started as a small crew has grown into a commercial flooring
+        subcontractor trusted on projects across the metro — but the way the work gets done
+        hasn't changed much: show up when we said we would, install it right the first time,
+        and stand behind it after the building opens.
+      </p>
+
+      <!-- [[ CONFIRM ]] Add a real one- or two-sentence quote from the owner here — the line people remember. -->
+
+      <p>
+        Eighteen years in, most of our work still comes from general contractors we've worked with
+        before — and from the ones they tell about us.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="eyebrow">Contact</div>
+        <h2>Invite us to bid</h2>
+        <p class="lead">
+          Send the plans, the bid date, and the scope. We'll confirm receipt the same day
+          and tell you straight if it isn't a fit.
+        </p>
+        <div class="cinfo">
+          <div class="row">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>
+            <div>
+              <div class="k">Phone</div>
+              <div class="v"><a href="tel:+18162564156">(816) 256-4156</a></div>
+              <div class="note">Call for bid invitations, plans, or questions.</div>
+            </div>
+          </div>
+          <div class="row">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><div class="k">Office</div><div class="v">103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</div></div>
+          </div>
+        </div>
+        <!--
+          [[ CONFIRM ]] Email row removed — there's no confirmed bid-invitations inbox yet, and a
+          bracketed placeholder email is worse than showing none. Phone plus the form cover
+          contact for now. Restore once real, right after the Office row above:
+            <div class="row">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+              <div><div class="k">Bid Invitations</div><div class="v"><a href="mailto:REAL_EMAIL">REAL_EMAIL</a></div></div>
+            </div>
+
+          [[ CONFIRM ]] Hours row removed for the same reason. Restore once real:
+            <div class="row">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+              <div><div class="k">Hours</div><div class="v">Mon–Fri, 7:00am – 4:00pm</div></div>
+            </div>
+        -->
+      </div>
+
+      <div class="rv">
+        <form id="bidform" name="bidform" method="POST" netlify netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="bidform">
+          <p class="hp-field" aria-hidden="true">
+            <label>Leave this field blank: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+
+          <div class="okmsg" id="okmsg" role="status" aria-live="polite"></div>
+          <div class="frow">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" placeholder="General contractor" required>
+            </div>
+          </div>
+          <div class="frow">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="(816) 555-0100">
+            </div>
+          </div>
+          <div class="frow">
+            <div class="field">
+              <label for="sector">Project type</label>
+              <select id="sector" name="sector">
+                <option>Healthcare</option>
+                <option>Education</option>
+                <option>Corporate interiors</option>
+                <option>Multifamily</option>
+                <option>Senior living</option>
+                <option>Hospitality</option>
+                <option>Retail / restaurant</option>
+                <option>Industrial</option>
+                <option>Government</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="biddate">Bid date</label>
+              <input id="biddate" name="biddate" type="date">
+            </div>
+          </div>
+          <div class="field">
+            <label for="msg">Scope &amp; details</label>
+            <textarea id="msg" name="msg" placeholder="Project name, location, square footage, flooring scope, and where the plans live."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Bid Invitation</button>
+          <p class="formnote">Or call <a href="tel:+18162564156">(816) 256-4156</a> to send plans directly.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" style="margin-bottom:16px">
+          <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect width="40" height="40" rx="4" fill="#b87333"/>
+            <path d="M8 12h10v6H8zM22 12h10v6H22zM8 22h10v6H8zM22 22h10v6H22z" fill="#131519" opacity=".82"/>
+          </svg>
+          <span style="display:block"><b>Campione</b><span>Interior Solutions</span></span>
+        </a>
+        <p style="max-width:38ch;margin-top:14px">
+          Commercial flooring subcontractor serving the greater Kansas City metro since 2008.
+        </p>
+        <p style="margin-top:18px">
+          <a href="tel:+18162564156" style="font-weight:600;color:#fff">(816) 256-4156</a>
+        </p>
+      </div>
+      <div>
+        <h4>Capabilities</h4>
+        <ul>
+          <li><a href="#capabilities">Carpet &amp; broadloom</a></li>
+          <li><a href="#capabilities">Luxury vinyl &amp; resilient</a></li>
+          <li><a href="#capabilities">Tile &amp; stone</a></li>
+          <li><a href="#capabilities">Polished concrete</a></li>
+          <li><a href="#capabilities">Resinous systems</a></li>
+          <li><a href="#capabilities">Floor prep &amp; demolition</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Service Area</h4>
+        <p class="svc-area">
+          North Kansas City · Kansas City, MO · Kansas City, KS · Overland Park · Olathe ·
+          Lenexa · Shawnee · Leawood · Liberty · Gladstone · Independence · Lee's Summit ·
+          Blue Springs · Riverside · Parkville · Raytown
+        </p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© <span id="yr">2026</span> Campione Interior Solutions LLC · 103 W 26th Ave, Ste 100, North Kansas City, MO 64116</div>
+      <div>Est. 2008</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// year
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// mobile nav toggle
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if(!toggle || !links) return;
+  function closeMenu(){
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+  function openMenu(){
+    links.classList.add('open');
+    toggle.setAttribute('aria-expanded','true');
+  }
+  toggle.addEventListener('click', function(){
+    if(links.classList.contains('open')){ closeMenu(); } else { openMenu(); }
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ closeMenu(); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && links.classList.contains('open')){
+      closeMenu();
+      toggle.focus();
+    }
+  });
+})();
+
+// reveal on scroll
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+/* ----------------------------------------------------------------------------
+   FORM — wired to Netlify Forms (see the form's netlify / netlify-honeypot
+   attributes and the hidden form-name field above). Submits via fetch so we
+   can show an inline confirmation instead of navigating away.
+
+   Local testing: opening this file directly (file://) or hosting it anywhere
+   other than Netlify means the fetch has nothing to POST to, so it fails —
+   that's expected, and the catch below covers it. Rather than fall back to a
+   mailto: for an inbox we haven't confirmed exists, it tells the visitor to
+   call the one contact method on this page that's actually real.
+---------------------------------------------------------------------------- */
+document.getElementById('bidform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = e.target;
+  var msg = document.getElementById('okmsg');
+
+  if(f['bot-field'] && f['bot-field'].value){
+    return; // honeypot tripped — silently drop
+  }
+  if(!f.name.value.trim() || !f.company.value.trim() || !f.email.value.trim()){
+    alert('Please fill in your name, company, and email.');
+    return;
+  }
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(f)).toString()
+  }).then(function(res){
+    if(!res.ok) throw new Error('Form submission failed');
+    msg.innerHTML = 'Thanks — your bid invitation was submitted. We\'ll confirm receipt the same day.';
+    msg.classList.add('show');
+    f.reset();
+  }).catch(function(){
+    msg.innerHTML = 'We couldn\'t submit this automatically. Please call ' +
+      '<a href="tel:+18162564156">(816) 256-4156</a> to send your bid invitation directly.';
+    msg.classList.add('show');
+  });
+});
+</script>
+</body>
+</html>
