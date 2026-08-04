@@ -101,6 +101,7 @@
   --line-lt:rgba(255,255,255,.14);
   --maxw:1180px;
   --pad:clamp(20px,5vw,64px);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -126,14 +127,24 @@ header{
   position:sticky;top:0;z-index:50;background:rgba(19,21,25,.94);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--line-lt);
 }
+.scroll-progress{
+  position:fixed;top:72px;left:0;width:100%;height:2px;background:var(--copper);
+  transform:scaleX(0);transform-origin:0 0;z-index:51;pointer-events:none;
+}
 .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;flex-shrink:0}
 .mark{width:34px;height:34px;flex-shrink:0}
 .brand b{font-family:'Inter Tight',sans-serif;font-size:16px;letter-spacing:-.02em;line-height:1.1;display:block}
 .brand span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-lt);font-weight:600}
 .nav-links{display:flex;gap:30px;list-style:none}
-.nav-links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s}
+.nav-links a{position:relative;color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:#fff}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-9px;height:2px;background:var(--copper);
+  opacity:0;transform:scaleX(.6);transform-origin:left;transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.nav-links a.active{color:#fff}
+.nav-links a.active::after{opacity:1;transform:scaleX(1)}
 .nav-cta{
   background:var(--copper);color:#fff;text-decoration:none;padding:11px 20px;border-radius:4px;
   font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .2s;
@@ -169,7 +180,7 @@ header{
   background:var(--ink);color:#fff;position:relative;overflow:hidden;
   padding:clamp(70px,11vw,130px) 0 clamp(60px,8vw,96px);
 }
-.hero-bg{position:absolute;inset:0;opacity:.16;pointer-events:none}
+.hero-bg{position:absolute;top:-40px;bottom:-40px;left:0;right:0;opacity:.16;pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(32px,5vw,72px);align-items:end}
 @media(max-width:880px){.hero-grid{grid-template-columns:1fr;align-items:start}}
@@ -202,12 +213,14 @@ h1 em{font-style:normal;color:var(--copper-lt)}
 .stat{padding:34px 26px;border-right:1px solid var(--line-lt);border-top:1px solid var(--line-lt)}
 .stat:last-child{border-right:0}
 @media(max-width:820px){.stat:nth-child(2){border-right:0}}
-.stat .num{font-size:clamp(2rem,4vw,2.9rem);color:var(--copper-lt);font-weight:700}
+.stat .num{font-size:clamp(2rem,4vw,2.9rem);color:var(--copper-lt);font-weight:700;font-variant-numeric:tabular-nums}
 .stat .num.sm{font-size:clamp(1.3rem,2.6vw,1.75rem)}
 .stat .cap{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px;font-weight:500}
 
 /* ---------- generic ---------- */
-h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
+h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px;overflow:hidden}
+h2 .reveal-text{display:block;transform:translateY(105%);transition:transform .7s var(--ease)}
+.rv.in h2 .reveal-text{transform:none}
 h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .lead{font-size:1.1rem;color:var(--muted);max-width:64ch}
 .two-col{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,80px);align-items:start}
@@ -215,8 +228,14 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 
 /* ---------- capabilities ---------- */
 .cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
-.cap-item{background:var(--paper);padding:30px 26px;transition:background .2s}
-.cap-item:hover{background:var(--bone)}
+.cap-item{position:relative;background:var(--paper);padding:30px 26px;transition:background .2s,transform .2s var(--ease)}
+.cap-item::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:0 16px 36px rgba(19,21,25,.10),0 4px 10px rgba(19,21,25,.06);
+  opacity:0;transition:opacity .2s var(--ease);
+}
+.cap-item:hover{background:var(--bone);transform:translateY(-2px);z-index:2}
+.cap-item:hover::after{opacity:1}
 .cap-item .ico{width:30px;height:30px;color:var(--copper);margin-bottom:16px}
 .cap-item p{font-size:14.5px;color:var(--muted);line-height:1.55}
 
@@ -260,7 +279,14 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 
 /* ---------- credentials ---------- */
 .cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
-.cred{background:var(--paper);padding:28px 24px}
+.cred{position:relative;background:var(--paper);padding:28px 24px;transition:transform .2s var(--ease)}
+.cred::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:0 16px 36px rgba(19,21,25,.10),0 4px 10px rgba(19,21,25,.06);
+  opacity:0;transition:opacity .2s var(--ease);
+}
+.cred:hover{transform:translateY(-2px);z-index:2}
+.cred:hover::after{opacity:1}
 .cred .k{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
 .cred .v{font-family:'Inter Tight',sans-serif;font-size:1.28rem;font-weight:600;letter-spacing:-.02em}
 .cred .v small{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
@@ -321,13 +347,36 @@ footer a:hover{color:var(--copper-lt)}
 .svc-area{font-size:13.5px;line-height:1.9;color:rgba(255,255,255,.45)}
 
 /* ---------- motion ---------- */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .rv.in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger>*:nth-child(1){transition-delay:0ms}
+.stagger>*:nth-child(2){transition-delay:70ms}
+.stagger>*:nth-child(3){transition-delay:140ms}
+.stagger>*:nth-child(4){transition-delay:210ms}
+.stagger>*:nth-child(5){transition-delay:280ms}
+.stagger>*:nth-child(6){transition-delay:350ms}
+.stagger>*:nth-child(7){transition-delay:420ms}
+.stagger>*:nth-child(8){transition-delay:490ms}
+.stagger>*:nth-child(9){transition-delay:560ms}
 @media(prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
+  .stagger>*{opacity:1;transform:none}
+  h2 .reveal-text{transform:none}
+  .hero-bg{transform:none!important}
+  .cap-item:hover,.cred:hover{transform:none}
+  .cap-item:hover::after,.cred:hover::after{opacity:0}
 }
 </style>
+
+<noscript>
+<style>
+  .rv,.stagger>*,h2 .reveal-text{opacity:1!important;transform:none!important}
+  .scroll-progress{display:none}
+</style>
+</noscript>
 </head>
 <body>
 
@@ -359,6 +408,7 @@ footer a:hover{color:var(--copper-lt)}
     <a href="#contact" class="nav-cta">Invite Us to Bid</a>
   </div>
 </header>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ============================ HERO ============================ -->
 <div class="hero" id="top">
@@ -411,16 +461,16 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap" style="padding-inline:0">
     <div class="stats-grid">
       <div class="stat" style="padding-left:var(--pad)">
-        <div class="num">18</div>
+        <div class="num" data-count="18" style="min-width:2ch">18</div>
         <div class="cap">Years in business</div>
       </div>
       <div class="stat">
-        <div class="num">2008</div>
+        <div class="num" data-count="2008" style="min-width:4ch">2008</div>
         <div class="cap">Established</div>
       </div>
       <!-- keep this count in sync with the service-area city list in the footer -->
       <div class="stat">
-        <div class="num">16</div>
+        <div class="num" data-count="16" style="min-width:2ch">16</div>
         <div class="cap">Metro cities served</div>
       </div>
       <!-- "100% Commercial" removed — unverifiable (Procore lists commercial sector, but two
@@ -439,14 +489,14 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">Scopes of Work</div>
-      <h2>What we install</h2>
+      <h2><span class="reveal-text">What we install</span></h2>
       <p class="lead">
         Full-scope commercial flooring — from demolition and substrate prep through
         final transitions and closeout documentation. One sub, one schedule, one point of contact.
       </p>
     </div>
 
-    <div class="cap-grid rv">
+    <div class="cap-grid stagger">
       <div class="cap-item">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
         <h3>Carpet Tile &amp; Broadloom</h3>
@@ -502,13 +552,13 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">Market Sectors</div>
-      <h2>Where we work</h2>
+      <h2><span class="reveal-text">Where we work</span></h2>
       <p class="lead">
         Commercial construction across the metro — ground-up, tenant finish, and occupied
         renovation where phasing and dust control aren't optional.
       </p>
     </div>
-    <div class="sector-list rv">
+    <div class="sector-list stagger">
       <div class="sector"><span class="dot"></span>Healthcare &amp; Medical</div>
       <div class="sector"><span class="dot"></span>K–12 &amp; Higher Education</div>
       <div class="sector"><span class="dot"></span>Corporate Interiors</div>
@@ -532,13 +582,13 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">Selected Work</div>
-      <h2>Recent projects</h2>
+      <h2><span class="reveal-text">Recent projects</span></h2>
       <p class="lead">
         A sample of commercial work completed across the Kansas City metro.
       </p>
     </div>
 
-    <div class="proj-grid rv">
+    <div class="proj-grid stagger">
       <article class="proj">
         <div class="proj-img">
           <span class="proj-tag">Healthcare</span>
@@ -611,13 +661,13 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">For General Contractors</div>
-      <h2>Why GCs keep us on the list</h2>
+      <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
       <p class="lead">
         Flooring lands at the end of the schedule, when the float is gone and the
         certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
       </p>
     </div>
-    <div class="why-grid rv">
+    <div class="why-grid stagger">
       <div class="why-item">
         <h3>We hold the date</h3>
         <p>Flooring is the last trade in and the first one blamed. We staff to the schedule we signed, including nights and weekends when the turnover date demands it.</p>
@@ -651,13 +701,13 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">Prequalification</div>
-      <h2>Credentials</h2>
+      <h2><span class="reveal-text">Credentials</span></h2>
       <p class="lead">
         The information a GC needs before sending a bid invitation. Full prequal package
         and certificates of insurance available on request.
       </p>
     </div>
-    <div class="cred-grid rv">
+    <div class="cred-grid stagger">
       <div class="cred">
         <div class="k">Entity</div>
         <div class="v">Campione Interior Solutions LLC<small>Missouri LLC, formed April 2008</small></div>
@@ -719,7 +769,7 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="story-inner rv">
       <div class="eyebrow">Our Story</div>
-      <h2>Built in North Kansas City, one floor at a time</h2>
+      <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
 
       <!--
         [[ CONFIRM ]] The real story goes here — the most important paragraph on the page, and
@@ -753,7 +803,7 @@ footer a:hover{color:var(--copper-lt)}
     <div class="contact-grid">
       <div class="rv">
         <div class="eyebrow">Contact</div>
-        <h2>Invite us to bid</h2>
+        <h2><span class="reveal-text">Invite us to bid</span></h2>
         <p class="lead">
           Send the plans, the bid date, and the scope. We'll confirm receipt the same day
           and tell you straight if it isn't a fit.
@@ -928,9 +978,9 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   });
 })();
 
-// reveal on scroll
+// reveal on scroll (also covers staggered grids — see .stagger CSS)
 (function(){
-  var els = document.querySelectorAll('.rv');
+  var els = document.querySelectorAll('.rv, .stagger');
   if(!('IntersectionObserver' in window)){
     els.forEach(function(e){e.classList.add('in')});
     return;
@@ -941,6 +991,104 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     });
   },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
   els.forEach(function(e){io.observe(e)});
+})();
+
+// count-up stats — once only, skipped entirely under reduced motion
+(function(){
+  var els = document.querySelectorAll('.stat .num[data-count]');
+  if(!els.length || !('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function animateCount(el){
+    var final = el.textContent.trim();
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if(isNaN(target)){ return; }
+    var duration = 1000;
+    var start = null;
+    function step(ts){
+      if(start === null){ start = ts; }
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if(progress < 1){
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = final;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ animateCount(en.target); io.unobserve(en.target); }
+    });
+  }, {threshold:.6});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+// scrollspy nav — IntersectionObserver only, no scroll listener
+(function(){
+  var sectionIds = ['capabilities','sectors','credentials','story'];
+  var links = {};
+  sectionIds.forEach(function(id){
+    var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+    if(link){ links[id] = link; }
+  });
+  var targets = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if(!targets.length || !('IntersectionObserver' in window)) return;
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        Object.keys(links).forEach(function(key){
+          links[key].classList.toggle('active', key === en.target.id);
+        });
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  targets.forEach(function(t){ io.observe(t); });
+})();
+
+// hero parallax — transform only, clamped to a few px, off entirely under reduced motion
+(function(){
+  var bg = document.querySelector('.hero-bg');
+  var hero = document.querySelector('.hero');
+  if(!bg || !hero) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function update(){
+    var rect = hero.getBoundingClientRect();
+    if(rect.bottom > 0 && rect.top < window.innerHeight){
+      var offset = Math.max(-40, Math.min(40, -rect.top * 0.3));
+      bg.style.transform = 'translateY(' + offset + 'px)';
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  update();
+})();
+
+// scroll progress bar — transform:scaleX only, no layout-triggering width changes
+(function(){
+  var bar = document.getElementById('scrollProgress');
+  if(!bar) return;
+  var ticking = false;
+  function update(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    var progress = max > 0 ? (window.scrollY || doc.scrollTop) / max : 0;
+    bar.style.transform = 'scaleX(' + progress + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  window.addEventListener('resize', function(){ requestAnimationFrame(update); });
+  update();
 })();
 
 /* ----------------------------------------------------------------------------
