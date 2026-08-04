@@ -98,3 +98,15 @@ Kansas City commercial flooring contractors," not "flashy."
 - If strategy context is needed, the Wave Search vault has it (added via
   `/add-dir`). Relevant notes: `The Pre-Built Site Play`, `Directory Squatters`,
   `Offer and Pricing`
+
+## Git workflow
+
+- After completing any task that changes files, automatically `git add -A`,
+  commit, and push to `origin main`. Don't wait to be asked
+- Write real commit messages describing what changed and why — never
+  "update" or "changes"
+- Commit once per completed task, not once per file edit
+- If a task is abandoned or reverted, don't commit it
+- Never commit secrets, API keys, or anything in the "Must NOT publish" list
+  above
+- Report the commit hash and short message after pushing
