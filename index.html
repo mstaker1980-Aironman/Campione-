@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campione Interior Solutions | Commercial Flooring Contractor — Kansas City</title>
 <meta name="description" content="Campione Interior Solutions is a commercial flooring subcontractor serving the Kansas City metro since 2008. Carpet, resilient, tile, polished concrete and resinous systems for healthcare, education, multifamily and corporate interiors.">
+<meta name="robots" content="noindex, nofollow">
+<!-- Remove the robots meta tag above once the [[ ]] / "available on request" content throughout this page is confirmed real and it's ready to be found by search engines. -->
 
 <!--
 ================================================================================
@@ -18,22 +20,30 @@
   CURRENT STATE (updated 2026-08-03, after the owner-facing pass):
     • Projects section is commented out — no real projects yet. See the comment
       block around the old <section id="projects"> for what's needed to restore it.
-    • Credentials grid shows "Available on request" instead of [[ ]] brackets for
-      bonding, EMR, GL, workers' comp, affiliations, and certs. See the credentials
-      comment block for the exact real values still needed. The [[ ]] convention
-      still applies to the story section (real quote, real founding story).
+    • Credentials grid shows "Available on request" for bonding, EMR, GL, workers' comp,
+      and affiliations. License is now real (see below). See the credentials comment
+      block for exact values still needed. The [[ ]] convention still applies to the
+      story section (real quote, real founding story).
     • Contact section's email and hours rows are removed, not bracketed — there's
       no honest placeholder for an unconfirmed inbox. Phone (real) plus the form
       cover contact for now. Markup to restore both rows is commented out right
       after the Office row in the contact section.
     • Mobile nav is a real hamburger menu (#navToggle / #navLinks), not a hidden list.
-    • Stat bar no longer shows "7 active projects" (Procore-only, goes stale). Swapped
-      for a metro-cities-served count pulled from the footer's service-area list.
+    • Stat bar: no "7 active projects" (Procore-only, goes stale) — swapped for a
+      metro-cities-served count from the footer's service-area list. No "100%
+      Commercial" either (unverifiable — two directories list residential services) —
+      swapped for Procore's own public market-sector categorization instead.
+    • Real contractor license (LIC-06-26-0031, active) is now on the page: Credentials
+      grid and footer. Do NOT add the other license numbers found in research — see
+      MUST NOT PUBLISH below.
     • Form is wired to Netlify Forms (netlify / netlify-honeypot attributes, hidden
       form-name field, honeypot input) and submits via fetch so success shows inline
       instead of navigating away. If the POST fails — e.g. this file opened locally
       via file:// instead of served from Netlify — it falls back to telling the
       visitor to call, not to a mailto: for an inbox that isn't confirmed yet.
+    • This is a small specialty subcontractor, not a large company. The $6.8M figure
+      (Procore) is average project size, not revenue — nothing on the page should
+      imply company revenue or headcount (both unconfirmed third-party estimates).
 
   CONFIRMED FACTS (verified from public sources, safe to keep):
     • Founded 22 April 2008 — 18 years in business as of 2026
@@ -41,21 +51,32 @@
     • (816) 256-4156
     • Commercial market sector, Specialty Contractor
     • Business manager: William Dunn
+    • Contractor license LIC-06-26-0031 — active, issued 5 June 2026,
+      independently reverified active July 2026
+    • Owns the domain campionekc.com (currently a GoDaddy parking page) —
+      eventual home for this site
+
+  MUST NOT PUBLISH (confirmed wrong/inactive/inappropriate — stronger than "unconfirmed"):
+    • License 2020-8263 — inactive/cancelled
+    • License 2016-8263 — unverified since December 2015
+    • St. Joseph license — expired December 2020
+    • Estimated revenue (~$798K) and headcount (~5) — third-party estimates
+    • Owner names — not for publication
 
   NEEDS CONFIRMATION FROM THE UNCLE CALL (currently placeholders):
     • The company story — who started it, why, what happened in 2008
     • Real project names, locations, sizes, and GC partners
     • Actual scopes of work performed (the list below is a reasonable guess)
     • EMR / safety record, bonding capacity, insurance limits
-    • Certifications, union affiliation, manufacturer approvals
+    • Manufacturer certifications, union affiliation
     • Real photography — this is the single biggest upgrade available
     • Whether they want residential inquiries at all
 
   DELIBERATELY NOT USED (licensing — see The Pre-Built Site Play, risk #1):
     • Google Places photos
     • Any review text from Google, Porch, or BBB
-    • Procore's $6.79M average-project-size figure is platform-only data;
-      confirm company-wide numbers before publishing anything like it.
+    • Procore's $6.79M average-project-size figure describes project size, not
+      company revenue — see "This is a small specialty subcontractor" above.
 
   FORM: wired to Netlify Forms. Deploy to Netlify for submissions to be
         captured — see the Netlify dashboard notes for how to get them emailed.
@@ -182,6 +203,7 @@ h1 em{font-style:normal;color:var(--copper-lt)}
 .stat:last-child{border-right:0}
 @media(max-width:820px){.stat:nth-child(2){border-right:0}}
 .stat .num{font-size:clamp(2rem,4vw,2.9rem);color:var(--copper-lt);font-weight:700}
+.stat .num.sm{font-size:clamp(1.3rem,2.6vw,1.75rem)}
 .stat .cap{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px;font-weight:500}
 
 /* ---------- generic ---------- */
@@ -401,9 +423,12 @@ footer a:hover{color:var(--copper-lt)}
         <div class="num">16</div>
         <div class="cap">Metro cities served</div>
       </div>
+      <!-- "100% Commercial" removed — unverifiable (Procore lists commercial sector, but two
+           directories list residential services too). Replaced with Procore's own public
+           market-sector categorization, which a GC can independently check. -->
       <div class="stat" style="padding-right:var(--pad)">
-        <div class="num">100%</div>
-        <div class="cap">Commercial</div>
+        <div class="num sm">Specialty Contractor</div>
+        <div class="cap">Commercial sector, per Procore</div>
       </div>
     </div>
   </div>
@@ -658,8 +683,8 @@ footer a:hover{color:var(--copper-lt)}
         <div class="v">Available on request<small>Provided during prequalification</small></div>
       </div>
       <div class="cred">
-        <div class="k">Certifications</div>
-        <div class="v">Available on request<small>Provided during prequalification</small></div>
+        <div class="k">License</div>
+        <div class="v">LIC-06-26-0031 — Active<small>Issued June 5, 2026</small></div>
       </div>
       <div class="cred">
         <div class="k">Project Management</div>
@@ -674,9 +699,17 @@ footer a:hover{color:var(--copper-lt)}
         - General liability: coverage limit
         - Workers' comp: carrier + limits
         - Affiliations: union local / association (INSTALL, Fuse Alliance, etc.), if any
-        - Certifications: manufacturer certs (e.g. Mohawk, Shaw, Ardex, Mapei)
       A GC's prequal form asks for exactly these fields. Get the real numbers on the call —
       especially the EMR, which is the single figure a GC's risk manager looks for.
+
+      The Certifications box above was replaced with the real, verified contractor license
+      (LIC-06-26-0031). Manufacturer certifications (e.g. Mohawk, Shaw, Ardex, Mapei) are a
+      separate, still-unconfirmed need with no box of its own right now — add one back if
+      the owner interview turns up real certs worth listing.
+
+      [[ DO NOT PUBLISH — confirmed inactive/expired/unverified, not "available on request" ]]
+        - License 2020-8263 (inactive/cancelled), License 2016-8263 (unverified since Dec 2015),
+          St. Joseph license (expired Dec 2020) — see CLAUDE.md "Must NOT publish"
     -->
   </div>
 </section>
@@ -760,7 +793,7 @@ footer a:hover{color:var(--copper-lt)}
         <form id="bidform" name="bidform" method="POST" netlify netlify-honeypot="bot-field" novalidate>
           <input type="hidden" name="form-name" value="bidform">
           <p class="hp-field" aria-hidden="true">
-            <label>Leave this field blank: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            <label>Leave this field blank: <input name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true"></label>
           </p>
 
           <div class="okmsg" id="okmsg" role="status" aria-live="polite"></div>
@@ -858,6 +891,7 @@ footer a:hover{color:var(--copper-lt)}
     </div>
     <div class="foot-bot">
       <div>© <span id="yr">2026</span> Campione Interior Solutions LLC · 103 W 26th Ave, Ste 100, North Kansas City, MO 64116</div>
+      <div>License LIC-06-26-0031 — Active</div>
       <div>Est. 2008</div>
     </div>
   </div>

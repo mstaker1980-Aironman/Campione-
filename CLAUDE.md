@@ -11,9 +11,15 @@ piece for a Kansas City web design side business.
 **General contractors, project managers, and architects doing subcontractor
 prequalification.** NOT homeowners.
 
-Campione runs commercial work averaging roughly $6.8M per project (15 projects
-on Procore, 7 active). The only reader who matters is a GC vetting them before
-sending a bid invitation.
+Campione is a small specialty subcontractor — not a general contractor, and
+not a large company — that works as one of many subs on large commercial
+jobs. The $6.8M figure is the average size of the *projects* they're tracked
+on in Procore (15 total, 7 active), not company revenue or headcount. Don't
+let anything on the site read as "this is a big company": estimated revenue
+(~$798K) and headcount (~5) are third-party estimates that must not be
+published (see "Must NOT publish" below) — but internally, assume small shop,
+big jobs. The only reader who matters is a GC vetting them before sending a
+bid invitation.
 
 Practical consequences:
 
@@ -44,6 +50,23 @@ Practical consequences:
 - Commercial market sector, Specialty Contractor
 - Business manager: William Dunn
 - On Procore since January 2024; 15 projects, 7 active
+- Contractor license LIC-06-26-0031 — active, issued 5 June 2026,
+  independently reverified active July 2026
+- Owns the domain campionekc.com (currently a GoDaddy parking page) — the
+  eventual home for this site
+
+## Must NOT publish
+
+Confirmed to be wrong, inactive, or inappropriate for a public site — this is
+stronger than "unconfirmed," these are known bad:
+
+- License 2020-8263 — inactive/cancelled
+- License 2016-8263 — unverified since December 2015
+- St. Joseph license — expired December 2020
+- Estimated revenue (~$798K) and headcount (~5) — third-party estimates, not
+  confirmed. Revenue/headcount claims on a live prequal site are exactly the
+  kind of precise-looking fabrication this project exists to avoid
+- Owner names — not for publication
 
 ## Not yet confirmed — marked `[[ ]]` in the file
 
