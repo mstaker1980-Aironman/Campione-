@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campione Interior Solutions | Commercial Flooring Contractor — Kansas City</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Campione Interior Solutions is a commercial flooring subcontractor serving the Kansas City metro since 2008. Carpet, resilient, tile, polished concrete and resinous systems for healthcare, education, multifamily and corporate interiors.">
 <meta name="robots" content="noindex, nofollow">
 <!-- Remove the robots meta tag above once the [[ ]] / "available on request" content throughout this page is confirmed real and it's ready to be found by search engines. -->
@@ -36,6 +40,14 @@
     • Real contractor license (LIC-06-26-0031, active) is now on the page: Credentials
       grid and footer. Do NOT add the other license numbers found in research — see
       MUST NOT PUBLISH below.
+    • Real logo is in. logo-mark.png is the mountain+trees icon only, cropped from the
+      client's logo file with the white background knocked out and the black outline
+      recolored white (the original black is nearly invisible against this site's dark
+      header/footer — recolored so it's actually legible, not a style choice). Used in
+      header + footer, same treatment. favicon.ico / favicon-16.png / favicon-32.png /
+      apple-touch-icon.png are generated from the same source. Source logo is only
+      100x100px — that's the ceiling on how crisp any of this can get without a better
+      file from the client.
     • Form is wired to Netlify Forms (netlify / netlify-honeypot attributes, hidden
       form-name field, honeypot input) and submits via fetch so success shows inline
       instead of navigating away. If the POST fails — e.g. this file opened locally
@@ -133,7 +145,7 @@ header{
 }
 .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;flex-shrink:0}
-.mark{width:34px;height:34px;flex-shrink:0}
+.mark{height:34px;width:auto;flex-shrink:0}
 .brand b{font-family:'Inter Tight',sans-serif;font-size:16px;letter-spacing:-.02em;line-height:1.1;display:block}
 .brand span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-lt);font-weight:600}
 .nav-links{display:flex;gap:30px;list-style:none}
@@ -403,10 +415,7 @@ footer a:hover{color:var(--copper-lt)}
 <header>
   <div class="wrap nav">
     <a href="#top" class="brand">
-      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="4" fill="#b87333"/>
-        <path d="M8 12h10v6H8zM22 12h10v6H22zM8 22h10v6H8zM22 22h10v6H22z" fill="#131519" opacity=".82"/>
-      </svg>
+      <img class="mark" src="logo-mark.png" alt="" aria-hidden="true">
       <span style="display:block">
         <b>Campione</b>
         <span>Interior Solutions</span>
@@ -929,10 +938,7 @@ footer a:hover{color:var(--copper-lt)}
     <div class="foot-grid">
       <div>
         <a href="#top" class="brand" style="margin-bottom:16px">
-          <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect width="40" height="40" rx="4" fill="#b87333"/>
-            <path d="M8 12h10v6H8zM22 12h10v6H22zM8 22h10v6H8zM22 22h10v6H22z" fill="#131519" opacity=".82"/>
-          </svg>
+          <img class="mark" src="logo-mark.png" alt="" aria-hidden="true">
           <span style="display:block"><b>Campione</b><span>Interior Solutions</span></span>
         </a>
         <p style="max-width:38ch;margin-top:14px">
