@@ -40,14 +40,14 @@
     • Real contractor license (LIC-06-26-0031, active) is now on the page: Credentials
       grid and footer. Do NOT add the other license numbers found in research — see
       MUST NOT PUBLISH below.
-    • Real logo is in. logo-mark.png is the mountain+trees icon only, cropped from the
-      client's logo file with the white background knocked out and the black outline
-      recolored white (the original black is nearly invisible against this site's dark
-      header/footer — recolored so it's actually legible, not a style choice). Used in
-      header + footer, same treatment. favicon.ico / favicon-16.png / favicon-32.png /
-      apple-touch-icon.png are generated from the same source. Source logo is only
-      100x100px — that's the ceiling on how crisp any of this can get without a better
-      file from the client.
+    • Real logo is in, now from a 1254x1254 source (logo-source.png — replaced the original
+      100x100 file, which no longer exists). logo-mark.png is the mountain+trees icon only
+      (header + footer); hero-logo.png is the full lockup (icon + wordmark + tagline), shown
+      once in the hero above the eyebrow. Both have the white background knocked out and the
+      black outline recolored white — the original black is nearly invisible against this
+      site's dark sections, so this is a legibility fix, not a style choice. The green tree
+      colors and the green tagline text are untouched. favicon.ico / favicon-16.png /
+      favicon-32.png / apple-touch-icon.png are generated the same way.
     • Form is wired to Netlify Forms (netlify / netlify-honeypot attributes, hidden
       form-name field, honeypot input) and submits via fetch so success shows inline
       instead of navigating away. If the POST fails — e.g. this file opened locally
@@ -196,6 +196,8 @@ header{
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(32px,5vw,72px);align-items:end}
 @media(max-width:880px){.hero-grid{grid-template-columns:1fr;align-items:start}}
+.hero-logo{display:block;width:170px;height:auto;margin-bottom:28px}
+@media(max-width:480px){.hero-logo{width:130px;margin-bottom:20px}}
 h1{font-size:clamp(2.6rem,6.4vw,4.75rem);margin-bottom:24px}
 h1 em{font-style:normal;color:var(--copper-lt)}
 .hero-seq{
@@ -453,17 +455,18 @@ footer a:hover{color:var(--copper-lt)}
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow hero-seq" style="--i:0">Commercial Flooring Contractor · Kansas City</div>
+        <img src="hero-logo.png" alt="Campione Interior Solutions — New, Maintain, Refresh" class="hero-logo hero-seq" style="--i:0">
+        <div class="eyebrow hero-seq" style="--i:1">Commercial Flooring Contractor · Kansas City</div>
         <h1>
-          <span class="hero-seq line" style="--i:1">Flooring that's</span><br>
-          <span class="hero-seq line" style="--i:2">ready for <em>turnover</em>.</span>
+          <span class="hero-seq line" style="--i:2">Flooring that's</span><br>
+          <span class="hero-seq line" style="--i:3">ready for <em>turnover</em>.</span>
         </h1>
-        <p class="lede hero-seq" style="--i:3">
+        <p class="lede hero-seq" style="--i:4">
           Campione Interior Solutions has installed commercial flooring across the Kansas City
           metro since 2008 — carpet, resilient, tile, and polished concrete for general contractors
           who need the schedule held and the punch list short.
         </p>
-        <div class="hero-actions hero-seq" style="--i:4">
+        <div class="hero-actions hero-seq" style="--i:5">
           <a href="#contact" class="btn btn-primary">
             Invite Us to Bid
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -474,7 +477,7 @@ footer a:hover{color:var(--copper-lt)}
           </a>
         </div>
       </div>
-      <div class="hero-card hero-seq" style="--i:5">
+      <div class="hero-card hero-seq" style="--i:6">
         <div class="lbl">Bid Desk</div>
         <div class="val"><a href="tel:+18162564156">(816) 256-4156</a></div>
         <hr>
