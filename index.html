@@ -155,7 +155,7 @@
      and slightly desaturated until verified (not estimated) >=4.5:1 against --ink: 5.09:1.
      Use this, not --accent, for any accent-colored text/border/focus-ring on a dark section. */
   --accent-on-dark:#2e9961;
-  --muted:#6b7280;
+  --muted:#636a78;
   --line:rgba(19,21,25,.12);
   --line-lt:rgba(255,255,255,.14);
   --maxw:1180px;
@@ -202,6 +202,16 @@ header{
 .nav-links{display:flex;gap:30px;list-style:none}
 .nav-links a{position:relative;color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:#fff}
+/* Ridge motif, 2 of 2 states on the nav (mirrors the mountain mark itself, reused via <use>
+   rather than redrawn): a quiet white ridge above marks the rare/momentary hover state; the
+   jagged green ridge below marks the active section, which scrollspy keeps visible nearly all
+   the time. White-on-near-black is the loudest signal available, so it's spent on the state
+   that isn't already visible most of the time. */
+.ridge-top{
+  position:absolute;left:50%;top:-15px;transform:translateX(-50%);
+  width:34px;height:auto;color:#fff;pointer-events:none;opacity:0;transition:opacity .2s ease;
+}
+.nav-links a:hover .ridge-top{opacity:1}
 /* Torn-edge motif (3 of 3): active nav indicator, same jagged language at underline scale.
    Uses --sage, not --accent: --accent on this dark header background measures 2.3:1 —
    fails even the 3:1 UI-component minimum. --sage is the palette's dark-background variant
@@ -239,6 +249,11 @@ header{
   .nav-links.open{display:flex}
   .nav-links a{display:block;padding:14px 0;border-bottom:1px solid var(--line-lt);font-size:16px}
   .nav-links li:last-child a{border-bottom:0}
+  /* Both ridge marks assume a centered, inline nav item; in the full-width left-aligned
+     mobile dropdown row a centered mark floats disconnected from the text (verified via
+     screenshot at 390px). Hide both rather than reposition — the hamburger dropdown already
+     shows the active row via its own list styling. */
+  .ridge-top,.nav-links a::after{display:none}
 }
 @media(max-width:480px){
   .brand span{display:none}
@@ -447,7 +462,7 @@ input,select,textarea{
   width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line-lt);border-radius:4px;
   padding:13px 14px;color:#fff;font-family:inherit;font-size:15.5px;transition:border-color .2s,background .2s;
 }
-input::placeholder,textarea::placeholder{color:rgba(255,255,255,.34)}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.48)}
 input:focus,select:focus,textarea:focus{outline:0;border-color:var(--accent-on-dark);background:rgba(255,255,255,.09)}
 select option{background:var(--ink-2);color:#fff}
 textarea{resize:vertical;min-height:104px}
@@ -466,7 +481,7 @@ footer ul{list-style:none}
 footer li{margin-bottom:9px}
 footer a{text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--sage)}
-.foot-bot{padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:rgba(255,255,255,.38)}
+.foot-bot{padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:rgba(255,255,255,.48)}
 .svc-area{font-size:13.5px;line-height:1.9;color:rgba(255,255,255,.45)}
 
 /* ---------- grain ---------- */
@@ -557,11 +572,11 @@ footer a:hover{color:var(--sage)}
     </a>
     <nav>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#capabilities">Capabilities</a></li>
-        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#capabilities">Capabilities<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
+        <li><a href="#sectors">Sectors<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
         <!-- Projects nav link hidden along with the section below — restore both together. -->
-        <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#story">About</a></li>
+        <li><a href="#credentials">Credentials<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
+        <li><a href="#story">About<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
       </ul>
     </nav>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
