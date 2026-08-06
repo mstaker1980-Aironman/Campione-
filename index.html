@@ -348,7 +348,11 @@ header{
   letter-spacing:.04em;margin-top:6px;text-transform:uppercase;
 }
 @media(max-width:480px){.hero-logo{width:130px;margin-bottom:20px}}
-h1{font-size:clamp(2.6rem,6.4vw,4.75rem);margin-bottom:24px}
+/* Phase 3 — oversized editorial typography. Was clamp(2.6rem,6.4vw,4.75rem) (76px at the
+   time the brief was written) — "tasteful," per the brief, is not what's being asked for.
+   Tighter tracking and line-height than the generic h1-h4 rule above on purpose: enormous
+   type needs to sit closer together to read as one shape instead of loose stacked lines. */
+h1{font-size:clamp(3rem,9vw,8.5rem);line-height:.95;letter-spacing:-.04em;margin-bottom:24px}
 h1 em{font-style:normal;color:var(--sage)}
 .hero-seq{
   opacity:0;transform:translateY(14px);
@@ -398,6 +402,30 @@ h1 .hero-seq.line{display:inline-block}
 h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
 .rv h2,.rv .eyebrow{clip-path:inset(100% 0 0 0);transition:clip-path .7s var(--ease)}
 .rv.in h2,.rv.in .eyebrow{clip-path:inset(0 0 0 0)}
+/* Section numbers beside each heading — "01, 02..." large and in outline/stroke type, per
+   the brief: enormous headline vs. small wide-tracked label is already the contrast the
+   eyebrow provides; this adds a second, quieter axis of scale contrast beside it.
+   .rv-num is a SEPARATE class from .rv, not a restyle of it — .rv alone is also used to wrap
+   the contact form (no heading, no number), and turning every .rv into a 2-col grid would
+   have shoved the form into an empty "auto" column with nothing beside it. Only the six
+   section-heading blocks get .rv-num; the form's .rv is untouched. */
+.rv-num{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,40px);align-items:start}
+.sec-num{
+  font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(3rem,7vw,5.5rem);
+  line-height:.85;letter-spacing:-.03em;margin:0;color:var(--line);
+  -webkit-text-stroke:1.5px var(--muted);user-select:none;
+}
+.why .sec-num,.contact .sec-num{color:rgba(255,255,255,.05);-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+/* Fallback above is a faint solid fill for browsers without -webkit-text-stroke support
+   (still reads fine, just filled instead of hollow); hollow it out where supported. */
+@supports (-webkit-text-stroke: 1px black){
+  .sec-num{color:transparent}
+  .why .sec-num,.contact .sec-num{color:transparent}
+}
+@media(max-width:700px){
+  .rv-num{grid-template-columns:1fr}
+  .sec-num{display:none}
+}
 h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .lead{font-size:1.1rem;color:var(--muted);max-width:64ch}
 .two-col{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,80px);align-items:start}
@@ -753,13 +781,16 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ CAPABILITIES ============================ -->
 <section id="capabilities">
   <div class="wrap">
-    <div class="rv">
-      <div class="eyebrow">Scopes of Work</div>
-      <h2><span class="reveal-text">What we install</span></h2>
-      <p class="lead">
-        Full-scope commercial flooring — from demolition and substrate prep through
-        final transitions and closeout documentation. One sub, one schedule, one point of contact.
-      </p>
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">01</div>
+      <div>
+        <div class="eyebrow">Scopes of Work</div>
+        <h2><span class="reveal-text">What we install</span></h2>
+        <p class="lead">
+          Full-scope commercial flooring — from demolition and substrate prep through
+          final transitions and closeout documentation. One sub, one schedule, one point of contact.
+        </p>
+      </div>
     </div>
 
     <div class="cap-grid stagger">
@@ -816,13 +847,16 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ SECTORS ============================ -->
 <section class="sectors" id="sectors">
   <div class="wrap">
-    <div class="rv">
-      <div class="eyebrow">Market Sectors</div>
-      <h2><span class="reveal-text">Where we work</span></h2>
-      <p class="lead">
-        Commercial construction across the metro — ground-up, tenant finish, and occupied
-        renovation where phasing and dust control aren't optional.
-      </p>
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">02</div>
+      <div>
+        <div class="eyebrow">Market Sectors</div>
+        <h2><span class="reveal-text">Where we work</span></h2>
+        <p class="lead">
+          Commercial construction across the metro — ground-up, tenant finish, and occupied
+          renovation where phasing and dust control aren't optional.
+        </p>
+      </div>
     </div>
     <div class="sector-list stagger">
       <div class="sector rv-item" style="--i:0"><span class="dot"></span>Healthcare &amp; Medical</div>
@@ -925,13 +959,16 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ WHY ============================ -->
 <section class="why grain">
   <div class="wrap">
-    <div class="rv">
-      <div class="eyebrow">For General Contractors</div>
-      <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
-      <p class="lead">
-        Flooring lands at the end of the schedule, when the float is gone and the
-        certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
-      </p>
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">03</div>
+      <div>
+        <div class="eyebrow">For General Contractors</div>
+        <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
+        <p class="lead">
+          Flooring lands at the end of the schedule, when the float is gone and the
+          certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
+        </p>
+      </div>
     </div>
     <div class="why-grid stagger">
       <div class="why-item rv-item" style="--i:0">
@@ -965,13 +1002,16 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ CREDENTIALS ============================ -->
 <section id="credentials">
   <div class="wrap">
-    <div class="rv">
-      <div class="eyebrow">Prequalification</div>
-      <h2><span class="reveal-text">Credentials</span></h2>
-      <p class="lead">
-        The information a GC needs before sending a bid invitation. Full prequal package
-        and certificates of insurance available on request.
-      </p>
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">04</div>
+      <div>
+        <div class="eyebrow">Prequalification</div>
+        <h2><span class="reveal-text">Credentials</span></h2>
+        <p class="lead">
+          The information a GC needs before sending a bid invitation. Full prequal package
+          and certificates of insurance available on request.
+        </p>
+      </div>
     </div>
     <div class="cred-grid stagger">
       <div class="cred rv-item" style="--i:0">
@@ -1033,32 +1073,35 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ STORY ============================ -->
 <section class="story" id="story">
   <div class="wrap">
-    <div class="story-inner rv">
-      <div class="eyebrow">Our Story</div>
-      <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
+    <div class="story-inner rv rv-num">
+      <div class="sec-num" aria-hidden="true">05</div>
+      <div>
+        <div class="eyebrow">Our Story</div>
+        <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
 
-      <!--
-        [[ CONFIRM ]] The real story goes here — the most important paragraph on the page, and
-        the only part no competitor can copy. Get it on the call: Who started the company? What
-        were they doing before April 2008? Why start a flooring business in the middle of a
-        housing collapse? What was the first job? What's the job they're proudest of? Who works
-        here now — family, long-tenured crew? Write it in his words, not marketing words.
-      -->
+        <!--
+          [[ CONFIRM ]] The real story goes here — the most important paragraph on the page, and
+          the only part no competitor can copy. Get it on the call: Who started the company? What
+          were they doing before April 2008? Why start a flooring business in the middle of a
+          housing collapse? What was the first job? What's the job they're proudest of? Who works
+          here now — family, long-tenured crew? Write it in his words, not marketing words.
+        -->
 
-      <p>
-        Campione Interior Solutions was founded in 2008 and has worked out of North Kansas City
-        ever since. What started as a small crew has grown into a commercial flooring
-        subcontractor trusted on projects across the metro — but the way the work gets done
-        hasn't changed much: show up when we said we would, install it right the first time,
-        and stand behind it after the building opens.
-      </p>
+        <p>
+          Campione Interior Solutions was founded in 2008 and has worked out of North Kansas City
+          ever since. What started as a small crew has grown into a commercial flooring
+          subcontractor trusted on projects across the metro — but the way the work gets done
+          hasn't changed much: show up when we said we would, install it right the first time,
+          and stand behind it after the building opens.
+        </p>
 
-      <!-- [[ CONFIRM ]] Add a real one- or two-sentence quote from the owner here — the line people remember. -->
+        <!-- [[ CONFIRM ]] Add a real one- or two-sentence quote from the owner here — the line people remember. -->
 
-      <p>
-        Eighteen years in, most of our work still comes from general contractors we've worked with
-        before — and from the ones they tell about us.
-      </p>
+        <p>
+          Eighteen years in, most of our work still comes from general contractors we've worked with
+          before — and from the ones they tell about us.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -1067,7 +1110,9 @@ footer a:hover{color:var(--sage)}
 <section class="contact grain" id="contact">
   <div class="wrap">
     <div class="contact-grid">
-      <div class="rv">
+      <div class="rv rv-num">
+        <div class="sec-num" aria-hidden="true">06</div>
+        <div>
         <div class="eyebrow">Contact</div>
         <h2><span class="reveal-text">Invite us to bid</span></h2>
         <p class="lead">
@@ -1103,6 +1148,7 @@ footer a:hover{color:var(--sage)}
               <div><div class="k">Hours</div><div class="v">Mon–Fri, 7:00am – 4:00pm</div></div>
             </div>
         -->
+        </div>
       </div>
 
       <div class="rv">
