@@ -432,7 +432,26 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 @media(max-width:880px){.two-col{grid-template-columns:1fr}}
 
 /* ---------- capabilities ---------- */
-.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+/* Phase 4 — bento grid. Eight identical tiles read as a spreadsheet; mixed cell sizes turn
+   the same content into a composition. Fixed column counts (not auto-fit) so grid-column:span
+   means something stable to lay tiles against; grid-auto-flow:dense lets normal-size tiles
+   pack into gaps a feature tile leaves behind instead of leaving a hole.
+   Which three scopes are "featured" is a layout choice, not a claim about what Campione
+   actually leads with — that fact isn't confirmed yet (see the self-performed-scopes comment
+   below). Chose the three broadest-appeal finish categories generically true of any commercial
+   flooring sub (carpet, resilient, polished concrete) rather than asserting a specialty. */
+.cap-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-flow:dense;
+  gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px;
+}
+.cap-item.feature{grid-column:span 2}
+@media(max-width:900px){
+  .cap-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .cap-grid{grid-template-columns:1fr}
+  .cap-item.feature{grid-column:span 1}
+}
 .cap-item{position:relative;background:var(--paper);padding:30px 26px;transition:background .2s,transform .2s var(--ease)}
 .cap-item::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -443,6 +462,14 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cap-item:hover::after{opacity:1}
 .cap-item .ico{width:30px;height:30px;color:var(--accent);margin-bottom:16px}
 .cap-item p{font-size:14.5px;color:var(--muted);line-height:1.55}
+/* 9th tile, purely decorative — 3 feature(span2) + 5 normal(span1) tiles sum to 11 grid units,
+   one short of the 12 that fill three clean rows of 4 (and short of 12 at 2-col, 9 at 1-col
+   too), leaving an empty trailing cell. Rather than a blank gap that reads as a broken tile,
+   this fills it with the brand mark — no new claim, reuses the existing mountain motif. */
+.cap-item.accent{background:var(--ink);display:flex;align-items:center;justify-content:center;padding:20px}
+.cap-item.accent:hover{background:var(--ink);transform:none}
+.cap-item.accent:hover::after{opacity:0}
+.cap-accent-mark{width:64%;height:auto;color:var(--sage);opacity:.55}
 
 /* ---------- sectors ---------- */
 .sectors{background:var(--bone)}
@@ -794,12 +821,12 @@ footer a:hover{color:var(--sage)}
     </div>
 
     <div class="cap-grid stagger">
-      <div class="cap-item rv-item" style="--i:0">
+      <div class="cap-item feature rv-item" style="--i:0">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
         <h3>Carpet Tile &amp; Broadloom</h3>
         <p>Modular carpet tile, walk-off systems, and broadloom for corporate, education, and hospitality interiors.</p>
       </div>
-      <div class="cap-item rv-item" style="--i:1">
+      <div class="cap-item feature rv-item" style="--i:1">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h18M3 12h18M3 19h18" stroke-linecap="round"/><path d="M7 5v14M17 5v14" opacity=".45"/></svg>
         <h3>Luxury Vinyl &amp; Resilient</h3>
         <p>LVT and LVP, sheet vinyl, rubber tile, and homogeneous sheet goods with heat-welded seams.</p>
@@ -809,7 +836,7 @@ footer a:hover{color:var(--sage)}
         <h3>Ceramic, Porcelain &amp; Stone</h3>
         <p>Floor and wall tile, large-format porcelain, waterproofing and crack-isolation membranes.</p>
       </div>
-      <div class="cap-item rv-item" style="--i:3">
+      <div class="cap-item feature rv-item" style="--i:3">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18" opacity=".45"/><circle cx="12" cy="12" r="3.4"/></svg>
         <h3>Polished Concrete</h3>
         <p>Grind, densify, and polish to specified gloss and clarity. Dyes, joint fill, and guard systems.</p>
@@ -834,12 +861,21 @@ footer a:hover{color:var(--sage)}
         <h3>Base, Trim &amp; Transitions</h3>
         <p>Rubber and vinyl wall base, stair treads and nosings, reducers, and ADA-compliant transitions.</p>
       </div>
+      <div class="cap-item accent rv-item" style="--i:8" aria-hidden="true">
+        <svg class="cap-accent-mark" viewBox="0 0 1239 430"><use href="#logo-mountain"/></svg>
+      </div>
     </div>
 
     <!--
       [[ CONFIRM ]] These are standard scopes for a commercial flooring sub in this market —
       confirm with the owner what Campione actually self-performs versus subs out. That
       distinction matters to a GC reading this page.
+
+      [[ CONFIRM ]] Phase 4 bento grid: Carpet Tile & Broadloom, Luxury Vinyl & Resilient, and
+      Polished Concrete (class="feature") are sized larger as the three broadest-appeal finish
+      categories generically true of any commercial flooring sub — NOT a claim about what
+      Campione specifically leads with, which isn't confirmed yet. Revisit which tiles get
+      class="feature" once the above is answered; it may not be these three.
     -->
   </div>
 </section>
