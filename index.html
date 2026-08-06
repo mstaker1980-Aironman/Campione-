@@ -471,9 +471,34 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cap-item.accent:hover::after{opacity:0}
 .cap-accent-mark{width:64%;height:auto;color:var(--sage);opacity:.55}
 
+/* Phase 5 — sticky-column sections, Sectors and Why-GCs only (per the brief). Heading pinned
+   in a sticky left column while the content scrolls past on the right — the narrower right
+   column also means the existing auto-fit content grids wrap to fewer columns than they did
+   full-width, which is what gives the column enough scroll height for the pin to actually be
+   visible rather than a no-op. top:96px clears the sticky header (~73px) with breathing room. */
+/* align-items:start is required, not incidental — got this backwards on the first pass and
+   had to verify against an isolated repro to find the real mechanism. Without it, the grid's
+   default stretch makes the sticky element's OWN box fill the entire (tall) row, and an
+   element that's already as tall as its containing block has no slack left to move through —
+   it just tracks the scroll 1:1 and never visibly sticks. With align-items:start, the sticky
+   element keeps its own short natural height and sits at the top of the tall cell, which is
+   what actually gives position:sticky room to hold its position while the rest of that tall
+   cell scrolls past. */
+.sticky-section{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.sticky-section .rv-num{position:sticky;top:96px}
+@media(max-width:880px){
+  .sticky-section{grid-template-columns:1fr}
+  .sticky-section .rv-num{position:static}
+}
+
 /* ---------- sectors ---------- */
 .sectors{background:var(--bone)}
-.sector-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:40px}
+/* Single column, not a multi-col grid: this list is the scrolling side of the sticky-heading
+   layout above, and it needs real vertical length for the pin to have anything to hold
+   against. A 3-4 col grid of 9 short tags was actually SHORTER than the (now narrower, more
+   wrapped) heading column beside it — measured 445px vs 485px — leaving the sticky element
+   no slack to stick within. Stacked, it's 9 rows instead of 3, comfortably taller. */
+.sector-list{display:grid;grid-template-columns:1fr;gap:12px;margin-top:40px;max-width:460px}
 .sector{
   background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:20px 22px;
   display:flex;align-items:center;gap:14px;font-weight:600;font-size:15.5px;transition:all .2s;
@@ -510,7 +535,10 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 }
 .why h2{color:#fff}
 .why .lead{color:rgba(255,255,255,.66)}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:34px;margin-top:52px}
+/* Single column for the same reason as .sector-list above: measured 578px (2-3 col grid) vs
+   630px for the heading column beside it at this width — also inverted. Stacked, 6 full-width
+   rows comfortably clears it. */
+.why-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:52px;max-width:560px}
 .why-item{border-top:2px solid var(--accent-on-dark);padding-top:22px}
 .why-item h3{color:#fff}
 .why-item p{color:rgba(255,255,255,.64);font-size:15px}
@@ -883,27 +911,29 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ SECTORS ============================ -->
 <section class="sectors" id="sectors">
   <div class="wrap">
-    <div class="rv rv-num">
-      <div class="sec-num" aria-hidden="true">02</div>
-      <div>
-        <div class="eyebrow">Market Sectors</div>
-        <h2><span class="reveal-text">Where we work</span></h2>
-        <p class="lead">
-          Commercial construction across the metro — ground-up, tenant finish, and occupied
-          renovation where phasing and dust control aren't optional.
-        </p>
+    <div class="sticky-section">
+      <div class="rv rv-num">
+        <div class="sec-num" aria-hidden="true">02</div>
+        <div>
+          <div class="eyebrow">Market Sectors</div>
+          <h2><span class="reveal-text">Where we work</span></h2>
+          <p class="lead">
+            Commercial construction across the metro — ground-up, tenant finish, and occupied
+            renovation where phasing and dust control aren't optional.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="sector-list stagger">
-      <div class="sector rv-item" style="--i:0"><span class="dot"></span>Healthcare &amp; Medical</div>
-      <div class="sector rv-item" style="--i:1"><span class="dot"></span>K–12 &amp; Higher Education</div>
-      <div class="sector rv-item" style="--i:2"><span class="dot"></span>Corporate Interiors</div>
-      <div class="sector rv-item" style="--i:3"><span class="dot"></span>Multifamily</div>
-      <div class="sector rv-item" style="--i:4"><span class="dot"></span>Senior Living</div>
-      <div class="sector rv-item" style="--i:5"><span class="dot"></span>Hospitality</div>
-      <div class="sector rv-item" style="--i:6"><span class="dot"></span>Retail &amp; Restaurant</div>
-      <div class="sector rv-item" style="--i:7"><span class="dot"></span>Industrial &amp; Warehouse</div>
-      <div class="sector rv-item" style="--i:8"><span class="dot"></span>Government &amp; Municipal</div>
+      <div class="sector-list stagger">
+        <div class="sector rv-item" style="--i:0"><span class="dot"></span>Healthcare &amp; Medical</div>
+        <div class="sector rv-item" style="--i:1"><span class="dot"></span>K–12 &amp; Higher Education</div>
+        <div class="sector rv-item" style="--i:2"><span class="dot"></span>Corporate Interiors</div>
+        <div class="sector rv-item" style="--i:3"><span class="dot"></span>Multifamily</div>
+        <div class="sector rv-item" style="--i:4"><span class="dot"></span>Senior Living</div>
+        <div class="sector rv-item" style="--i:5"><span class="dot"></span>Hospitality</div>
+        <div class="sector rv-item" style="--i:6"><span class="dot"></span>Retail &amp; Restaurant</div>
+        <div class="sector rv-item" style="--i:7"><span class="dot"></span>Industrial &amp; Warehouse</div>
+        <div class="sector rv-item" style="--i:8"><span class="dot"></span>Government &amp; Municipal</div>
+      </div>
     </div>
   </div>
 </section>
@@ -995,41 +1025,43 @@ footer a:hover{color:var(--sage)}
 <!-- ============================ WHY ============================ -->
 <section class="why grain">
   <div class="wrap">
-    <div class="rv rv-num">
-      <div class="sec-num" aria-hidden="true">03</div>
-      <div>
-        <div class="eyebrow">For General Contractors</div>
-        <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
-        <p class="lead">
-          Flooring lands at the end of the schedule, when the float is gone and the
-          certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
-        </p>
+    <div class="sticky-section">
+      <div class="rv rv-num">
+        <div class="sec-num" aria-hidden="true">03</div>
+        <div>
+          <div class="eyebrow">For General Contractors</div>
+          <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
+          <p class="lead">
+            Flooring lands at the end of the schedule, when the float is gone and the
+            certificate of occupancy is the only thing anyone cares about. That's the part we're built for.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="why-grid stagger">
-      <div class="why-item rv-item" style="--i:0">
-        <h3>We hold the date</h3>
-        <p>Flooring is the last trade in and the first one blamed. We staff to the schedule we signed, including nights and weekends when the turnover date demands it.</p>
-      </div>
-      <div class="why-item rv-item" style="--i:1">
-        <h3>Submittals that don't bounce</h3>
-        <p>Complete submittal packages, product data, and samples returned on time — not three RFIs later.</p>
-      </div>
-      <div class="why-item rv-item" style="--i:2">
-        <h3>Substrate problems caught early</h3>
-        <p>Moisture testing before material hits the floor. Finding a failing slab in week two is a schedule item; finding it after install is a claim.</p>
-      </div>
-      <div class="why-item rv-item" style="--i:3">
-        <h3>Short punch lists</h3>
-        <p>We walk our own work before the architect does, and we close out with the O&amp;M manuals and warranties in hand.</p>
-      </div>
-      <div class="why-item rv-item" style="--i:4">
-        <h3>Occupied-space experience</h3>
-        <p>Phasing, containment, and after-hours work in hospitals, schools, and offices that never actually close.</p>
-      </div>
-      <div class="why-item rv-item" style="--i:5">
-        <h3>Local, and staying that way</h3>
-        <p>North Kansas City since 2008. Our crews live here, our references are down the road, and we'll still be here for the warranty call.</p>
+      <div class="why-grid stagger">
+        <div class="why-item rv-item" style="--i:0">
+          <h3>We hold the date</h3>
+          <p>Flooring is the last trade in and the first one blamed. We staff to the schedule we signed, including nights and weekends when the turnover date demands it.</p>
+        </div>
+        <div class="why-item rv-item" style="--i:1">
+          <h3>Submittals that don't bounce</h3>
+          <p>Complete submittal packages, product data, and samples returned on time — not three RFIs later.</p>
+        </div>
+        <div class="why-item rv-item" style="--i:2">
+          <h3>Substrate problems caught early</h3>
+          <p>Moisture testing before material hits the floor. Finding a failing slab in week two is a schedule item; finding it after install is a claim.</p>
+        </div>
+        <div class="why-item rv-item" style="--i:3">
+          <h3>Short punch lists</h3>
+          <p>We walk our own work before the architect does, and we close out with the O&amp;M manuals and warranties in hand.</p>
+        </div>
+        <div class="why-item rv-item" style="--i:4">
+          <h3>Occupied-space experience</h3>
+          <p>Phasing, containment, and after-hours work in hospitals, schools, and offices that never actually close.</p>
+        </div>
+        <div class="why-item rv-item" style="--i:5">
+          <h3>Local, and staying that way</h3>
+          <p>North Kansas City since 2008. Our crews live here, our references are down the road, and we'll still be here for the warranty call.</p>
+        </div>
       </div>
     </div>
   </div>
