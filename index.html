@@ -272,6 +272,43 @@ header{
   clip-path:polygon(0% 18px, 0.00% 6.7px, 4.55% 10.7px, 9.09% 6.5px, 13.64% 15.2px, 18.18% 6.2px, 22.73% 7.3px, 27.27% 5.2px, 31.82% 5.7px, 36.36% 5.5px, 40.91% 6.5px, 45.45% 9.4px, 50.00% 7.9px, 54.55% 12.1px, 59.09% 5.6px, 63.64% 6.7px, 68.18% 5.8px, 72.73% 15.9px, 77.27% 5.7px, 81.82% 6.0px, 86.36% 14.4px, 90.91% 6.1px, 95.45% 15.5px, 100.00% 7.7px, 100% 18px);
 }
 .hero-bg{position:absolute;top:-40px;bottom:-40px;left:0;right:0;opacity:.16;pointer-events:none}
+/* Phase 2 — "the logo as architecture": the mountain mark alone, oversized and faint, as
+   structural texture behind the hero copy rather than a centered watermark stamp. Anchored
+   left:0/width:120vw so the excess 20% falls entirely on the right (bleeds off the right
+   edge only, not the left); bottom offset bleeds it off the bottom edge too — two edges,
+   not four. .hero's own overflow:hidden (above) clips it regardless of viewport width, so
+   this can't create horizontal scroll even at the 120vw size. Mountain only, no trees —
+   needle detail is invisible/noisy at this scale (confirmed back in Phase 0).
+   Opacity note: spec called for 4-6% in --forest. Verified via pixel sampling (real
+   screenshot, not estimated) that --forest (#164d30) blended at 4-6% over --ink (#131519)
+   produces an RGB delta of only ~3-7/255 — confirmed invisible, not just subtle, even
+   zoomed into the exact ridge location. Walked the opacity up in real rendered steps
+   (5/10/16/22/30%) until it read as present-but-quiet rather than gone: 28% is where it
+   first holds up as structure crossing behind the copy without reading as a pasted logo. */
+.hero-mountain{position:absolute;left:0;bottom:-6vw;width:120vw;height:auto;pointer-events:none;z-index:0}
+.hero-mountain path{fill:var(--forest);fill-opacity:.28;stroke:none}
+/* Draw-in state — added by JS only, and only when motion is allowed. The markup's default
+   (no class) is already the correct static end state, so no-JS and reduced-motion both just
+   render the finished texture with no animation step at all. */
+/* mtn-ready commits the fully-hidden state with NO transition property present — adding
+   stroke-dashoffset and a transition in the same rule would animate FROM the property's
+   implicit initial value (0, i.e. fully drawn) TO the hidden length, backwards. mtn-run,
+   added a frame later once mtn-ready has actually painted, introduces stroke-dashoffset:0
+   and the transition together, so it animates forward from the already-committed hidden
+   length down to 0 (confirmed with a standalone repro before wiring this into the page). */
+.hero-mountain path.mtn-ready{
+  fill-opacity:0;stroke:var(--forest);stroke-opacity:.4;stroke-width:1.5px;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:var(--mtn-len);stroke-dashoffset:var(--mtn-len);
+}
+.hero-mountain path.mtn-ready.mtn-run{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 2.4s var(--ease);
+}
+.hero-mountain path.mtn-done{
+  fill-opacity:.28;stroke-opacity:0;
+  transition:fill-opacity 1.3s ease,stroke-opacity 1s ease;
+}
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:clamp(32px,5vw,72px);align-items:end}
 @media(max-width:880px){.hero-grid{grid-template-columns:1fr;align-items:start}}
@@ -508,6 +545,7 @@ footer a:hover{color:var(--sage)}
   .rv h2,.rv .eyebrow{clip-path:inset(0 0 0 0)}
   .hero-seq{opacity:1;transform:none}
   .hero-bg{transform:none!important}
+  .hero-mountain path{fill-opacity:.28!important;stroke:none!important}
   .stat::after{transform:scaleY(1)}
   .cap-item:hover,.cred:hover{transform:none}
   .cap-item:hover::after,.cred:hover::after{opacity:0}
@@ -590,6 +628,11 @@ footer a:hover{color:var(--sage)}
 
 <!-- ============================ HERO ============================ -->
 <div class="hero grain" id="top">
+  <!-- Duplicated (not <use>) so JS can call getTotalLength()/set stroke-dasharray directly —
+       <use> shadow content isn't measurable. Same d as #logo-mountain above. -->
+  <svg class="hero-mountain" aria-hidden="true" viewBox="0 0 1239 430">
+    <path id="heroMountainPath" d="M 620.500 4.462 C 608.203 7.693, 610.965 6.484, 485.500 63.520 C 464.050 73.271, 434.575 86.418, 420 92.735 C 405.425 99.053, 383.150 108.716, 370.500 114.208 C 357.850 119.700, 334.450 129.827, 318.500 136.712 C 187.388 193.313, 130.158 222.082, 86.645 253.263 C 80.515 257.655, 72.912 263.010, 69.750 265.162 C 66.588 267.314, 64 269.424, 64 269.851 C 64 270.614, 80.805 268.673, 83.650 267.581 C 84.463 267.269, 84.834 267.459, 84.493 268.011 C 84.157 268.555, 83.471 269, 82.968 269 C 78.408 269, 32 295.581, 32 298.193 C 32 298.637, 34.362 299.008, 37.250 299.017 L 42.500 299.033 35.500 302.479 C 31.650 304.373, 27.150 307.050, 25.500 308.426 L 22.500 310.928 30.440 310.964 C 34.807 310.984, 40.882 311.450, 43.940 311.999 C 46.998 312.549, 52.006 313.246, 55.070 313.548 C 60.504 314.085, 60.629 314.167, 60.227 316.909 C 59.778 319.966, 61.451 320.914, 67.500 321.031 L 70.500 321.088 66.500 323.150 C 58.198 327.429, 46.372 334.426, 43 337.056 C 39.513 339.775, 23.937 348.724, 8.250 357.021 C -4.316 363.668, -2.725 364.356, 17.500 361.020 C 33.658 358.356, 34.303 358.405, 28.946 361.901 C 26.501 363.496, 21.800 367.300, 18.500 370.355 C 11.325 376.996, 11.775 377.147, 28.207 373.626 C 34.095 372.364, 38.681 371.707, 38.398 372.166 C 38.114 372.625, 37.396 373, 36.802 373 C 32.520 373, 3.320 397.653, 5.280 399.613 C 9.322 403.655, 187.323 317.028, 294.820 258.705 C 321.908 244.008, 327.069 240.502, 324.446 238.584 C 322.554 237.200, 334.488 231.213, 359.665 220.914 C 374.673 214.775, 381.989 211.295, 388.420 207.235 C 392.113 204.904, 392.248 204.655, 390.518 203.390 C 388.789 202.125, 388.892 201.943, 392.084 200.608 C 410.010 193.109, 435.663 180.654, 456.867 169.153 C 470.965 161.506, 492.175 150.077, 504 143.755 C 539.003 125.041, 545.344 121.004, 541.750 119.720 C 540.140 119.145, 540.021 119.224, 550 114.281 C 554.675 111.966, 563.225 107.556, 569 104.482 C 574.775 101.409, 585.703 95.703, 593.285 91.803 C 600.867 87.903, 606.903 84.215, 606.697 83.606 C 606.318 82.486, 631.990 67.822, 639.799 64.697 C 650.386 60.461, 660.180 63.148, 674.919 74.332 C 680.738 78.749, 696.300 90.511, 709.500 100.470 C 722.700 110.430, 747.410 129.086, 764.410 141.929 C 797.155 166.664, 802.748 170.026, 818.067 174.176 C 831.533 177.825, 852.189 177.461, 869.500 173.270 C 885.975 169.281, 895.946 168.435, 908.046 170 C 930.675 172.927, 943.100 178.743, 970.552 199.261 C 1042.207 252.817, 1059.102 265.192, 1088.829 285.895 C 1125.096 311.153, 1191.910 360.724, 1221 383.956 C 1235.830 395.799, 1239 398.208, 1239 397.634 C 1239 397.340, 1232.813 391.800, 1225.250 385.322 C 1217.688 378.845, 1197.100 360.920, 1179.500 345.490 C 1099.127 275.025, 1007.149 196.014, 980.200 174.286 C 941.019 142.697, 913.950 134.124, 867.504 138.593 C 837.849 141.447, 825.648 138.275, 809 123.383 C 800.940 116.173, 744.151 62.706, 719.515 39.133 C 699.392 19.878, 688.166 12.077, 673.004 6.812 C 657.071 1.279, 636.180 0.344, 620.500 4.462 M 490 302.500 C 490 303.325, 490.436 304, 490.969 304 C 491.501 304, 491.678 303.325, 491.362 302.500 C 491.045 301.675, 490.609 301, 490.393 301 C 490.177 301, 490 301.675, 490 302.500 M 71.500 326.959 C 68.973 328.010, 55.343 336, 56.077 336 C 56.378 336, 61.545 333.754, 67.562 331.008 C 73.932 328.101, 77.456 326.039, 76 326.071 C 74.625 326.102, 72.600 326.501, 71.500 326.959 M 567 394.027 C 530.216 395.428, 501.617 396.993, 430.500 401.500 C 417.300 402.336, 402.225 403.445, 397 403.965 C 391.775 404.484, 378.275 405.617, 367 406.483 C 314.281 410.532, 247.887 419.190, 206.500 427.411 L 194.500 429.795 244.574 429.898 C 284.984 429.980, 300.135 429.619, 323.074 428.025 C 381.399 423.973, 454.060 420.420, 532.500 417.784 C 581.642 416.133, 769.020 416.165, 819.500 417.833 C 889.420 420.143, 949.032 423.235, 1006.500 427.532 C 1046.967 430.557, 1116.887 431.148, 1105.500 428.369 C 1075.469 421.037, 983.186 407.518, 949.500 405.516 C 944 405.189, 937.925 404.715, 936 404.464 C 932.355 403.988, 903.652 401.717, 879.500 399.994 C 871.800 399.445, 852.225 398.315, 836 397.482 C 819.775 396.650, 797.950 395.484, 787.500 394.892 C 764.061 393.563, 596.450 392.905, 567 394.027"/>
+  </svg>
   <svg class="hero-bg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
     <defs>
       <pattern id="herringbone" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -663,11 +706,11 @@ footer a:hover{color:var(--sage)}
         <div class="cap">Metro cities served</div>
       </div>
       <!-- "100% Commercial" removed — unverifiable (Procore lists commercial sector, but two
-           directories list residential services too). Replaced with Procore's own public
-           market-sector categorization, which a GC can independently check. -->
+           directories list residential services too). Citing Procore by name for what business
+           we're in read as a company citing a directory about itself — dropped the attribution. -->
       <div class="stat" style="padding-right:var(--pad);--i:3">
         <div class="num sm">Specialty Contractor</div>
-        <div class="cap">Commercial sector, per Procore</div>
+        <div class="cap">Commercial</div>
       </div>
     </div>
   </div>
@@ -1175,6 +1218,29 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     requestAnimationFrame(function(){
       hero.classList.add('loaded');
     });
+  });
+})();
+
+// hero mountain draw-in — traces the mark's stroke once on load, then dissolves into the
+// low-opacity fill wash that's already the default (no-JS/reduced-motion) resting state.
+// Runs once, never repeats — there's no scroll or re-trigger hook at all.
+(function(){
+  var path = document.getElementById('heroMountainPath');
+  if(!path) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var len;
+  try{ len = path.getTotalLength(); }catch(e){ return; }
+  path.style.setProperty('--mtn-len', len);
+  path.classList.add('mtn-ready');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      path.classList.add('mtn-run');
+    });
+  });
+  path.addEventListener('transitionend', function onEnd(e){
+    if(e.propertyName !== 'stroke-dashoffset') return;
+    path.removeEventListener('transitionend', onEnd);
+    path.classList.add('mtn-done');
   });
 })();
 
