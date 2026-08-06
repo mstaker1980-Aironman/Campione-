@@ -101,12 +101,15 @@ Kansas City commercial flooring contractors," not "flashy."
 
 ## Git workflow
 
-- After completing any task that changes files, automatically `git add -A`,
-  commit, and push to `origin main`. Don't wait to be asked
+- After completing any task that changes files, automatically `git add -A`
+  and commit. Don't wait to be asked
+- Do **not** push to `origin main` unless explicitly asked. The user pushes
+  when they want something live
 - Write real commit messages describing what changed and why — never
   "update" or "changes"
 - Commit once per completed task, not once per file edit
 - If a task is abandoned or reverted, don't commit it
 - Never commit secrets, API keys, or anything in the "Must NOT publish" list
   above
-- Report the commit hash and short message after pushing
+- Report the commit hash and short message after committing (and after
+  pushing, when asked to push)
