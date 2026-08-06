@@ -152,9 +152,17 @@
   --accent-hover:#0f5122;
   /* --accent measures 7.94:1 on white/bone (excellent) but only 2.30:1 on --ink — fails
      the 4.5:1 text minimum outright and even the 3:1 non-text minimum. Same hue, lightened
-     and slightly desaturated until verified (not estimated) >=4.5:1 against --ink: 5.09:1.
-     Use this, not --accent, for any accent-colored text/border/focus-ring on a dark section. */
-  --accent-on-dark:#2e9961;
+     and slightly desaturated until verified (not estimated) >=4.5:1 against --ink.
+     Re-verified again after Phase 2's hero mountain: the mountain's 28%-opacity --forest
+     fill lightens the hero background wherever it sits, and the hero eyebrow/tagline (both
+     colored with this token) overlap that tint at common desktop widths (~1600-3200px,
+     confirmed via real pixel sampling, not the flat --ink token). Original #2e9961 measured
+     only 4.39:1 against the worst sampled tinted background (~rgb(21,38,33)) — a real fail,
+     even though it held 4.96:1 against the plain background. Lightened again to #3aa36c:
+     5.63:1 on plain background, 4.98:1 against the worst-case tinted background — both clear
+     4.5:1 with margin. Use this, not --accent, for any accent-colored text/border/focus-ring
+     on a dark section. */
+  --accent-on-dark:#3aa36c;
   --muted:#636a78;
   --line:rgba(19,21,25,.12);
   --line-lt:rgba(255,255,255,.14);
