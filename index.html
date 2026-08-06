@@ -492,7 +492,16 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 }
 
 /* ---------- sectors ---------- */
-.sectors{background:var(--bone)}
+.sectors{background:var(--bone);position:relative}
+/* Phase 7 — texture and depth: section transitions that aren't hard cuts. The torn-edge motif
+   is deliberately used sparingly (3 spots, per the brand notes) — this and the Story->Contact
+   transition below are the two remaining light-to-dark hard cuts on the page, given a plain
+   gradient bleed instead rather than a 4th torn edge. */
+.sectors::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:72px;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--ink));
+}
+.sectors .sticky-section{position:relative;z-index:1}
 /* Single column, not a multi-col grid: this list is the scrolling side of the sticky-heading
    layout above, and it needs real vertical length for the pin to have anything to hold
    against. A 3-4 col grid of 9 short tags was actually SHORTER than the (now narrower, more
@@ -558,7 +567,14 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cred .v small{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
 
 /* ---------- story ---------- */
-.story{background:var(--bone)}
+.story{background:var(--bone);position:relative}
+/* Second of the two plain gradient-bleed transitions — see the matching comment on .sectors
+   above for why this isn't a 4th torn edge. */
+.story::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:72px;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--ink));
+}
+.story .story-inner{position:relative;z-index:1}
 .story-inner{max-width:76ch}
 .story p{margin-bottom:20px;font-size:1.06rem}
 .story p:last-child{margin-bottom:0}
