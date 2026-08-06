@@ -471,6 +471,13 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cap-item.accent:hover::after{opacity:0}
 .cap-accent-mark{width:64%;height:auto;color:var(--sage);opacity:.55}
 
+/* ---------- lifecycle (new / maintain / refresh) ---------- */
+.lifecycle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:48px}
+@media(max-width:820px){.lifecycle-grid{grid-template-columns:1fr}}
+.lifecycle-item{border-top:2px solid var(--accent);padding-top:22px}
+.lc-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.lifecycle-item p{color:var(--muted);font-size:15px;line-height:1.6}
+
 /* Phase 5 — sticky-column sections, Sectors and Why-GCs only (per the brief). Heading pinned
    in a sticky left column while the content scrolls past on the right — the narrower right
    column also means the existing auto-fit content grids wrap to fewer columns than they did
@@ -955,12 +962,59 @@ footer a:hover{color:var(--sage)}
   </div>
 </section>
 
+<!-- ============================ LIFE-CYCLE SERVICES ============================ -->
+<!--
+  Phase 8 — the missing service lines. Design Direction v2.md: confirmed via the Fuse Alliance
+  research and Campione's own tagline that they do maintenance and reclamation work, not just
+  new installation — the site never mentioned either. "NEW · MAINTAIN · REFRESH" is their own
+  tagline (it's already in the hero lockup), used here as the section's own structure.
+
+  [[ CONFIRM ]] The three descriptions below are generic, industry-standard descriptions of
+  what "maintenance" and "reclamation/refresh" scopes typically cover for a commercial flooring
+  sub — NOT specific claims about Campione's actual programs, crew, or client list, none of
+  which are confirmed. Get the real specifics on the owner call: do they run scheduled
+  maintenance contracts or is refresh/reclamation project-only work? Any current maintenance
+  clients or portfolios they can reference (even unnamed, e.g. "a regional healthcare system")?
+-->
+<section id="lifecycle">
+  <div class="wrap">
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">02</div>
+      <div>
+        <div class="eyebrow">New · Maintain · Refresh</div>
+        <h2><span class="reveal-text">Beyond first installation</span></h2>
+        <p class="lead">
+          Flooring has a life cycle after the ribbon-cutting. Most of our work is ground-up
+          and tenant finish, but we work the full cycle, not just the first install.
+        </p>
+      </div>
+    </div>
+    <div class="lifecycle-grid stagger">
+      <div class="lifecycle-item rv-item" style="--i:0">
+        <div class="lc-label">New</div>
+        <h3>Ground-up &amp; tenant finish</h3>
+        <p>New construction and tenant improvement installs across every flooring type in our capabilities — the work most GCs already know us for.</p>
+      </div>
+      <div class="lifecycle-item rv-item" style="--i:1">
+        <div class="lc-label">Maintain</div>
+        <h3>Scheduled care for occupied buildings</h3>
+        <p>Ongoing maintenance for owners and facility managers — cleaning protocols, scheduled recoating, and preventive upkeep that extends the life of flooring already in service.</p>
+      </div>
+      <div class="lifecycle-item rv-item" style="--i:2">
+        <div class="lc-label">Refresh</div>
+        <h3>Reclamation without a full teardown</h3>
+        <p>Restoration of existing floors — refinishing, selective replacement, and reclamation — where a phased refresh gets the space back in service faster than a full rip-out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ SECTORS ============================ -->
 <section class="sectors" id="sectors">
   <div class="wrap">
     <div class="sticky-section">
       <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">02</div>
+        <div class="sec-num" aria-hidden="true">03</div>
         <div>
           <div class="eyebrow">Market Sectors</div>
           <h2><span class="reveal-text">Where we work</span></h2>
@@ -1074,7 +1128,7 @@ footer a:hover{color:var(--sage)}
   <div class="wrap">
     <div class="sticky-section">
       <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">03</div>
+        <div class="sec-num" aria-hidden="true">04</div>
         <div>
           <div class="eyebrow">For General Contractors</div>
           <h2><span class="reveal-text">Why GCs keep us on the list</span></h2>
@@ -1118,7 +1172,7 @@ footer a:hover{color:var(--sage)}
 <section id="credentials">
   <div class="wrap">
     <div class="rv rv-num">
-      <div class="sec-num" aria-hidden="true">04</div>
+      <div class="sec-num" aria-hidden="true">05</div>
       <div>
         <div class="eyebrow">Prequalification</div>
         <h2><span class="reveal-text">Credentials</span></h2>
@@ -1189,7 +1243,7 @@ footer a:hover{color:var(--sage)}
 <section class="story" id="story">
   <div class="wrap">
     <div class="story-inner rv rv-num">
-      <div class="sec-num" aria-hidden="true">05</div>
+      <div class="sec-num" aria-hidden="true">06</div>
       <div>
         <div class="eyebrow">Our Story</div>
         <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
@@ -1226,7 +1280,7 @@ footer a:hover{color:var(--sage)}
   <div class="wrap">
     <div class="contact-grid">
       <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">06</div>
+        <div class="sec-num" aria-hidden="true">07</div>
         <div>
         <div class="eyebrow">Contact</div>
         <h2><span class="reveal-text">Invite us to bid</span></h2>
