@@ -420,7 +420,14 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
    section-heading blocks get .rv-num; the form's .rv is untouched. */
 .rv-num{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,40px);align-items:start}
 .sec-num{
-  font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(3rem,7vw,5.5rem);
+  /* Letter-spacing alone wasn't the real cause of the "04" overlap — corrected after further
+     diagnosis. Inter Tight's "4" is built from overlapping subpaths; with a transparent fill
+     and -webkit-text-stroke, the browser strokes every subpath, so the glyph's own internal
+     construction seams become visible (confirmed on canvas: Inter/Inter Tight show the seams,
+     Arial/Helvetica Neue don't — those are built from clean single outlines). Font swapped to
+     a system Helvetica stack for this stroked-only element specifically; Inter Tight stays
+     everywhere else (headings, body, nav) — not a sitewide font change. */
+  font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(3rem,7vw,5.5rem);
   /* letter-spacing was -.03em: negative tracking + text-stroke means adjacent glyph OUTLINES
      overlap, not just their (invisible) fill boxes — most visible on "04", where the 4's
      diagonal crossed into the 0. Positive tracking instead, set locally (not inherited from
@@ -684,12 +691,17 @@ form .btn{width:100%;justify-content:center;margin-top:8px;border:0;cursor:point
    from contrast rules" isn't the same claim as "legible on purpose" — .4 read as an accident,
    not a choice. Not chasing a specific ratio here since none applies; just visibly deliberate. */
 .marquee-item{
-  /* letter-spacing was -.01em: same overlapping-outline issue as .sec-num below, here
-     colliding letters within city names rather than between two digits. Set locally (already
-     was, not inherited) — positive tracking instead. Stroke width/font-size unchanged. */
-  font-family:'Inter Tight',sans-serif;font-weight:700;letter-spacing:.03em;
+  /* Letter-spacing alone didn't fully fix this — Inter Tight's kerning table pulls certain
+     pairs together, and CSS letter-spacing is applied AFTER kerning, so tight pairs inside
+     city names could still collide under stroke. Same subpath-overlap issue as .sec-num above
+     applies here too. Fixed the same way: system Helvetica stack for this stroked-only
+     element, plus font-kerning:none so letter-spacing is the only thing adjusting inter-glyph
+     gaps, plus a touch less stroke width since Helvetica's default spacing runs tighter than
+     Inter Tight's. Inter Tight stays everywhere else — not a sitewide font change. */
+  font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:.04em;
+  font-kerning:none;
   font-size:clamp(1.5rem,3.2vw,2.4rem);white-space:nowrap;padding:0 26px;
-  color:rgba(255,255,255,.24);-webkit-text-stroke:1.3px rgba(255,255,255,.7);
+  color:rgba(255,255,255,.24);-webkit-text-stroke:1px rgba(255,255,255,.7);
 }
 @supports (-webkit-text-stroke: 1px black){.marquee-item{color:transparent}}
 .marquee-dot{color:var(--sage);font-size:1rem;display:flex;align-items:center}
