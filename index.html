@@ -505,8 +505,17 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    element keeps its own short natural height and sits at the top of the tall cell, which is
    what actually gives position:sticky room to hold its position while the rest of that tall
    cell scrolls past. */
-.sticky-section{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:clamp(32px,5vw,64px);align-items:start}
-.sticky-section .rv-num{position:sticky;top:96px}
+/* Left rail was a hardcoded minmax(220px,300px) — starved the heading in 03/04 (Sectors,
+   Why-GCs) at the widths where it mattered most. minmax(0,360px) gives it more room and the
+   0 minimum keeps the track from forcing an overflow at narrow widths before the 880px
+   breakpoint below collapses it to one column entirely. */
+.sticky-section{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:56px;align-items:start}
+/* Sticky sections also stack the numeral above the heading instead of beside it — scoped to
+   .sticky-section specifically, NOT a change to .rv-num itself: sections 01, 02, 05, 06, and
+   07 use plain .rv-num outside a sticky-section wrapper and still want the side-by-side
+   number|content layout. */
+.sticky-section .rv-num{position:sticky;top:96px;display:block}
+.sticky-section .rv-num .sec-num{margin-bottom:14px}
 @media(max-width:880px){
   .sticky-section{grid-template-columns:1fr}
   .sticky-section .rv-num{position:static}
@@ -528,7 +537,7 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    against. A 3-4 col grid of 9 short tags was actually SHORTER than the (now narrower, more
    wrapped) heading column beside it — measured 445px vs 485px — leaving the sticky element
    no slack to stick within. Stacked, it's 9 rows instead of 3, comfortably taller. */
-.sector-list{display:grid;grid-template-columns:1fr;gap:12px;margin-top:40px;max-width:460px}
+.sector-list{display:grid;grid-template-columns:1fr;gap:12px;margin-top:40px}
 .sector{
   background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:20px 22px;
   display:flex;align-items:center;gap:14px;font-weight:600;font-size:15.5px;transition:all .2s;
@@ -568,7 +577,7 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 /* Single column for the same reason as .sector-list above: measured 578px (2-3 col grid) vs
    630px for the heading column beside it at this width — also inverted. Stacked, 6 full-width
    rows comfortably clears it. */
-.why-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:52px;max-width:560px}
+.why-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:52px}
 .why-item{border-top:2px solid var(--accent-on-dark);padding-top:22px}
 .why-item h3{color:#fff}
 .why-item p{color:rgba(255,255,255,.64);font-size:15px}
