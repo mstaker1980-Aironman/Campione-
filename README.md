@@ -17,3 +17,12 @@ module only — no `npm install`) that serves this folder as-is, matching the
 site itself: no build step, nothing to compile. `Ctrl+C` to stop it.
 
 Set a different port with `PORT=5173 node serve.js` if 5500 is taken.
+
+## Local development
+
+- Serve with VS Code Live Server on port 5500. Fallback: `npx serve .`
+- **Netlify auto-deploy is currently paused.** Pushes to `main` will not go live
+  until it's re-enabled.
+- The license number in the Credentials grid (section 05) and the footer is a
+  placeholder (`EXAMPLE-LIC-06-02-00003`) pending re-verification — see
+  `CLAUDE.md`. Don't re-enable deploys until it's replaced with a verified value.

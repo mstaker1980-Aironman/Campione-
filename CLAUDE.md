@@ -50,8 +50,6 @@ Practical consequences:
 - Commercial market sector, Specialty Contractor
 - Business manager: William Dunn
 - On Procore since January 2024; 15 projects, 7 active
-- Contractor license LIC-06-26-0031 — active, issued 5 June 2026,
-  independently reverified active July 2026
 - Owns the domain campionekc.com (currently a GoDaddy parking page) — the
   eventual home for this site
 
@@ -74,7 +72,16 @@ The company story, real project names/photos/GC partners, actual self-performed
 scopes, EMR, bonding capacity, insurance limits, certifications, union
 affiliation, hours, and the real email address.
 
-All of these come from an interview with the owner.
+**Contractor license number** — was previously listed here as confirmed
+(independently reverified active July 2026), but that's no longer trusted as of
+2026-08-17 — flagged as possibly expired, not re-checked. Site currently shows
+`EXAMPLE-LIC-06-02-00003` as an explicit placeholder in the Credentials grid and
+footer, each marked with an HTML comment. Do not put a real number back on the
+page without re-verifying it first, and don't re-enable Netlify deploys until
+it's replaced with a verified value (see README).
+
+All of these come from an interview with the owner (or, for the license, a
+re-verification pass).
 
 **Never invent these.** If a value is unknown, leave the placeholder in place.
 A fabricated EMR or bonding number on a live contractor site is a serious
