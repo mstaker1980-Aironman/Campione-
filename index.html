@@ -133,12 +133,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Source Serif 4 bundled into the same request (still one HTTP round-trip) — regular +
-     italic only, Google's default Latin subset. Used narrowly: Story section body copy and
-     its pull-quote only, not section headings. Measured cost: ~22-27KB added to this request,
-     against Georgia (system font, +0KB) and Fraunces (+45KB) as the other options shown. See
-     the top-of-file log for the comparison and reasoning. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,500&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<!-- Source Serif 4 removed from this request — was loaded for .story p only, which no longer
+     uses it (reverted to the site's Inter stack). Note: .pull still names Source Serif 4 in
+     its font-family (not in use in the markup yet) — it'll fall back to Georgia now that the
+     webfont isn't loaded, since nothing pulls it in over the network anymore. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -619,14 +618,11 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 }
 .story .story-inner{position:relative;z-index:1}
 .story-inner{max-width:76ch}
-/* Serif applied narrowly, per direction: Story body copy and its pull-quote only — nowhere
-   else. Section headings (h1-h4) stay in Inter Tight; the oversized condensed sans is doing
-   real work there and a serif would dilute it. This is the one place on the page telling the
-   company's own story rather than listing specs, so it's the one place a tonal shift earns
-   its keep. Source Serif 4, not Georgia: their logo's own serif ("INTERIOR SOLUTIONS") is
-   delicate, high-contrast, and letterspaced — Georgia's low-contrast, large-x-height screen-
-   face shape doesn't match it. Source Serif 4 is a transitional serif closer to that shape. */
-.story p{margin-bottom:20px;font-size:1.08rem;font-family:'Source Serif 4',Georgia,serif;line-height:1.65}
+/* Serif reverted — Story body copy now inherits the site's Inter stack like every other body
+   paragraph, same as before the Source Serif 4 experiment. .pull still declares Source Serif 4
+   (not asked to change here); with the webfont no longer loaded below, it'll fall back to
+   Georgia instead. Flagged, not silently left inconsistent. */
+.story p{margin-bottom:20px;font-size:1.08rem;line-height:1.65}
 .story p:last-child{margin-bottom:0}
 .pull{
   border-left:3px solid var(--accent);padding:6px 0 6px 26px;margin:34px 0;
