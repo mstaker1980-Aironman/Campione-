@@ -32,7 +32,9 @@ Practical consequences:
 
 ## Hard constraints
 
-- **Single file.** `index.html`, no build step, no bundler, no framework
+- **`index.html` + `styles.css` + `site.js`.** Still no build step, no
+  bundler, no framework — just three static files, served as-is by
+  `serve.js` on port 5500
 - **No localStorage or sessionStorage** anywhere
 - **Fast.** Target sub-1.5s load on 4G. One webfont maximum
 - **Mobile-first.** GCs read email on phones on jobsites
