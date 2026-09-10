@@ -1,8 +1,9 @@
 # Campione Interior Solutions — site
 
-Single-page marketing site for Campione Interior Solutions LLC. One file
-(`index.html`), no build step, no framework. See `CLAUDE.md` for the full
-project brief, audience, and content rules.
+Single-page marketing site for Campione Interior Solutions, Country Carpet,
+and Floorsmith. Three files (`index.html`, `styles.css`, `site.js`), no build
+step, no framework. See `CLAUDE.md` for the full project brief, audience, and
+content rules.
 
 ## Local preview
 

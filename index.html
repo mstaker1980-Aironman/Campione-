@@ -261,70 +261,90 @@
     <rect width="1200" height="600" fill="url(#herringbone)"/>
   </svg>
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <!-- Hero logo lockup removed (was hero-logo, --i:0): the sticky header directly above
-             already shows the same mark, same name, within 200px of this one — same brand
-             element twice in one screen height. Relocating the full lockup elsewhere per
-             discussion; header coverage is enough here, so the headline leads instead. -->
-        <div class="eyebrow hero-seq" style="--i:0">Commercial Flooring Contractor · Kansas City</div>
-        <h1>
-          <span class="hero-seq line" style="--i:1">Flooring that's</span><br>
-          <span class="hero-seq line" style="--i:2">ready for <em>turnover</em>.</span>
-        </h1>
-        <p class="lede hero-seq" style="--i:3">
-          Campione Interior Solutions has installed commercial flooring across the Kansas City
-          metro since 2008 — carpet, resilient, tile, and polished concrete for general contractors
-          who need the schedule held and the punch list short.
-        </p>
-        <div class="hero-actions hero-seq" style="--i:4">
-          <a href="#contact" class="btn btn-primary">
-            Invite Us to Bid
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="tel:+18162564156" class="btn btn-ghost">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>
-            (816) 256-4156
-          </a>
-        </div>
-      </div>
-      <div class="hero-card hero-seq" style="--i:5">
-        <div class="lbl">Bid Desk</div>
-        <div class="val"><a href="tel:+18162564156">(816) 256-4156</a></div>
-        <hr>
-        <div class="lbl">Office</div>
-        <div class="sm">103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</div>
-        <hr>
-        <div class="lbl">Serving</div>
-        <div class="sm">Greater Kansas City metro — Missouri &amp; Kansas</div>
+    <div class="hero-copy">
+      <!-- Hero logo lockup removed (was hero-logo, --i:0): the sticky header directly above
+           already shows the same mark, same name, within 200px of this one — same brand
+           element twice in one screen height. Relocating the full lockup elsewhere per
+           discussion; header coverage is enough here, so the headline leads instead. -->
+      <div class="eyebrow hero-seq" style="--i:0">Commercial Flooring · Kansas &amp; Missouri</div>
+      <h1>
+        <span class="hero-seq line" style="--i:1">Flooring that's</span><br>
+        <span class="hero-seq line" style="--i:2">ready for <em>turnover</em>.</span>
+      </h1>
+      <p class="lede hero-seq" style="--i:3">
+        Campione, Country Carpet, and Floorsmith install, maintain, and restore commercial
+        flooring across Kansas and Missouri. Three companies, one owner, and one crew
+        accountable from the first install through every year after it.
+      </p>
+      <div class="hero-actions hero-seq" style="--i:4">
+        <a href="#contact" class="btn btn-primary">
+          Contact us
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="tel:+18162564156" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>
+          816.256.4156
+        </a>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ============================ BRAND STRIP ============================ -->
+<!-- Light/bone background on purpose: the three logo files below have white backgrounds and
+     fine linework (email-export quality, better files coming later) that would disappear or
+     look wrong knocked onto the hero's dark scheme. -->
+<section class="brand-strip">
+  <div class="wrap">
+    <div class="eyebrow rv">Three Companies. One Standard.</div>
+    <div class="brand-tiles stagger">
+      <div class="brand-tile rv-item" style="--i:0">
+        <div class="brand-logo">
+          <img src="img/campione-logo.jpg" alt="Campione Interior Solutions" width="334" height="112" style="max-width:334px" loading="lazy">
+        </div>
+        <h3>Campione Interior Solutions</h3>
+        <div class="brand-role">Commercial install &amp; tenant finish</div>
+        <div class="brand-city">North Kansas City, MO</div>
+      </div>
+      <div class="brand-tile rv-item" style="--i:1">
+        <div class="brand-logo">
+          <img src="img/country-carpet-logo.jpg" alt="Country Carpet" width="206" height="123" style="max-width:206px" loading="lazy">
+        </div>
+        <h3>Country Carpet</h3>
+        <div class="brand-role">Commercial install &amp; tenant finish</div>
+        <div class="brand-city">Maple Hill &amp; Wichita, KS</div>
+      </div>
+      <div class="brand-tile rv-item" style="--i:2">
+        <div class="brand-logo">
+          <img src="img/floorsmith-logo.png" alt="Floorsmith" width="1062" height="1280" style="max-width:1062px" loading="lazy">
+        </div>
+        <h3>Floorsmith</h3>
+        <div class="brand-role">Commercial floor care &amp; restoration</div>
+        <div class="brand-city">Kansas City metro</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============================ STATS ============================ -->
 <div class="stats grain">
   <div class="wrap" style="padding-inline:0">
     <div class="stats-grid">
       <div class="stat" style="padding-left:var(--pad);--i:0">
-        <div class="num" data-count="18" style="min-width:2ch">18</div>
-        <div class="cap">Years in business</div>
+        <div class="num" style="min-width:4ch">1976</div>
+        <div class="cap">Roots in Kansas</div>
       </div>
       <div class="stat" style="--i:1">
-        <div class="num" style="min-width:4ch">2008</div>
-        <div class="cap">Established</div>
+        <div class="num" style="min-width:2ch">3</div>
+        <div class="cap">Companies</div>
       </div>
-      <!-- keep this count in sync with the service-area city list in the footer -->
       <div class="stat" style="--i:2">
-        <div class="num" data-count="16" style="min-width:2ch">16</div>
-        <div class="cap">Metro cities served</div>
+        <div class="num" style="min-width:2ch">6</div>
+        <div class="cap">Markets</div>
       </div>
-      <!-- "100% Commercial" removed — unverifiable (Procore lists commercial sector, but two
-           directories list residential services too). Citing Procore by name for what business
-           we're in read as a company citing a directory about itself — dropped the attribution. -->
       <div class="stat" style="padding-right:var(--pad);--i:3">
-        <div class="num sm">Specialty Contractor</div>
-        <div class="cap">Commercial</div>
+        <div class="num sm">Install · Maintain · Refresh</div>
+        <div class="cap">Full lifecycle</div>
       </div>
     </div>
   </div>
