@@ -99,8 +99,10 @@ page.
 
 - Founded 1976 — this is the group's "roots since 1976" claim
 - Commercial install & tenant finish
-- Maple Hill & Wichita, KS (Wichita location opened September 2022)
 - Joined the group January 2022
+- Maple Hill office: 14969 Waterman Crossing Rd, Maple Hill, KS 66507 — 785.256.4800
+- Wichita office: 505 S Broadway, Ste 122, Wichita, KS 67202 — 316.910.4950 (opened
+  September 2022)
 
 ### Floorsmith
 

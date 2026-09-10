@@ -208,7 +208,7 @@
     <nav>
       <ul class="nav-links" id="navLinks">
         <li><a href="#capabilities">Capabilities<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
-        <li><a href="#sectors">Sectors<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
+        <li><a href="#service-area">Service Area<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
         <!-- Projects nav link hidden along with the section below — restore both together. -->
         <li><a href="#credentials">Credentials<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
         <li><a href="#story">About<svg class="ridge-top" viewBox="0 0 1239 430" aria-hidden="true"><use href="#logo-mountain"/></svg></a></li>
@@ -471,20 +471,122 @@
 </section>
 
 <!-- ============================ SECTORS ============================ -->
-<section class="sectors" id="sectors">
+<!--
+  Phase 4 — the group's geographic footprint. Replaces the old market-sector list that used to
+  be this section's argument; that list is preserved further down as a secondary block, since
+  it's still real prequal content (a GC filtering by building type), just no longer the point
+  of section 03.
+
+  The map is hand-built inline SVG on purpose: a third-party embed needs an API key, loads
+  outside tiles, and would look like every other contractor site. Projection is plain
+  equirectangular with longitude scaled by cos(38.3°) so the states aren't stretched sideways
+  — recognisable, not a GIS exercise.
+
+  Division of labour, and the reason for it: the SVG holds ONLY the drawn geography (two state
+  outlines, the I-70 and I-35 corridors the offices actually sit on, state names) and is
+  aria-hidden. Every pin, label and card is real HTML positioned over it at percentage
+  coordinates that match the viewBox. That keeps label type at a fixed CSS size instead of
+  shrinking with the map on a phone, and gives the office pins native link semantics — keyboard
+  focus and activation for free. Hover or focus reveals the card; activating a pin jumps to the
+  full office card below, which is where the tel: link lives (a link inside a link would be
+  invalid, so the card overlay is display-only). No JavaScript is involved anywhere in this.
+-->
+<section class="sectors" id="service-area">
   <div class="wrap">
-    <div class="sticky-section">
-      <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">03</div>
-        <div>
-          <div class="eyebrow">Market Sectors</div>
-          <h2><span class="reveal-text">Where we work</span></h2>
-          <p class="lead">
-            Commercial construction across the metro — ground-up, tenant finish, and occupied
-            renovation where phasing and dust control aren't optional.
-          </p>
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">03</div>
+      <div>
+        <div class="eyebrow">Service Area</div>
+        <h2><span class="reveal-text">Three offices, one footprint</span></h2>
+        <p class="lead">
+          Kansas City metro, Lawrence, Topeka, Manhattan, Wichita, and the communities around
+          them. Whichever office is closest, the same standard shows up.
+        </p>
+      </div>
+    </div>
+
+    <div class="map-wrap rv">
+      <svg class="map-svg" viewBox="0 0 1000 462" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+        <!-- Kansas: 37°N-40°N, -102.05° to the Missouri state line, with the Missouri River
+             cutting the northeast corner off between White Cloud and Kansas City. -->
+        <path class="map-state" d="M 0 63 L 520 63 L 528 75 L 535 106 L 544 116 L 551 131 L 561 137 L 574 150 L 574 358 L 0 358 Z"/>
+        <!-- Missouri: shares the river line above, up to the northwest corner at Rulo, then the
+             40°35' north border, the Mississippi down the east side, and the bootheel. -->
+        <path class="map-state" d="M 574 150 L 561 137 L 551 131 L 544 116 L 535 106 L 528 75 L 520 63 L 511 47 L 500 30 L 491 16 L 485 6 L 798 6 L 806 38 L 818 69 L 825 98 L 833 121 L 845 145 L 862 166 L 884 183 L 903 193 L 915 199 L 923 225 L 932 253 L 944 285 L 956 308 L 967 328 L 969 359 L 962 393 L 968 423 L 955 456 L 918 456 L 918 407 L 574 407 Z"/>
+        <!-- I-70 (Kansas City - Lawrence - Topeka - Maple Hill - Manhattan) and I-35 (Kansas
+             City - Wichita): unlabelled and faint, there to explain why the offices sit where
+             they do rather than to be read as a road map. -->
+        <path class="map-road" d="M 574 150 L 526 164 L 491 156 L 465 154 L 423 152 L 403 155 L 330 160 L 230 152 L 120 140 L 0 138"/>
+        <path class="map-road" d="M 574 150 L 523 199 L 453 220 L 400 258 L 364 290 L 348 322"/>
+        <text class="map-state-name" x="205" y="272">KANSAS</text>
+        <text class="map-state-name" x="772" y="300">MISSOURI</text>
+      </svg>
+
+      <div class="map-overlay">
+        <!-- Service-area markers: lighter than the office pins, not interactive. -->
+        <span class="map-mark lbl-above" style="--x:42.3%;--y:31.1%"><i></i><b>Manhattan</b></span>
+        <span class="map-mark lbl-above" style="--x:49.1%;--y:33.9%"><i></i><b>Topeka</b></span>
+        <span class="map-mark lbl-below-right" style="--x:52.6%;--y:35.6%"><i></i><b>Lawrence</b></span>
+
+        <!-- Office pins: links to the matching card below, revealing a display-only card on
+             hover/focus. -->
+        <div class="map-office" style="--x:57.8%;--y:32.1%">
+          <a class="map-pin lbl-right" href="#office-nkc"><i></i><b>North Kansas City</b></a>
+          <span class="map-card card-below" aria-hidden="true">
+            <b>North Kansas City, MO</b>
+            103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116
+            <em>816.256.4156</em>
+          </span>
+        </div>
+        <div class="map-office" style="--x:46.5%;--y:33.4%">
+          <a class="map-pin lbl-below-left" href="#office-maple-hill"><i></i><b>Maple Hill</b></a>
+          <span class="map-card card-below" aria-hidden="true">
+            <b>Maple Hill, KS</b>
+            14969 Waterman Crossing Rd<br>Maple Hill, KS 66507
+            <em>785.256.4800</em>
+          </span>
+        </div>
+        <div class="map-office" style="--x:36.4%;--y:62.8%">
+          <a class="map-pin lbl-below" href="#office-wichita"><i></i><b>Wichita</b></a>
+          <span class="map-card" aria-hidden="true">
+            <b>Wichita, KS</b>
+            505 S Broadway, Ste 122<br>Wichita, KS 67202
+            <em>316.910.4950</em>
+          </span>
+        </div>
+
+        <!-- Sits in the empty band south of Kansas. Earns its place on small screens, where the
+             service-area city labels are hidden and the two marker weights are all that's left
+             to tell apart. -->
+        <div class="map-legend">
+          <span><i class="lg-office"></i>Office</span>
+          <span><i class="lg-area"></i>Service area</span>
         </div>
       </div>
+    </div>
+
+    <div class="office-grid stagger">
+      <div class="office-card rv-item" id="office-nkc" style="--i:0">
+        <div class="oc-city">North Kansas City, MO</div>
+        <address>103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</address>
+        <a class="oc-tel" href="tel:+18162564156">816.256.4156</a>
+      </div>
+      <div class="office-card rv-item" id="office-maple-hill" style="--i:1">
+        <div class="oc-city">Maple Hill, KS</div>
+        <address>14969 Waterman Crossing Rd<br>Maple Hill, KS 66507</address>
+        <a class="oc-tel" href="tel:+17852564800">785.256.4800</a>
+      </div>
+      <div class="office-card rv-item" id="office-wichita" style="--i:2">
+        <div class="oc-city">Wichita, KS</div>
+        <address>505 S Broadway, Ste 122<br>Wichita, KS 67202</address>
+        <a class="oc-tel" href="tel:+13169104950">316.910.4950</a>
+      </div>
+    </div>
+
+    <!-- Preserved from the previous version of this section: still useful prequal content for a
+         GC filtering by building type, demoted from the section's argument to a closing note. -->
+    <div class="sector-block rv">
+      <div class="eyebrow">Sectors we build in</div>
       <div class="sector-list stagger">
         <div class="sector rv-item" style="--i:0"><span class="dot"></span>Healthcare &amp; Medical</div>
         <div class="sector rv-item" style="--i:1"><span class="dot"></span>K–12 &amp; Higher Education</div>
@@ -846,8 +948,11 @@
 
 <!-- ============================ SERVICE AREA MARQUEE ============================ -->
 <!-- Decorative echo of the real service-area list in the footer just below — aria-hidden so
-     it isn't announced twice. Keep this list of 16 cities in sync with the footer's .svc-area
-     paragraph and the "16 metro cities" stat in the stats bar (see that section's comment). -->
+     it isn't announced twice. Keep this list of 22 cities in sync with the footer's .svc-area
+     paragraph. (The old "16 metro cities" stat this used to track is gone — the stats bar now
+     counts 6 markets: the KC metro plus Lawrence, Topeka, Manhattan, Junction City, Wichita.)
+     Ordered so the five Kansas markets appear early: the reduced-motion block stops the
+     animation outright, leaving only the cities that fit one viewport width visible. -->
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item">North Kansas City</span><span class="marquee-dot">•</span>
@@ -855,6 +960,12 @@
     <span class="marquee-item">Kansas City, KS</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Overland Park</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Olathe</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Lawrence</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Topeka</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Manhattan</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Junction City</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Wichita</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Maple Hill</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Lenexa</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Shawnee</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Leawood</span><span class="marquee-dot">•</span>
@@ -872,6 +983,12 @@
     <span class="marquee-item">Kansas City, KS</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Overland Park</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Olathe</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Lawrence</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Topeka</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Manhattan</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Junction City</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Wichita</span><span class="marquee-dot">•</span>
+    <span class="marquee-item">Maple Hill</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Lenexa</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Shawnee</span><span class="marquee-dot">•</span>
     <span class="marquee-item">Leawood</span><span class="marquee-dot">•</span>
@@ -920,7 +1037,8 @@
         <h4>Service Area</h4>
         <p class="svc-area">
           North Kansas City · Kansas City, MO · Kansas City, KS · Overland Park · Olathe ·
-          Lenexa · Shawnee · Leawood · Liberty · Gladstone · Independence · Lee's Summit ·
+          Lawrence · Topeka · Manhattan · Junction City · Wichita · Maple Hill · Lenexa ·
+          Shawnee · Leawood · Liberty · Gladstone · Independence · Lee's Summit ·
           Blue Springs · Riverside · Parkville · Raytown
         </p>
       </div>

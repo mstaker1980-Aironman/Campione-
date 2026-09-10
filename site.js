@@ -116,7 +116,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 // scrollspy nav — IntersectionObserver only, no scroll listener
 (function(){
-  var sectionIds = ['capabilities','sectors','why','credentials','story'];
+  var sectionIds = ['capabilities','service-area','why','credentials','story'];
   var links = {};
   sectionIds.forEach(function(id){
     var link = document.querySelector('.nav-links a[href="#' + id + '"]');
