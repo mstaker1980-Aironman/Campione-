@@ -1,25 +1,28 @@
-# Campione Interior Solutions — one-page site
+# Campione / Country Carpet / Floorsmith — group site
 
 ## What this is
 
-A single-page marketing site for Campione Interior Solutions LLC, a commercial
-flooring subcontractor in North Kansas City, MO. Built as the flagship portfolio
-piece for a Kansas City web design side business.
+A single-page marketing site presenting three separately-branded commercial
+flooring companies as one group: Campione Interior Solutions, Country Carpet,
+and Floorsmith. All three are owned by Bill Dunn III. The brands stay
+distinct — each has regional equity in its part of Kansas/Missouri, so no
+consolidation under one name — and the site presents them at equal weight,
+mirroring the layout of the owner's own business card. Built as the flagship
+portfolio piece for a Kansas City web design side business.
 
 ## Who the audience is — this drives every decision
 
 **General contractors, project managers, and architects doing subcontractor
 prequalification.** NOT homeowners.
 
-Campione is a small specialty subcontractor — not a general contractor, and
-not a large company — that works as one of many subs on large commercial
-jobs. The $6.8M figure is the average size of the *projects* they're tracked
-on in Procore (15 total, 7 active), not company revenue or headcount. Don't
-let anything on the site read as "this is a big company": estimated revenue
-(~$798K) and headcount (~5) are third-party estimates that must not be
-published (see "Must NOT publish" below) — but internally, assume small shop,
-big jobs. The only reader who matters is a GC vetting them before sending a
-bid invitation.
+Each of the three companies is a small, regionally-rooted specialty
+contractor — not a general contractor, and not a large company — working as
+one of many subs on large commercial jobs. Campione's $6.8M figure is the
+average size of the *projects* it's tracked on in Procore (15 total, 7
+active), not company revenue or headcount. Don't let anything on the site
+read as "these are big companies" — internally, assume small shops, big jobs.
+The only reader who matters is a GC vetting one (or more) of them before
+sending a bid invitation.
 
 Practical consequences:
 
@@ -44,9 +47,46 @@ Practical consequences:
   Places, Porch, BBB, or any directory. Those are licensed to the platform, not
   to us. Facts only until the client supplies real assets
 
+## Structure
+
+Single scroll page. Target section order:
+
+1. Hero
+2. Brand strip — three logos, equal weight
+3. Stats
+4. Lifecycle — New / Maintain / Refresh
+5. Where we work — plus map
+6. Kansas statewide contract
+7. Credentials
+8. History
+9. Community
+10. Contact
+11. Footer
+
+This is the target, being built toward incrementally, phase by phase — don't
+assume every section already matches this list without checking the actual
+page.
+
 ## Confirmed facts — safe to use
 
-- Campione Interior Solutions LLC, Missouri LLC formed 22 April 2008
+### The group
+
+- Three separately-branded companies, one owner: Bill Dunn III. Brands stay
+  distinct — no consolidation under one name — presented at equal weight
+- Group-wide credential: **"roots since 1976"** (Country Carpet's founding
+  year). Never "50 years in business" — Campione itself dates to 2008, and
+  the companies didn't operate as a group until 2022
+- Service area: Kansas City metro, Lawrence, Topeka, Manhattan, Wichita, and
+  surrounding communities
+- Bill Dunn III is publicly the contact of record on the Kansas statewide
+  contract (see "Must NOT publish" for what's still off-limits about it)
+- Jon Ross, Mallory Minor, and Jay Marr are named in the History section, in
+  their roles there — no other individual staff bios are in scope yet
+
+### Campione Interior Solutions LLC
+
+- Missouri LLC formed 22 April 2008
+- Commercial install & tenant finish
 - 103 W 26th Ave, Ste 100, North Kansas City, MO 64116
 - (816) 256-4156
 - Commercial market sector, Specialty Contractor
@@ -55,18 +95,43 @@ Practical consequences:
 - Owns the domain campionekc.com (currently a GoDaddy parking page) — the
   eventual home for this site
 
+### Country Carpet Inc
+
+- Founded 1976 — this is the group's "roots since 1976" claim
+- Commercial install & tenant finish
+- Maple Hill & Wichita, KS (Wichita location opened September 2022)
+- Joined the group January 2022
+
+### Floorsmith
+
+- Founded 2018
+- Commercial floor care & restoration
+- Kansas City metro
+- Joined the group July 2026
+
+### Kansas statewide contract
+
+- Awarded to multiple vendors — never claim exclusivity
+- Don't hardcode an end date on the page; link to the live state portal
+  instead
+
 ## Must NOT publish
 
-Confirmed to be wrong, inactive, or inappropriate for a public site — this is
-stronger than "unconfirmed," these are known bad:
+- Bill Dunn's cell phone number
+- The Kansas contract award PDF (contains full unit pricing)
+- Named GC or client references — pending permission from both Bill and the
+  GCs
+- Team roster or individual bios — pending Bill; competitor-intelligence risk
+- FEIN, DUNS, CAGE codes
+- Any claim of exclusivity on the Kansas statewide contract — it is awarded to
+  multiple vendors
+- Any hardcoded end date for the Kansas contract — link to the live state
+  portal instead
 
-- License 2020-8263 — inactive/cancelled
-- License 2016-8263 — unverified since December 2015
-- St. Joseph license — expired December 2020
-- Estimated revenue (~$798K) and headcount (~5) — third-party estimates, not
-  confirmed. Revenue/headcount claims on a live prequal site are exactly the
-  kind of precise-looking fabrication this project exists to avoid
-- Owner names — not for publication
+Owner names are **no longer** blanket-prohibited: Bill Dunn III is publicly
+the contact of record on the state contract, and the History section names
+Jon Ross, Mallory Minor, and Jay Marr in their roles. Individual staff bios
+remain out of scope pending a decision (see "Team roster" above).
 
 ## Not yet confirmed — marked `[[ ]]` in the file
 
