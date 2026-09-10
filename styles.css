@@ -60,7 +60,7 @@ img{max-width:100%;display:block}
 /* Dark-section eyebrows (hero, why, contact) — --accent fails 4.5:1 on --ink (2.30:1).
    Verified fix, not scattered manually: swap to --accent-on-dark wherever an eyebrow
    sits on a dark background. */
-.hero .eyebrow,.why .eyebrow,.contact .eyebrow{color:var(--accent-on-dark)}
+.hero .eyebrow,.lifecycle .eyebrow,.why .eyebrow,.contact .eyebrow{color:var(--accent-on-dark)}
 section{padding:clamp(64px,9vw,120px) 0}
 #capabilities,#lifecycle,#sectors,#why,#projects,#credentials,#story,#contact{scroll-margin-top:88px}
 
@@ -340,12 +340,12 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
   line-height:.85;letter-spacing:.02em;margin:0;color:var(--line);
   -webkit-text-stroke:1.5px var(--muted);user-select:none;
 }
-.why .sec-num,.contact .sec-num{color:rgba(255,255,255,.05);-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+.lifecycle .sec-num,.why .sec-num,.contact .sec-num{color:rgba(255,255,255,.05);-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
 /* Fallback above is a faint solid fill for browsers without -webkit-text-stroke support
    (still reads fine, just filled instead of hollow); hollow it out where supported. */
 @supports (-webkit-text-stroke: 1px black){
   .sec-num{color:transparent}
-  .why .sec-num,.contact .sec-num{color:transparent}
+  .lifecycle .sec-num,.why .sec-num,.contact .sec-num{color:transparent}
 }
 @media(max-width:700px){
   .rv-num{grid-template-columns:1fr}
@@ -397,11 +397,22 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cap-accent-mark{width:64%;height:auto;color:var(--sage);opacity:.55}
 
 /* ---------- lifecycle (new / maintain / refresh) ---------- */
+/* Phase 3: promoted from plain --paper to the dark/grain treatment shared with .hero/.why/
+   .contact — this section is the site's central claim (three companies, one life cycle), not
+   a supporting one. Both new section boundaries (Capabilities->Lifecycle, Lifecycle->Sectors)
+   are deliberate flat cuts, not a 4th torn edge or a 3rd gradient bleed — same choice already
+   made for Stats->Capabilities and Brand-strip->Stats; those motifs are used sparingly. */
+.lifecycle{background:var(--ink);color:#fff;position:relative}
+.lifecycle h2{color:#fff}
+.lifecycle .lead{color:rgba(255,255,255,.66)}
 .lifecycle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:48px}
 @media(max-width:820px){.lifecycle-grid{grid-template-columns:1fr}}
-.lifecycle-item{border-top:2px solid var(--accent);padding-top:22px}
-.lc-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-.lifecycle-item p{color:var(--muted);font-size:15px;line-height:1.6}
+.lifecycle-item{border-top:2px solid var(--accent-on-dark);padding-top:22px}
+.lc-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-on-dark);margin-bottom:12px}
+/* The company attribution (e.g. "Campione · Country Carpet") is set as the item's h3 — real
+   heading weight, not a caption — since routing a visitor to the right brand is the point. */
+.lifecycle-item h3{color:#fff}
+.lifecycle-item p{color:rgba(255,255,255,.64);font-size:15px;line-height:1.6}
 
 /* Phase 5 — sticky-column sections, Sectors and Why-GCs only (per the brief). Heading pinned
    in a sticky left column while the content scrolls past on the right — the narrower right
