@@ -469,9 +469,28 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    390px viewport (map ~350px wide, i.e. 0.35x) a 12px label would render at 4px; and native
    <a> pins get keyboard focus and activation with no JS and no ARIA. */
 .map-wrap{position:relative;margin-top:clamp(34px,4.5vw,54px)}
+/* Sized by the SVG alone, so .map-overlay's inset:0 is exactly the map box and the pins'
+   percentage coordinates stay locked to the viewBox no matter what else .map-wrap holds. */
+.map-figure{position:relative}
 .map-svg{display:block;width:100%;height:auto}
-.map-state{fill:var(--paper);stroke:rgba(19,21,25,.32);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
-.map-road{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.16}
+/* Stroke was .32 alpha at 2px, which — with a --paper fill sitting on --bone, a 1.28:1
+   difference — meant you saw two thin outlines rather than two filled shapes, and the eye
+   merged Kansas and Missouri into a single mass. Read as one shape, that mass is 969x295
+   units = 3.3:1, which is exactly the "letterboxed" proportion it was being read as; Kansas
+   alone measures 1.95:1 (403x207mi against a real 410x210). Nothing was stretched — the two
+   states just weren't separating. Heavier stroke so each reads as its own silhouette. */
+.map-state{fill:var(--paper);stroke:rgba(19,21,25,.46);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.map-road{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.22}
+/* Route labels, sat on the line with a --paper chip behind them the way a road map does it —
+   without them the corridors read as unexplained connector lines between the dots. HTML, not
+   SVG text, for the same reason as the city labels: fixed size, legible at any map width. */
+.map-road-label{
+  position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
+  font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--accent);
+  background:var(--paper);padding:1px 5px;white-space:nowrap;
+}
+.r70{--x:15%;--y:30.9%}
+.r35{--x:39%;--y:57.8%}
 /* Outlined type, same language as .sec-num and the marquee — but drawn with SVG's own
    stroke/fill rather than -webkit-text-stroke, which SVG text doesn't honour everywhere.
    Left at a single size on purpose: 40 user units renders ~42px at 1440 and still ~14px on a
@@ -500,14 +519,26 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .map-mark b,.map-pin b{position:absolute;white-space:nowrap;line-height:1;font-weight:600}
 .map-mark b{font-size:12px;color:var(--muted)}
 .map-pin b{font-size:13px;font-weight:700;color:var(--ink)}
-/* Label placement per marker — hand-placed, the way map labels always are: five of the six
-   cities sit in the same 100px-wide I-70 band, so they alternate above/below and left/right to
-   keep clear of each other and of the pins. */
-.lbl-above b{left:0;bottom:12px;transform:translateX(-50%)}
-.lbl-below b{left:0;top:12px;transform:translateX(-50%)}
-.lbl-right b{left:14px;top:0;transform:translateY(-50%)}
-.lbl-below-left b{right:8px;top:10px}
-.lbl-below-right b{left:8px;top:10px}
+/* Label placement — hand-placed, the way map labels always are. Five of the six cities sit
+   within ~160px of each other along I-70, so nudging labels around the pin isn't enough: at
+   that density a label ends up nearer a neighbouring city's dot than its own, which is what
+   made Manhattan look like it was east of Maple Hill (its position was always correct — west,
+   as it should be; the label was just ambiguous). Each label now sits at a per-marker distance
+   set by --off and is tied back to its own dot by a leader line, so ownership is unambiguous
+   and the labels can be spread far enough apart not to touch. */
+.lbl-above b{left:0;bottom:var(--off,12px);transform:translateX(-50%)}
+.lbl-below b{left:0;top:var(--off,12px);transform:translateX(-50%)}
+.lbl-right b{left:var(--off,14px);top:0;transform:translateY(-50%)}
+.lbl-above b::before,.lbl-below b::before{
+  content:"";position:absolute;left:50%;width:1px;
+  height:calc(var(--off,12px) - 5px);background:currentColor;opacity:.38;
+}
+.lbl-above b::before{top:100%}
+.lbl-below b::before{bottom:100%}
+.lbl-right b::before{
+  content:"";position:absolute;right:100%;top:50%;height:1px;
+  width:calc(var(--off,14px) - 5px);background:currentColor;opacity:.38;
+}
 /* Display-only card: the real, linkable address and phone are in the office card this pin
    points at, and a tel: link nested inside the pin's own <a> would be invalid markup. Hidden
    with visibility (not display) so it can transition; the sitewide reduced-motion block already
@@ -528,7 +559,9 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 /* North Kansas City and Maple Hill sit in the top third of the map, where a card opening
    upwards clears the map entirely and lands on the lead paragraph. Those two open downwards
    into the empty middle of the states instead. */
-.card-below{bottom:auto;top:26px}
+/* 42px, not 26px: Maple Hill's own label now hangs 22px below its pin, and a shorter drop put
+   the card's top edge through the middle of it. */
+.card-below{bottom:auto;top:42px}
 .card-below::after{bottom:auto;top:-5px}
 /* Hover only where hovering is real: on a touch screen the same tap would both flash the card
    and follow the link, so there the pin just jumps to the office card below (highlighted via
@@ -547,18 +580,34 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .map-legend i{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .map-legend .lg-office{background:var(--accent);box-shadow:0 0 0 1.5px rgba(17,93,53,.4)}
 .map-legend .lg-area{background:var(--muted);opacity:.5}
+/* Below 700px the map is ~350px wide and ~160px tall, and every piece of annotation is fixed-
+   size CSS, so it all grows relative to the drawing as the drawing shrinks. Each override below
+   exists because a pairwise bounding-box test (scratchpad/collisions.js, run at 8 widths down to
+   360px) found a real overlap without it. */
 @media(max-width:700px){
   /* Manhattan/Topeka/Lawrence sit ~25px apart at this map width — their labels can't coexist.
      Dots stay (the shape of the footprint is the point) and the legend explains them; the names
      themselves are in the lead paragraph, the marquee and the footer list. Office labels stay —
-     those are the interactive pins. Pin/dot sizes come down too: they're fixed CSS px, so they
-     grow relative to the map as it shrinks. */
+     those are the interactive pins. */
   .map-mark b{display:none}
-  .map-pin b{font-size:11px}
-  .lbl-right b{left:11px}
-  .map-pin i{left:-5.5px;top:-5.5px;width:11px;height:11px;border-width:2px}
-  .map-mark i{left:-3px;top:-3px;width:6px;height:6px}
-  .map-legend{font-size:11px;gap:4px 14px}
+  .map-pin b{font-size:11px;--off:12px}
+  .map-pin i{left:-5px;top:-5px;width:10px;height:10px;border-width:2px}
+  .map-mark i{left:-2.5px;top:-2.5px;width:5px;height:5px}
+  /* Wichita's label swings out to the right: below, it collided with both the I-35 label and
+     the legend, and it's the one office pin with open space to its east. */
+  .mob-right b{top:0;bottom:auto;left:var(--off,12px);transform:translateY(-50%)}
+  .mob-right b::before{
+    top:50%;bottom:auto;left:auto;right:100%;
+    width:calc(var(--off,12px) - 5px);height:1px;
+  }
+  /* I-35's desktop spot lands on the Maple Hill label at this size, and every other stretch of
+     that diagonal is taken by Wichita's label or the Kansas City cluster. It moves instead to
+     just past where the road leaves Kansas, reading as the route continuing south — outside the
+     state, so the --paper chip comes off too or it punches a white notch through the border. */
+  .r35{--x:37.8%;--y:82%;background:transparent}
+  /* Out of the absolute layer entirely: the band south of Kansas is ~35px tall here and Wichita
+     needs it. */
+  .map-legend{position:static;margin-top:12px;font-size:11px;gap:4px 14px}
 }
 
 /* ---------- offices ---------- */

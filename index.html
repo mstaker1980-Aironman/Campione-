@@ -506,6 +506,11 @@
     </div>
 
     <div class="map-wrap rv">
+      <!-- .map-figure wraps the SVG and the overlay ONLY. The overlay's percentage coordinates
+           are relative to its containing block, so anything else that adds height here (the
+           legend, once it drops into normal flow on small screens) would silently push every pin
+           off its map coordinate. -->
+      <div class="map-figure">
       <svg class="map-svg" viewBox="0 0 1000 462" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
         <!-- Kansas: 37°N-40°N, -102.05° to the Missouri state line, with the Missouri River
              cutting the northeast corner off between White Cloud and Kansas City. -->
@@ -513,25 +518,37 @@
         <!-- Missouri: shares the river line above, up to the northwest corner at Rulo, then the
              40°35' north border, the Mississippi down the east side, and the bootheel. -->
         <path class="map-state" d="M 574 150 L 561 137 L 551 131 L 544 116 L 535 106 L 528 75 L 520 63 L 511 47 L 500 30 L 491 16 L 485 6 L 798 6 L 806 38 L 818 69 L 825 98 L 833 121 L 845 145 L 862 166 L 884 183 L 903 193 L 915 199 L 923 225 L 932 253 L 944 285 L 956 308 L 967 328 L 969 359 L 962 393 L 968 423 L 955 456 L 918 456 L 918 407 L 574 407 Z"/>
-        <!-- I-70 (Kansas City - Lawrence - Topeka - Maple Hill - Manhattan) and I-35 (Kansas
-             City - Wichita): unlabelled and faint, there to explain why the offices sit where
-             they do rather than to be read as a road map. -->
+        <!-- The two corridors the offices are strung along, and the ones the crews drive to
+             reach the towns between them: I-70 (Kansas City - Lawrence - Topeka - Maple Hill -
+             Manhattan - Junction City, then west to Colorado) and I-35 (Kansas City - Ottawa -
+             Emporia - Wichita, then south to Oklahoma). Both now run edge to edge and carry a
+             label — previously I-70 stopped in open country west of Manhattan and I-35 stopped
+             mid-state below Wichita, which read as unfinished lines rather than highways. -->
         <path class="map-road" d="M 574 150 L 526 164 L 491 156 L 465 154 L 423 152 L 403 155 L 330 160 L 230 152 L 120 140 L 0 138"/>
-        <path class="map-road" d="M 574 150 L 523 199 L 453 220 L 400 258 L 364 290 L 348 322"/>
+        <path class="map-road" d="M 574 150 L 523 199 L 453 220 L 400 258 L 364 290 L 372 325 L 378 358"/>
         <text class="map-state-name" x="205" y="272">KANSAS</text>
         <text class="map-state-name" x="772" y="300">MISSOURI</text>
       </svg>
 
       <div class="map-overlay">
-        <!-- Service-area markers: lighter than the office pins, not interactive. -->
-        <span class="map-mark lbl-above" style="--x:42.3%;--y:31.1%"><i></i><b>Manhattan</b></span>
-        <span class="map-mark lbl-above" style="--x:49.1%;--y:33.9%"><i></i><b>Topeka</b></span>
-        <span class="map-mark lbl-below-right" style="--x:52.6%;--y:35.6%"><i></i><b>Lawrence</b></span>
+        <!-- Route labels, sat on their corridors. Positions live in CSS (.r70/.r35) rather than
+             inline, so the breakpoint can move I-35 to a clearer stretch of road — inline custom
+             properties would win over the media query. -->
+        <span class="map-road-label r70">I-70</span>
+        <span class="map-road-label r35">I-35</span>
+
+        <!-- Service-area markers: lighter than the office pins, not interactive. West to east
+             these run Manhattan (42.3%), Maple Hill (46.5%), Topeka (49.1%), Lawrence (52.6%),
+             North Kansas City (57.8%) — the real order along I-70. --off pushes each label
+             clear of the cluster on its own leader line. -->
+        <span class="map-mark lbl-above" style="--x:42.3%;--y:31.1%;--off:46px"><i></i><b>Manhattan</b></span>
+        <span class="map-mark lbl-above" style="--x:49.1%;--y:33.9%;--off:22px"><i></i><b>Topeka</b></span>
+        <span class="map-mark lbl-below" style="--x:52.6%;--y:35.6%;--off:48px"><i></i><b>Lawrence</b></span>
 
         <!-- Office pins: links to the matching card below, revealing a display-only card on
              hover/focus. -->
         <div class="map-office" style="--x:57.8%;--y:32.1%">
-          <a class="map-pin lbl-right" href="#office-nkc"><i></i><b>North Kansas City</b></a>
+          <a class="map-pin lbl-right" style="--off:15px" href="#office-nkc"><i></i><b>North Kansas City</b></a>
           <span class="map-card card-below" aria-hidden="true">
             <b>North Kansas City, MO</b>
             103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116
@@ -539,7 +556,7 @@
           </span>
         </div>
         <div class="map-office" style="--x:46.5%;--y:33.4%">
-          <a class="map-pin lbl-below-left" href="#office-maple-hill"><i></i><b>Maple Hill</b></a>
+          <a class="map-pin lbl-below" style="--off:22px" href="#office-maple-hill"><i></i><b>Maple Hill</b></a>
           <span class="map-card card-below" aria-hidden="true">
             <b>Maple Hill, KS</b>
             14969 Waterman Crossing Rd<br>Maple Hill, KS 66507
@@ -547,7 +564,7 @@
           </span>
         </div>
         <div class="map-office" style="--x:36.4%;--y:62.8%">
-          <a class="map-pin lbl-below" href="#office-wichita"><i></i><b>Wichita</b></a>
+          <a class="map-pin lbl-below mob-right" style="--off:15px" href="#office-wichita"><i></i><b>Wichita</b></a>
           <span class="map-card" aria-hidden="true">
             <b>Wichita, KS</b>
             505 S Broadway, Ste 122<br>Wichita, KS 67202
@@ -555,13 +572,16 @@
           </span>
         </div>
 
-        <!-- Sits in the empty band south of Kansas. Earns its place on small screens, where the
-             service-area city labels are hidden and the two marker weights are all that's left
-             to tell apart. -->
-        <div class="map-legend">
-          <span><i class="lg-office"></i>Office</span>
-          <span><i class="lg-area"></i>Service area</span>
-        </div>
+      </div>
+      </div>
+
+      <!-- Outside .map-figure so it can drop out of the absolute layer and sit under the map on
+           small screens, where the band south of Kansas is too tight to share with Wichita's
+           label. Earns its place there especially: that's where the service-city labels are
+           hidden and the two marker weights are all a reader has to go on. -->
+      <div class="map-legend">
+        <span><i class="lg-office"></i>Office</span>
+        <span><i class="lg-area"></i>Service area</span>
       </div>
     </div>
 
