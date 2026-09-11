@@ -22,6 +22,3 @@ Set a different port with `PORT=5173 node serve.js` if 5500 is taken.
 ## Local development
 
 - Serve with VS Code Live Server on port 5500. Fallback: `npx serve .`
-- The license number in the Credentials grid (section 06) and the footer is a
-  placeholder (`EXAMPLE-LIC-06-02-00003`) pending re-verification — see
-  `CLAUDE.md`.

@@ -164,6 +164,12 @@ page.
   multiple vendors
 - Any hardcoded end date for the Kansas contract — link to the live state
   portal instead
+- A contractor license number, verified or not. The Credentials License
+  card was removed (post-launch refinement) — commercial subs verify
+  licensing during prequalification, not on a public website, and no
+  competitor in this space publishes one; "full prequalification package
+  available on request" already covers it. This is a settled decision, not
+  a pending item — don't add a license number back to the page
 
 Owner names are **no longer** blanket-prohibited: Bill Dunn III is publicly
 the contact of record on the state contract, and the History section names
@@ -180,19 +186,10 @@ affiliation, hours, and the real email address.
 Structure position 9); he gives to various organizations, but which ones
 and what to say about it is not yet confirmed. The section is live on the
 page with a bracketed `[[ ]]` placeholder and a "Placeholder — pending
-confirmation" sub-line, same pattern as the License placeholder below —
-not hidden until ready, since Bill wants the section visible now.
+confirmation" sub-line — not hidden until ready, since Bill wants the
+section visible now.
 
-**Contractor license number** — was previously listed here as confirmed
-(independently reverified active July 2026), but that's no longer trusted as of
-2026-08-17 — flagged as possibly expired, not re-checked. Site currently shows
-`EXAMPLE-LIC-06-02-00003` as an explicit placeholder in the Credentials grid and
-footer, each marked with an HTML comment. Do not put a real number back on the
-page without re-verifying it first, and don't re-enable Netlify deploys until
-it's replaced with a verified value (see README).
-
-All of these come from an interview with the owner (or, for the license, a
-re-verification pass).
+All of these come from an interview with the owner.
 
 **Never invent these.** If a value is unknown, leave the placeholder in place.
 A fabricated EMR or bonding number on a live contractor site is a serious

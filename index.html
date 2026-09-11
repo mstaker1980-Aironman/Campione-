@@ -45,11 +45,10 @@
       metro-cities-served count from the footer's service-area list. No "100%
       Commercial" either (unverifiable — two directories list residential services) —
       swapped for Procore's own public market-sector categorization instead.
-    • License number pulled back to a placeholder (EXAMPLE-LIC-06-02-00003) in the
-      Credentials grid and footer — the number that was live before is no longer
-      confirmed (see CLAUDE.md, moved out of "Confirmed facts"). Do not restore it or
-      any other license number without re-verifying first. Do NOT add the other license
-      numbers found in research either — see MUST NOT PUBLISH below.
+    • License card removed from Credentials entirely (post-launch refinement) — commercial
+      subs verify licensing during prequalification, not on a public site, and no
+      competitor here publishes a number. Do NOT add any license number to the page —
+      see MUST NOT PUBLISH below.
     • Logo is inline SVG (Design Direction v2, Phase 0 + refinements). Traced from
       logo-source.png into color-separated <symbol>s (mountain, dark trees, light trees) in
       the hidden SVG after <body>, reused via <use> in header/footer/hero. Two variants of
@@ -339,8 +338,8 @@
         <div class="cap">Companies</div>
       </div>
       <div class="stat" style="--i:2">
-        <div class="num" style="min-width:2ch">6</div>
-        <div class="cap">Markets</div>
+        <div class="num" style="min-width:2ch">2</div>
+        <div class="cap">States</div>
       </div>
       <div class="stat" style="padding-right:var(--pad);--i:3">
         <div class="num sm">Install · Maintain · Refresh</div>
@@ -831,6 +830,13 @@
 
   Per the brief: no named GC/client references, no trade references, no team names, no
   FEIN/DUNS/CAGE — all still either pending permission or on the Must-NOT-publish list.
+
+  License card removed entirely (post-launch refinement): commercial subcontractors verify
+  licensing during prequalification, not on a public website, and no competitor in this space
+  publishes a license number — "full prequalification package available on request" (the
+  section's own lead) already covers it. Down to 8 cards, which is why the .cred-wide/
+  .cred-license span workarounds added to compensate for 9's odd count are gone too — see the
+  card-count comment further down for the arithmetic that replaces them.
 -->
 <section id="credentials">
   <div class="wrap">
@@ -872,7 +878,7 @@
         <div class="k">Insurance</div>
         <div class="v">Certificates of insurance provided on request</div>
       </div>
-      <div class="cred cred-wide rv-item" style="--i:4">
+      <div class="cred rv-item" style="--i:4">
         <div class="k">Kansas Statewide Contract</div>
         <div class="v">Floor Coverings, Furnish and Install<small>Contract 56954A · <a href="#kansas-contract">Full details above ↑</a></small></div>
       </div>
@@ -884,14 +890,9 @@
         <div class="k">NAICS</div>
         <div class="v">238330<small>Flooring Contractors</small></div>
       </div>
-      <div class="cred rv-item" style="--i:7">
+      <div class="cred cred-fill rv-item" style="--i:7">
         <div class="k">Project Management</div>
         <div class="v">Procore<small>Submittals, RFIs, and closeout in your system</small></div>
-      </div>
-      <div class="cred cred-license rv-item" style="--i:8">
-        <div class="k">License</div>
-        <!-- PLACEHOLDER: replace with verified license number before this site goes live -->
-        <div class="v">EXAMPLE-LIC-06-02-00003<small>Placeholder — pending verification</small></div>
       </div>
     </div>
     <!--
