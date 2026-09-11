@@ -726,6 +726,13 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    500px down to 430px — 480px is exactly the boundary). */
 .cred-wide{grid-column:span 2}
 @media(max-width:480px){.cred-wide{grid-column:span 1}}
+/* Fuse Alliance membership is a real industry-network credential Bill specifically wants
+   visible, not just another "available on request" fact — the brand green (--accent) instead
+   of .cred .v's default inherited --ink flags it as worth a second look. Measured, not
+   assumed: --accent on --paper is 7.95:1, well clear of the 4.5:1 AA minimum at this text size
+   (1.28rem/600 weight is normal-size text per WCAG, not "large text," so 4.5:1 is the real bar)
+   — no need for the darker --forest fallback the brief allowed for. */
+.cred-affiliation .v{color:var(--accent)}
 /* Verified against real rendering, not just the arithmetic above: 1 empty trailing cell at
    1440px (4 cols), 900px (3 cols), and 700px (2 cols) alike — License ends up bumped to its own
    full row at 700px rather than sharing one with Project Management, since only 1 column was
