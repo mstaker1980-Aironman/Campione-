@@ -713,19 +713,27 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    instead of trying to cram all three into one run of text. */
 .cred-entities .v > div{margin-top:14px}
 .cred-entities .v > div:first-child{margin-top:0}
-/* .cred-wide (Phase 6, revised after EMR/Project Management were added back): Kansas Statewide
-   Contract and License both span 2 columns — the two longest values in the grid (License's
-   EXAMPLE-LIC-06-02-00003 wrapped to 2 lines at single-cell width; Kansas Statewide Contract
-   carries a value, a contract number, AND a link). Re-checked the arithmetic when the card
-   count changed from 7 to 9: raw 9 cards with no spans is WORSE at 4 columns (1440px) than the
-   old 7-card+1-span setup — 9 mod 4 leaves 3 empty cells, same bad gap this pattern exists to
-   avoid — so the spans stay. Two spanning cards (11 effective cells) leaves just 1 empty cell
-   at both 1440px (4 cols) and 900px (3 cols), and closes completely at 700px (2 cols) — checked
-   by simulating the auto-placement order, not assumed. Both reset to span:1 below 480px, the
-   measured width where the grid itself drops to a single column (checked at 8 widths from
-   500px down to 430px — 480px is exactly the boundary). */
+/* .cred-wide (Phase 6): Kansas Statewide Contract spans 2 columns — it carries a value, a
+   contract number, AND a link, the most content of any card here. Resets to span:1 below
+   480px, the measured width where the grid itself drops to a single column. */
 .cred-wide{grid-column:span 2}
 @media(max-width:480px){.cred-wide{grid-column:span 1}}
+/* .cred-license: was sharing .cred-wide's span:2 with Kansas Statewide Contract, which left a
+   1-empty-cell gap at 1440px/900px/700px — a real leftover slot that rendered with the grid's
+   own background and border, reading as a broken empty card, not just unused space. Rather
+   than adding a 10th card to force even division, License now expands to consume exactly
+   whatever's left in its own row instead of claiming a fixed amount: span:3 fills the rest of
+   the last row at both 4 columns (next to Project Management, 1+3=4) and 3 columns (alone,
+   spanning all 3) without any change needed between those two cases. Bisected, not assumed:
+   the grid itself drops from 3 columns to 2 between 722px and 721px exactly — span:3 would
+   overflow a 2-column grid by forcing an implicit 3rd track, so it resets to span:1 there,
+   which completes THAT row exactly too (next to Project Management, 1+1=2). First attempt used
+   max-width:722px, which is still 3 columns — off by one pixel, caught by measuring the actual
+   gap at that exact width (433.5px, not the expected ~1px hairline) rather than assuming the
+   fix worked. Verified by simulating the auto-placement order at 4/3/2/1 columns: zero empty
+   cells at any of them, not just the two required widths. */
+.cred-license{grid-column:span 3}
+@media(max-width:721px){.cred-license{grid-column:span 1}}
 /* Fuse Alliance membership is a real industry-network credential Bill specifically wants
    visible, not just another "available on request" fact — the brand green (--accent) instead
    of .cred .v's default inherited --ink flags it as worth a second look. Measured, not
@@ -947,18 +955,8 @@ form .btn{width:100%;justify-content:center;margin-top:8px;border:0;cursor:point
 
 /* ---------- footer (Phase 9) ---------- */
 footer{background:#0d0f12;color:rgba(255,255,255,.55);padding:52px 0 30px;font-size:14px}
-/* Logos, small and equal weight — light chips so the white/blue-background logo files don't
-   read as stray rectangles on this dark footer (see the HTML comment above them). Fixed height,
-   not width, so the three very different aspect ratios (wide/near-square/tall — same three
-   files as the brand strip) still land at the same visual weight; width:auto/height:auto plus
-   each image's own native-width inline cap keeps every logo from ever upscaling. */
-.foot-logos{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
-.foot-logo-chip{
-  background:var(--paper);border-radius:4px;height:38px;padding:6px 12px;
-  display:flex;align-items:center;justify-content:center;
-}
-.foot-logo-chip img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
-/* 4 equal columns now — three offices plus Service Area, replacing the old asymmetric
+/* .foot-logos/.foot-logo-chip removed — see the HTML comment above the footer for why.
+   4 equal columns — three offices plus Service Area, replacing the old asymmetric
    1.4fr/1fr/1fr (brand block / capabilities links / service area) that this rewrite removed. */
 .foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:36px;border-bottom:1px solid var(--line-lt)}
 @media(max-width:900px){.foot-grid{grid-template-columns:repeat(2,1fr)}}
