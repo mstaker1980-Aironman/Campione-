@@ -526,32 +526,24 @@
       </svg>
 
       <div class="map-overlay">
-        <!-- Service-area markers: lighter than the office pins, not interactive. West to east
-             these run Manhattan (42.3%), Maple Hill (46.5%), Topeka (49.1%), Lawrence (52.6%),
-             North Kansas City (57.8%) — the real west-to-east order. Every label now sits
-             directly against its own dot, so direction (above/below/left/right) rather than
-             distance is what keeps them from touching. -->
-        <span class="map-mark lbl-below" style="--x:42.3%;--y:31.1%"><i></i><b>Manhattan</b></span>
-        <span class="map-mark lbl-below" style="--x:49.1%;--y:33.9%"><i></i><b>Topeka</b></span>
-        <span class="map-mark lbl-below" style="--x:52.6%;--y:35.6%;--off:22px"><i></i><b>Lawrence</b></span>
+        <!-- Service-area markers: lighter than the office pins, not interactive. West to east these
+             run Manhattan (42.3%), Maple Hill (46.5%), Topeka (49.1%), Lawrence (52.6%), North
+             Kansas City (57.8%) — the real west-to-east order.
+             Placement note: horizontal gaps between labels shrink as the map scales, but --off
+             is fixed CSS px, so vertical separation is the only kind that survives every
+             viewport width. Hence the pattern — Manhattan and Topeka above, Maple Hill and
+             Lawrence below on two different levels. Maple Hill's and Lawrence's labels are only
+             ~4px apart horizontally at full width and overlap outright below ~1100px; dropping
+             Lawrence to a deeper offset means that never matters. -->
+        <span class="map-mark lbl-above" style="--x:42.3%;--y:31.1%;--off:10px"><i></i><b>Manhattan</b></span>
+        <span class="map-mark lbl-above" style="--x:49.1%;--y:33.9%;--off:12px"><i></i><b>Topeka</b></span>
+        <span class="map-mark lbl-below" style="--x:52.6%;--y:35.6%;--off:26px"><i></i><b>Lawrence</b></span>
 
-        <!-- Kansas City metro, east of the state line: the group works both sides of it, and
-             with only the North Kansas City pin over there Missouri was 40% of the map carrying
-             one border marker. Liberty, Gladstone, Independence and Lee's Summit, in that DOM
-             order, at close to their real positions — Gladstone and Liberty are nudged a few
-             miles apart because Gladstone sits ~4 miles from North Kansas City, which at this
-             scale puts it underneath the office pin. Only Lee's Summit is labelled: the metro
-             is meant to read as a cluster, and its dots are the one place on this map where
-             markers are allowed to touch each other as it shrinks. -->
-        <span class="map-mark metro" style="--x:59.2%;--y:29.2%"><i></i></span>
-        <span class="map-mark metro" style="--x:58.2%;--y:29.4%"><i></i></span>
-        <span class="map-mark metro" style="--x:58.9%;--y:33.0%"><i></i></span>
-        <span class="map-mark metro lbl-right" style="--x:59.2%;--y:36.8%;--off:8px"><i></i><b>Lee's Summit</b></span>
 
         <!-- Office pins: links to the matching card below, revealing a display-only card on
              hover/focus. -->
         <div class="map-office" style="--x:57.8%;--y:32.1%">
-          <a class="map-pin lbl-up-right lbl-wrap mob-right" style="--offx:8px;--offy:24px;--off:10px" href="#office-nkc"><i></i><b>North Kansas City</b></a>
+          <a class="map-pin lbl-right" style="--off:12px" href="#office-nkc"><i></i><b>North Kansas City</b></a>
           <span class="map-card card-below" aria-hidden="true">
             <b>North Kansas City, MO</b>
             103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116
@@ -559,7 +551,7 @@
           </span>
         </div>
         <div class="map-office" style="--x:46.5%;--y:33.4%">
-          <a class="map-pin lbl-above mid-below" style="--off:14px" href="#office-maple-hill"><i></i><b>Maple Hill</b></a>
+          <a class="map-pin lbl-below" style="--off:10px" href="#office-maple-hill"><i></i><b>Maple Hill</b></a>
           <span class="map-card card-below" aria-hidden="true">
             <b>Maple Hill, KS</b>
             14969 Waterman Crossing Rd<br>Maple Hill, KS 66507
@@ -567,7 +559,7 @@
           </span>
         </div>
         <div class="map-office" style="--x:36.4%;--y:62.8%">
-          <a class="map-pin lbl-below mob-right" style="--off:15px" href="#office-wichita"><i></i><b>Wichita</b></a>
+          <a class="map-pin lbl-below" style="--off:12px" href="#office-wichita"><i></i><b>Wichita</b></a>
           <span class="map-card" aria-hidden="true">
             <b>Wichita, KS</b>
             505 S Broadway, Ste 122<br>Wichita, KS 67202

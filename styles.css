@@ -499,11 +499,6 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
   position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;
   background:var(--muted);opacity:.5;
 }
-/* Kansas City metro dots. Same lighter service-area treatment, one size down: the whole metro
-   spans ~30 map units, so at anything below full width these four sit close enough to touch,
-   and they must stay subordinate to the office pin they surround rather than swallowing it.
-   Overlapping each other at small sizes is fine — a cluster reading as a cluster is the point. */
-.map-mark.metro i{left:-3.5px;top:-3.5px;width:7px;height:7px}
 .map-pin i{
   position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;
   background:var(--accent);border:2.5px solid var(--paper);
@@ -514,27 +509,18 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .map-mark b,.map-pin b{position:absolute;white-space:nowrap;line-height:1;font-weight:600}
 .map-mark b{font-size:12px;color:var(--muted)}
 .map-pin b{font-size:13px;font-weight:700;color:var(--ink)}
-/* Label placement — hand-placed, the way map labels always are. No leader lines: every label
-   sits hard against its own dot, and it's the DIRECTION that keeps neighbours apart, not
-   distance. In the tight run from Manhattan across to Kansas City that means alternating —
-   Manhattan and Topeka below, Maple Hill above, Lawrence right, North Kansas City left into
-   Kansas (the only clear side, since its pin sits on the state line with the metro cluster
-   immediately east of it). Offsets stay ~8-15px so adjacency alone shows ownership. */
+/* Label placement — hand-placed, the way map labels always are. No leader lines: each label
+   sits hard against its own dot, close enough that adjacency alone shows ownership.
+   The four cities between Manhattan and Kansas City are 27-44px apart at full width while their
+   labels are 41-66px wide, so every adjacent pair overlaps if they share a line. They alternate
+   above/below instead — Manhattan and Topeka above, Maple Hill and Lawrence below — and the one
+   remaining tight pair (Maple Hill and Lawrence clear each other by only ~4px horizontally, and
+   not at all below ~1100px) is separated by putting Lawrence on a deeper offset. That last part
+   matters: --off is fixed CSS px while the map scales with its column, so vertical separation is
+   the only kind that holds at every viewport width. */
 .lbl-above b{left:0;bottom:var(--off,10px);transform:translateX(-50%)}
 .lbl-below b{left:0;top:var(--off,10px);transform:translateX(-50%)}
 .lbl-right b{left:var(--off,10px);top:0;transform:translateY(-50%)}
-.lbl-left b{right:var(--off,10px);top:0;transform:translateY(-50%)}
-/* North Kansas City is the hard one: the longest label on the map, on a pin that sits on the
-   state line with the metro cluster immediately north, east and south-east. Every horizontal
-   placement runs into either the Kansas cities or a cluster dot, so it goes up and to the right
-   into open northern Missouri, on separate x and y offsets — far enough up to clear Liberty,
-   close enough across to stay attached — and wraps to two lines to halve its width. */
-.lbl-up-right b{left:var(--offx,8px);bottom:var(--offy,8px)}
-/* An explicit width, not max-width: these labels are absolutely positioned inside a zero-width
-   point, so shrink-to-fit sees ~0 available width and collapses to the longest single word —
-   "North Kansas City" came out as three lines no matter how generous the max-width. 88px fits
-   "North Kansas" (measured 85.3px at 13px bold) and pushes "City" onto a second line. */
-.lbl-wrap b{white-space:normal;width:88px;line-height:1.2}
 /* Display-only card: the real, linkable address and phone are in the office card this pin
    points at, and a tel: link nested inside the pin's own <a> would be invalid markup. Hidden
    with visibility (not display) so it can transition; the sitewide reduced-motion block already
@@ -555,8 +541,8 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 /* North Kansas City and Maple Hill sit in the top third of the map, where a card opening
    upwards clears the map entirely and lands on the lead paragraph. Those two open downwards
    into the empty middle of the states instead. */
-/* Both of these pins label above or to the side now, so the card can sit close under them. */
-.card-below{bottom:auto;top:26px}
+/* 30px clears Maple Hill's own label, which now hangs 10px below its pin and is ~14px tall. */
+.card-below{bottom:auto;top:30px}
 .card-below::after{bottom:auto;top:-5px}
 /* Hover only where hovering is real: on a touch screen the same tap would both flash the card
    and follow the link, so there the pin just jumps to the office card below (highlighted via
@@ -580,34 +566,19 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    exists because a pairwise bounding-box test (scratchpad/collisions.js, run at 8 widths down to
    360px) found a real overlap without it. */
 /* The service-city labels come off well before the phone breakpoint. Labels are fixed-size CSS
-   over a map that scales with the column, so the crowding is a function of map width, not
-   device: by ~1080px the viewport the map sits in is ~980px, the Manhattan-to-Kansas-City run
-   is under 150px, and ten labels can't share it. Dots stay — the shape of the footprint is the
-   point — and the legend explains them; the names are in the lead paragraph, the marquee and
-   the footer list. Office labels stay at every size: those are the interactive pins. */
-@media(max-width:1080px){
+   over a map that scales with its column, so the crowding is a function of map width, not
+   device. Bisected rather than guessed: with this marker set they are clean down to 860px and
+   first collide at 850px, so they come off at 900 — the breakpoint the nav already uses, and a
+   50px margin over the real failure. Dots stay, the legend explains them, and the names are in
+   the lead paragraph, the marquee and the footer list. Office labels stay at every size: those
+   are the interactive pins. */
+@media(max-width:900px){
   .map-mark b{display:none}
-  /* Maple Hill drops below its pin here: above, it runs into North Kansas City's two-line
-     label once the map is under ~950px. */
-  .mid-below b{top:var(--off,12px);bottom:auto;left:0;transform:translateX(-50%)}
 }
 @media(max-width:700px){
   .map-pin b{font-size:11px;--off:12px}
   .map-pin i{left:-5px;top:-5px;width:10px;height:10px;border-width:2px}
   .map-mark i{left:-2.5px;top:-2.5px;width:5px;height:5px}
-  /* Needs restating: .map-mark.metro i outranks .map-mark i, so the cluster would otherwise
-     keep its desktop size while every other marker shrank around it. */
-  .map-mark.metro i{left:-2.5px;top:-2.5px;width:5px;height:5px}
-  /* Wichita and North Kansas City swing their labels out to the right at this size. Wichita's
-     collided with the legend below; North Kansas City's points west into Kansas on desktop,
-     which at this width runs straight through the Maple Hill pin. East of both is clear once
-     the metro cluster's own labels are hidden. */
-  /* +6px over the shared offset: North Kansas City's label passes the metro cluster on its way
-     out, and at the widest end of this breakpoint it clipped the Liberty and Lee's Summit dots. */
-  .mob-right b{
-    top:0;bottom:auto;left:calc(var(--off,12px) + 6px);right:auto;
-    transform:translateY(-50%);text-align:left;
-  }
   /* Out of the absolute layer entirely: the band south of Kansas is ~35px tall here and Wichita
      needs it. */
   .map-legend{position:static;margin-top:12px;font-size:11px;gap:4px 14px}
