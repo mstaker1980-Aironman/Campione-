@@ -514,7 +514,7 @@
       <svg class="map-svg" viewBox="0 0 1000 462" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
         <!-- Kansas: 37°N-40°N, -102.05° to the Missouri state line, with the Missouri River
              cutting the northeast corner off between White Cloud and Kansas City. -->
-        <path class="map-state" d="M 0 63 L 520 63 L 528 75 L 535 106 L 544 116 L 551 131 L 561 137 L 574 150 L 574 358 L 0 358 Z"/>
+        <path class="map-state" d="M 0.5 63 L 520 63 L 528 75 L 535 106 L 544 116 L 551 131 L 561 137 L 574 150 L 574 358 L 0.5 358 Z"/>
         <!-- Missouri: shares the river line above, up to the northwest corner at Rulo, then the
              40°35' north border, the Mississippi down the east side, and the bootheel. -->
         <path class="map-state" d="M 574 150 L 561 137 L 551 131 L 544 116 L 535 106 L 528 75 L 520 63 L 511 47 L 500 30 L 491 16 L 485 6 L 798 6 L 806 38 L 818 69 L 825 98 L 833 121 L 845 145 L 862 166 L 884 183 L 903 193 L 915 199 L 923 225 L 932 253 L 944 285 L 956 308 L 967 328 L 969 359 L 962 393 L 968 423 L 955 456 L 918 456 L 918 407 L 574 407 Z"/>
@@ -750,11 +750,67 @@
   </div>
 </section>
 
+<!-- ============================ KANSAS STATEWIDE CONTRACT ============================ -->
+<!--
+  Phase 5 — a hard credential, not a sales pitch. Country Carpet (not the group as a whole)
+  holds Kansas Statewide Contract 56954A for commercial floor coverings, furnish and install,
+  awarded by the Office of Facilities and Property Management. Bill specifically asked for this
+  to be on the site; it stands alone rather than folding into a company block, since it's a
+  group-level capability a competitor either has or doesn't.
+
+  Plain --paper background, no override — same as Credentials right after it, and it means the
+  torn-edge bar on .why::after (which tears from the dark Why section into "whatever comes
+  next," hardcoded to --paper) still lines up without touching that CSS.
+
+  Three hard constraints, straight from CLAUDE.md's Kansas-statewide-contract facts and
+  Must-NOT-publish list:
+  - Never claim exclusivity — the bid spec confirms multiple vendors hold this contract.
+    "Holds" is the verb; nothing implying sole/exclusive/one-of-the-only.
+  - No hardcoded end date — currently 30 Nov 2026 with renewal options, but a stale date on a
+    live page is worse than none. The eSupplier portal link is the source of truth instead.
+  - No link to or hosting of the award PDF — it carries full unit pricing.
+-->
+<section id="kansas-contract">
+  <div class="wrap">
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">05</div>
+      <div>
+        <div class="eyebrow">Public Procurement</div>
+        <h2><span class="reveal-text">Kansas Statewide Contract</span></h2>
+        <div class="contract-tag">Floor Coverings — Furnish and Install · Contract 56954A</div>
+        <p class="lead">
+          Country Carpet holds a statewide contract with the Kansas Department of Administration
+          for commercial floor coverings, furnished and installed. Agencies can purchase directly
+          off it without running a separate competitive bid.
+        </p>
+      </div>
+    </div>
+    <div class="contract-grid stagger">
+      <div class="contract-block rv-item" style="--i:0">
+        <h3>Who can use it</h3>
+        <p>State agencies, and political subdivisions of the State of Kansas — cities, counties, school districts, and universities. Pricing is available to all of them at contract rates.</p>
+      </div>
+      <div class="contract-block rv-item" style="--i:1">
+        <h3>What's covered</h3>
+        <p>Broadloom carpet · carpet tile · VCT · LVT · Marmoleum and rubber · sheet vinyl · porcelain and ceramic tile · adhesives. Furnish and install, with pricing on both material and labor.</p>
+      </div>
+      <div class="contract-block rv-item" style="--i:2">
+        <h3>How to use it</h3>
+        <p>Contract 56954A, awarded by the Office of Facilities and Property Management. Current terms and pricing are listed on the Kansas eSupplier portal. Payment terms are Net 30; P-Cards are not accepted on this contract.</p>
+      </div>
+    </div>
+    <div class="contract-foot">
+      <p>Questions about scope, scheduling, or a specific project — call Maple Hill at <a href="tel:+17852564800">785.256.4800</a>.</p>
+      <a class="contract-cta" href="https://supplier.sok.ks.gov" target="_blank" rel="noopener">View the contract on the Kansas eSupplier portal →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ CREDENTIALS ============================ -->
 <section id="credentials">
   <div class="wrap">
     <div class="rv rv-num">
-      <div class="sec-num" aria-hidden="true">05</div>
+      <div class="sec-num" aria-hidden="true">06</div>
       <div>
         <div class="eyebrow">Prequalification</div>
         <h2><span class="reveal-text">Credentials</span></h2>
@@ -827,7 +883,7 @@
 <section class="story" id="story">
   <div class="wrap">
     <div class="story-inner rv rv-num">
-      <div class="sec-num" aria-hidden="true">06</div>
+      <div class="sec-num" aria-hidden="true">07</div>
       <div>
         <div class="eyebrow">Our Story</div>
         <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
@@ -864,7 +920,7 @@
   <div class="wrap">
     <div class="contact-grid">
       <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">07</div>
+        <div class="sec-num" aria-hidden="true">08</div>
         <div>
         <div class="eyebrow">Contact</div>
         <h2><span class="reveal-text">Invite us to bid</span></h2>

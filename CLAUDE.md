@@ -113,9 +113,28 @@ page.
 
 ### Kansas statewide contract
 
-- Awarded to multiple vendors — never claim exclusivity
+- Contract 56954A — Floor Coverings, Furnish and Install
+- Held by Country Carpet (not the group as a whole), with Kansas Department
+  of Administration, awarded by the Office of Facilities and Property
+  Management
+- Open to state agencies and political subdivisions of Kansas (cities,
+  counties, school districts, universities) at contract pricing — no
+  separate competitive bid needed
+- Covers broadloom carpet, carpet tile, VCT, LVT, Marmoleum and rubber,
+  sheet vinyl, porcelain and ceramic tile, and adhesives; furnish and
+  install, material and labor both priced
+- Payment terms: Net 30. P-Cards are not accepted
+- Current terms/pricing live on the Kansas eSupplier portal
+  (https://supplier.sok.ks.gov) — that's the page's link target, not a
+  hardcoded date
+- Runs to 30 Nov 2026 with renewal options as of this writing — internal
+  reference only, per the constraint below
+- Awarded to multiple vendors — never claim exclusivity. "Holds" is the
+  correct verb; never "one of the only," "exclusive," or "sole"
 - Don't hardcode an end date on the page; link to the live state portal
   instead
+- Don't link to or host the contract award PDF — full unit pricing (see
+  Must NOT publish)
 
 ## Must NOT publish
 
