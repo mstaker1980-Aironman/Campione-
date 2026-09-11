@@ -759,43 +759,57 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    rest of the site already uses (.eyebrow::after, the credentials grid, sector-card borders).
    The line is one pseudo-element on the container, not five separate borders, so it reads as
    one continuous fifty-year span rather than five disconnected segments. */
-/* max-width matches .story-inner above so the timeline reads as the same column as the intro
-   text, not a sudden full-bleed stretch — .timeline is a sibling of .story-inner, not nested
-   inside it (the intro's --i:0 rv-num and the timeline's own stagger are two independent reveal
-   groups), so it needs its own constraint rather than inheriting one. */
-.timeline{position:relative;margin-top:48px;max-width:76ch}
+/* Refinement: was max-width:76ch, matched to .story-inner above it. That left the timeline
+   capped at ~815px inside a ~1052px content column at 1440px — a 237px dead strip down the
+   right side of the section, with nothing in it (not even the spine/dots, which stopped with
+   the rest of the block). .timeline is still a sibling of .story-inner, not nested inside it,
+   so removing its own cap lets it use the section's full measure like every other content grid
+   on the page (.cred-grid, .why-grid, .lifecycle-grid — none of them carry a max-width either);
+   .tl-body below picks up its own reading-width cap instead, so body text doesn't stretch
+   edge-to-edge just because the container now can. */
+.timeline{position:relative;margin-top:48px}
 .timeline::before{
   content:"";position:absolute;left:190px;top:10px;bottom:10px;width:1px;background:var(--line);
 }
 .tl-item{position:relative;display:grid;grid-template-columns:190px 1fr;column-gap:28px;padding-bottom:36px}
 .tl-item:last-child{padding-bottom:0}
 /* The year is the most prominent element on purpose — the fifty-year span is the point of this
-   section, and a reader should get it from the numbers alone on a skim. Right-aligned so every
-   year sits flush against the spine regardless of length. Column measured, not guessed: at this
-   font "September 2022" (the longest entry) renders 158.5px wide — 190px leaves it real margin
-   before the padding-right below, where a narrower column (96px, the first attempt) clipped it
-   against the node dot. */
+   section, and a reader should get it from the numbers alone on a skim. Column measured, not
+   guessed: at this font "September 2022" (the longest entry) renders 158.5px wide — well clear
+   of both the 190px column and the dot at x:185, so it works left- or right-aligned. */
 .tl-year{
   font-family:'Inter Tight',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.01em;
-  color:var(--ink);text-align:right;line-height:1.3;padding-right:18px;
+  color:var(--ink);text-align:left;line-height:1.3;
 }
-/* padding-right above (not just visual spacing) is load-bearing: text-align:right runs the
-   glyphs flush to the column's own right edge, which is exactly where the node dot sits without
-   it. Node dot, centered exactly on the spine: the spine sits at left:190px (the year column's
+/* Refinement: was text-align:right — flush-right dates against the spine left a ragged edge on
+   the OTHER side (where each year starts), varying by up to 114px between "1976" and "September
+   2022". Left-aligned, every year starts at the same x — the ragged edge moves to the (already
+   variable-width, already ragged) gap between year and dot, where it doesn't read as misaligned
+   text. Node dot, centered exactly on the spine: the spine sits at left:190px (the year column's
    own width), and the dot is 10px wide, so left:185px (190 minus half the dot's width) centers
-   it precisely on that line. */
+   it precisely on that line, independent of the year text's own alignment. */
 .tl-year::after{
   content:"";position:absolute;left:185px;top:6px;width:10px;height:10px;border-radius:50%;
   background:var(--accent);border:2px solid var(--bone);box-shadow:0 0 0 1px rgba(17,93,53,.35);
 }
-.tl-body{color:var(--muted);font-size:1.05rem;line-height:1.6;padding-top:2px}
+/* max-width added in the same refinement that removed .timeline's own cap: a reading-width
+   limit that travels with the body text itself instead of the whole container, so short entries
+   still leave (expected, ordinary) trailing whitespace rather than stretching to fill however
+   wide the section happens to be. 58ch (the standard reading-measure value used elsewhere on
+   the page) barely moved the needle here — 614px against the 597px the old capped container
+   already gave these short entries — so the dead space the request was about would have stayed
+   almost exactly as visible. 68ch (720px) actually closes most of it while staying well inside
+   a readable line length for text this short. */
+.tl-body{color:var(--muted);font-size:1.05rem;line-height:1.6;padding-top:2px;max-width:68ch}
 @media(max-width:560px){
   /* Below this, a 190px year column plus a readable body column no longer both fit — stack each
      entry instead of running them side by side. The spine moves to the left edge of the whole
-     item (a conventional stacked-timeline layout) and the dot moves with it. */
+     item (a conventional stacked-timeline layout) and the dot moves with it. Year is already
+     text-align:left at this point (the desktop default, post-refinement), so this block no
+     longer needs to override alignment — only position and spacing. */
   .tl-item{grid-template-columns:1fr;column-gap:0;padding-left:22px}
   .timeline::before{left:4px}
-  .tl-year{text-align:left;padding-right:0;padding-left:20px;margin-bottom:4px}
+  .tl-year{padding-left:20px;margin-bottom:4px}
   .tl-year::after{left:0}
 }
 

@@ -926,7 +926,12 @@
       <div class="sec-num" aria-hidden="true">07</div>
       <div>
         <div class="eyebrow">Our Story</div>
-        <h2><span class="reveal-text">Fifty years of floors in Kansas and Missouri</span></h2>
+        <!-- Non-breaking spaces tie "Kansas and Missouri" into one unit so the line break falls
+             after "in" instead of stranding "Missouri" alone on its own line — measured against
+             the rendered h2 width at 1440px: "Fifty years of floors in" / "Kansas and Missouri"
+             comes out to 428.5px / 419.4px, close to even, versus 587.8px / 260.1px for the
+             default break point. -->
+        <h2><span class="reveal-text">Fifty years of floors in Kansas&nbsp;and&nbsp;Missouri</span></h2>
         <p class="lead">
           The group didn't start as a group. It started as one carpet company in a small Kansas
           town, and grew by bringing in people who were already good at the part we were missing.
@@ -940,7 +945,7 @@
       </div>
       <div class="tl-item rv-item" style="--i:1">
         <div class="tl-year">2008</div>
-        <div class="tl-body">Bill Dunn founds Campione Interior Solutions in North Kansas City, after years in commercial flooring and flooring maintenance.</div>
+        <div class="tl-body">Bill Dunn III founds Campione Interior Solutions in North Kansas City, after years in commercial flooring and flooring maintenance.</div>
       </div>
       <div class="tl-item rv-item" style="--i:2">
         <div class="tl-year">January 2022</div>
