@@ -809,11 +809,14 @@
 <!-- ============================ CREDENTIALS ============================ -->
 <!--
   Phase 6 — rewritten for the group, from Bill's Business Profile and Statement of
-  Qualifications rather than placeholders. EMR/General Liability/Workers' Comp are no longer
-  separate cards: no real figures for them came out of that document, and "Available on
-  request" for three cards in a row was the placeholder-heavy version this rewrite replaces —
-  Insurance below covers the same ground honestly, without inventing a number that isn't there.
-  Project Management/Procore is dropped for the same reason: not part of the new content.
+  Qualifications rather than placeholders. General Liability/Workers' Comp stay folded into the
+  single Insurance card — no separate coverage-limit figures came out of that document, and
+  three "Available on request" cards in a row was the placeholder-heavy version this rewrite
+  replaces. EMR and Project Management/Procore were dropped in that same pass, then explicitly
+  asked back afterward: EMR because it's the first safety metric a GC's risk department checks
+  and its absence read as more conspicuous than a request line in a section framed around
+  prequalification, Project Management because Procore is a real, verifiable capability (not a
+  placeholder) that signals working inside the same platform a GC already uses.
 
   Claims History leads, as its own full-width block above the grid rather than a grid card — a
   sworn no-claims/no-failure-to-perform statement is exactly what a GC's risk department is
@@ -862,22 +865,30 @@
         <div class="v">Sufficient to meet growing market needs<small>Details provided during prequalification</small></div>
       </div>
       <div class="cred rv-item" style="--i:2">
+        <div class="k">EMR</div>
+        <div class="v">Provided during prequalification</div>
+      </div>
+      <div class="cred rv-item" style="--i:3">
         <div class="k">Insurance</div>
         <div class="v">Certificates of insurance provided on request</div>
       </div>
-      <div class="cred rv-item" style="--i:3">
+      <div class="cred cred-wide rv-item" style="--i:4">
         <div class="k">Kansas Statewide Contract</div>
         <div class="v">Floor Coverings, Furnish and Install<small>Contract 56954A · <a href="#kansas-contract">Full details above ↑</a></small></div>
       </div>
-      <div class="cred rv-item" style="--i:4">
+      <div class="cred rv-item" style="--i:5">
         <div class="k">Affiliations</div>
         <div class="v">Fuse Alliance member</div>
       </div>
-      <div class="cred rv-item" style="--i:5">
+      <div class="cred rv-item" style="--i:6">
         <div class="k">NAICS</div>
         <div class="v">238330<small>Flooring Contractors</small></div>
       </div>
-      <div class="cred cred-license rv-item" style="--i:6">
+      <div class="cred rv-item" style="--i:7">
+        <div class="k">Project Management</div>
+        <div class="v">Procore<small>Submittals, RFIs, and closeout in your system</small></div>
+      </div>
+      <div class="cred cred-wide rv-item" style="--i:8">
         <div class="k">License</div>
         <!-- PLACEHOLDER: replace with verified license number before this site goes live -->
         <div class="v">EXAMPLE-LIC-06-02-00003<small>Placeholder — pending verification</small></div>

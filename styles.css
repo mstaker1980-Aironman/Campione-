@@ -713,16 +713,24 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    instead of trying to cram all three into one run of text. */
 .cred-entities .v > div{margin-top:14px}
 .cred-entities .v > div:first-child{margin-top:0}
-/* License (Phase 6): last card in DOM order, spanning 2 columns — with 7 cards total this is
-   what makes the count divide evenly at the grid's own measured column counts (8 effective
-   cells / 4 cols at 1440px, /2 cols at 700px; still leaves a smaller gap at 3 cols around
-   900px, same class of pre-existing imperfection the 8-card grid already had there before this
-   phase). Also a genuine, non-arbitrary fit: EXAMPLE-LIC-06-02-00003 is the longest value
-   string in the grid and wrapped to 2 lines in a single-width cell. Resets to span:1 below
-   480px, the measured width where the grid itself drops to a single column (checked at 8
-   widths from 500px down to 430px — 480px is exactly the boundary). */
-.cred-license{grid-column:span 2}
-@media(max-width:480px){.cred-license{grid-column:span 1}}
+/* .cred-wide (Phase 6, revised after EMR/Project Management were added back): Kansas Statewide
+   Contract and License both span 2 columns — the two longest values in the grid (License's
+   EXAMPLE-LIC-06-02-00003 wrapped to 2 lines at single-cell width; Kansas Statewide Contract
+   carries a value, a contract number, AND a link). Re-checked the arithmetic when the card
+   count changed from 7 to 9: raw 9 cards with no spans is WORSE at 4 columns (1440px) than the
+   old 7-card+1-span setup — 9 mod 4 leaves 3 empty cells, same bad gap this pattern exists to
+   avoid — so the spans stay. Two spanning cards (11 effective cells) leaves just 1 empty cell
+   at both 1440px (4 cols) and 900px (3 cols), and closes completely at 700px (2 cols) — checked
+   by simulating the auto-placement order, not assumed. Both reset to span:1 below 480px, the
+   measured width where the grid itself drops to a single column (checked at 8 widths from
+   500px down to 430px — 480px is exactly the boundary). */
+.cred-wide{grid-column:span 2}
+@media(max-width:480px){.cred-wide{grid-column:span 1}}
+/* Verified against real rendering, not just the arithmetic above: 1 empty trailing cell at
+   1440px (4 cols), 900px (3 cols), and 700px (2 cols) alike — License ends up bumped to its own
+   full row at 700px rather than sharing one with Project Management, since only 1 column was
+   left open next to it and span:2 needs 2 contiguous. Minor and consistent at every width
+   checked; not chasing it to zero with a third spanning card. */
 
 /* ---------- story ---------- */
 .story{background:var(--bone);position:relative}
