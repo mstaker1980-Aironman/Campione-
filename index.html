@@ -536,11 +536,12 @@
              is fixed CSS px, so vertical separation is the only kind that survives every
              viewport width. Hence the pattern — Manhattan and Topeka above, Maple Hill and
              Lawrence below on two different levels. Maple Hill's and Lawrence's labels are only
-             ~4px apart horizontally at full width and overlap outright below ~1100px; dropping
-             Lawrence to a deeper offset means that never matters. -->
+             ~4px apart horizontally at full width and overlap outright below ~1100px; a 19px
+             offset keeps Lawrence's label close to its own dot while still clearing Maple Hill's
+             vertically (4px+ margin at every width down to the 900px cutoff, measured). -->
         <span class="map-mark lbl-above" style="--x:42.3%;--y:31.1%;--off:10px"><i></i><b>Manhattan</b></span>
         <span class="map-mark lbl-above" style="--x:49.1%;--y:33.9%;--off:12px"><i></i><b>Topeka</b></span>
-        <span class="map-mark lbl-below" style="--x:52.6%;--y:35.6%;--off:26px"><i></i><b>Lawrence</b></span>
+        <span class="map-mark lbl-below" style="--x:52.6%;--y:35.6%;--off:19px"><i></i><b>Lawrence</b></span>
 
 
         <!-- Office pins: links to the matching card below, revealing a display-only card on
