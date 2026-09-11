@@ -480,7 +480,10 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
    alone measures 1.95:1 (403x207mi against a real 410x210). Nothing was stretched — the two
    states just weren't separating. Heavier stroke so each reads as its own silhouette. */
 .map-state{fill:var(--paper);stroke:rgba(19,21,25,.46);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
-/* .map-road / .map-road-label removed — see the note in the markup. */
+/* Faint, unlabelled — the corridors are context for why the offices sit where they do, not
+   a road map to navigate by. Green (--accent) at low opacity so it reads as background
+   structure rather than another data layer competing with the pins. */
+.map-road{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.16}
 /* Outlined type, same language as .sec-num and the marquee — but drawn with SVG's own
    stroke/fill rather than -webkit-text-stroke, which SVG text doesn't honour everywhere.
    Left at a single size on purpose: 40 user units renders ~42px at 1440 and still ~14px on a
