@@ -904,37 +904,55 @@
   </div>
 </section>
 
-<!-- ============================ STORY ============================ -->
+<!-- ============================ STORY / HISTORY ============================ -->
+<!--
+  Phase 7 — the group's history, replacing Campione's single-company story. Five real dates
+  from Bill's own company announcement, not a narrative paragraph: the fifty-year span (1976 to
+  2026) is the point, so the years carry the visual weight rather than prose.
+
+  Torn-edge motif considered per the brief and set aside: that clip-path is tuned for full-bleed,
+  18px-tall section-transition bars, not a repeating divider between five short list items in a
+  narrow content column — reusing it at this scale would either need redrawing the jagged path
+  at a fraction of its size (illegible) or stretching it (looks broken). A plain vertical rule is
+  the same "hairline" language the rest of the site already uses for dividers (.eyebrow::after,
+  the credentials grid, sector-card borders) and it's what actually reads as a timeline spine.
+
+  Named individuals (Jon Ross, Mallory Minor, Jay Marr) are explicitly approved, per the brief —
+  leadership named in Bill's own announcement. Individual staff bios stay out of scope.
+-->
 <section class="story" id="story">
   <div class="wrap">
     <div class="story-inner rv rv-num">
       <div class="sec-num" aria-hidden="true">07</div>
       <div>
         <div class="eyebrow">Our Story</div>
-        <h2><span class="reveal-text">Built in North Kansas City, one floor at a time</span></h2>
-
-        <!--
-          [[ CONFIRM ]] The real story goes here — the most important paragraph on the page, and
-          the only part no competitor can copy. Get it on the call: Who started the company? What
-          were they doing before April 2008? Why start a flooring business in the middle of a
-          housing collapse? What was the first job? What's the job they're proudest of? Who works
-          here now — family, long-tenured crew? Write it in his words, not marketing words.
-        -->
-
-        <p>
-          Campione Interior Solutions was founded in 2008 and has worked out of North Kansas City
-          ever since. What started as a small crew has grown into a commercial flooring
-          subcontractor trusted on projects across the metro — but the way the work gets done
-          hasn't changed much: show up when we said we would, install it right the first time,
-          and stand behind it after the building opens.
+        <h2><span class="reveal-text">Fifty years of floors in Kansas and Missouri</span></h2>
+        <p class="lead">
+          The group didn't start as a group. It started as one carpet company in a small Kansas
+          town, and grew by bringing in people who were already good at the part we were missing.
         </p>
-
-        <!-- [[ CONFIRM ]] Add a real one- or two-sentence quote from the owner here — the line people remember. -->
-
-        <p>
-          Eighteen years in, most of our work still comes from general contractors we've worked with
-          before — and from the ones they tell about us.
-        </p>
+      </div>
+    </div>
+    <div class="timeline stagger">
+      <div class="tl-item rv-item" style="--i:0">
+        <div class="tl-year">1976</div>
+        <div class="tl-body">Country Carpet opens in Maple Hill, Kansas.</div>
+      </div>
+      <div class="tl-item rv-item" style="--i:1">
+        <div class="tl-year">2008</div>
+        <div class="tl-body">Bill Dunn founds Campione Interior Solutions in North Kansas City, after years in commercial flooring and flooring maintenance.</div>
+      </div>
+      <div class="tl-item rv-item" style="--i:2">
+        <div class="tl-year">January 2022</div>
+        <div class="tl-body">Country Carpet joins the group. Jon Ross, its owner, stays on to lead operations across the enterprise.</div>
+      </div>
+      <div class="tl-item rv-item" style="--i:3">
+        <div class="tl-year">September 2022</div>
+        <div class="tl-body">Country Carpet opens in Wichita with Mallory Minor.</div>
+      </div>
+      <div class="tl-item rv-item" style="--i:4">
+        <div class="tl-year">July 2026</div>
+        <div class="tl-body">Floorsmith joins, bringing commercial floor care in-house. Jay Marr leads it as Director of Asset Services.</div>
       </div>
     </div>
   </div>

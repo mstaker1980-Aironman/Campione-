@@ -88,7 +88,12 @@ page.
 - Bill Dunn III is publicly the contact of record on the Kansas statewide
   contract (see "Must NOT publish" for what's still off-limits about it)
 - Jon Ross, Mallory Minor, and Jay Marr are named in the History section, in
-  their roles there — no other individual staff bios are in scope yet
+  their roles there — no other individual staff bios are in scope yet.
+  Specifically: Jon Ross is Country Carpet's owner, stayed on to lead
+  operations across the enterprise when Country Carpet joined the group
+  (January 2022); Mallory Minor is associated with Country Carpet's Wichita
+  opening (September 2022); Jay Marr leads Floorsmith as Director of Asset
+  Services (joined July 2026)
 
 ### Campione Interior Solutions LLC
 

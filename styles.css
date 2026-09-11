@@ -742,20 +742,61 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 }
 .story .story-inner{position:relative;z-index:1}
 .story-inner{max-width:76ch}
-/* Serif reverted — Story body copy now inherits the site's Inter stack like every other body
-   paragraph, same as before the Source Serif 4 experiment. .pull still declares Source Serif 4
-   (not asked to change here); with the webfont no longer loaded below, it'll fall back to
-   Georgia instead. Flagged, not silently left inconsistent.
-   Two things the removal left orphaned, caught after the fact: no color, so these paragraphs
-   were falling back to body's --ink instead of the --muted every other body/.lead paragraph
-   uses (01/03/05 etc.); and font-size 1.08rem (17.28px) vs .lead's 1.1rem (17.6px) — a stray
-   mismatch, not a deliberate choice. line-height:1.65 was also specific to this rule where
-   .lead sets none at all and just inherits body's 1.6 — dropped so both take the same path. */
-.story p{margin-bottom:20px;font-size:1.1rem;color:var(--muted)}
-.story p:last-child{margin-bottom:0}
+/* .story p removed (Phase 7): the two hand-written narrative paragraphs it styled are gone,
+   replaced by the timeline below — the section now uses the sitewide .lead for its intro
+   line, same as every other numbered section, instead of its own paragraph rule. .pull is
+   unused on the page but kept for whoever adds a pull-quote later; it still declares Source
+   Serif 4, which is no longer loaded anywhere (removed with the .story p serif experiment
+   this same rule used to explain) — falls back to Georgia until that's revisited. */
 .pull{
   border-left:3px solid var(--accent);padding:6px 0 6px 26px;margin:34px 0;
   font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:1.5rem;line-height:1.4;
+}
+
+/* Timeline (Phase 7): a vertical spine, not the torn-edge motif — considered per the brief, but
+   that clip-path is tuned for full-bleed 18px section-transition bars, not a repeating divider
+   between five short items in a ~76ch column. A plain rule is the same hairline language the
+   rest of the site already uses (.eyebrow::after, the credentials grid, sector-card borders).
+   The line is one pseudo-element on the container, not five separate borders, so it reads as
+   one continuous fifty-year span rather than five disconnected segments. */
+/* max-width matches .story-inner above so the timeline reads as the same column as the intro
+   text, not a sudden full-bleed stretch — .timeline is a sibling of .story-inner, not nested
+   inside it (the intro's --i:0 rv-num and the timeline's own stagger are two independent reveal
+   groups), so it needs its own constraint rather than inheriting one. */
+.timeline{position:relative;margin-top:48px;max-width:76ch}
+.timeline::before{
+  content:"";position:absolute;left:190px;top:10px;bottom:10px;width:1px;background:var(--line);
+}
+.tl-item{position:relative;display:grid;grid-template-columns:190px 1fr;column-gap:28px;padding-bottom:36px}
+.tl-item:last-child{padding-bottom:0}
+/* The year is the most prominent element on purpose — the fifty-year span is the point of this
+   section, and a reader should get it from the numbers alone on a skim. Right-aligned so every
+   year sits flush against the spine regardless of length. Column measured, not guessed: at this
+   font "September 2022" (the longest entry) renders 158.5px wide — 190px leaves it real margin
+   before the padding-right below, where a narrower column (96px, the first attempt) clipped it
+   against the node dot. */
+.tl-year{
+  font-family:'Inter Tight',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.01em;
+  color:var(--ink);text-align:right;line-height:1.3;padding-right:18px;
+}
+/* padding-right above (not just visual spacing) is load-bearing: text-align:right runs the
+   glyphs flush to the column's own right edge, which is exactly where the node dot sits without
+   it. Node dot, centered exactly on the spine: the spine sits at left:190px (the year column's
+   own width), and the dot is 10px wide, so left:185px (190 minus half the dot's width) centers
+   it precisely on that line. */
+.tl-year::after{
+  content:"";position:absolute;left:185px;top:6px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bone);box-shadow:0 0 0 1px rgba(17,93,53,.35);
+}
+.tl-body{color:var(--muted);font-size:1.05rem;line-height:1.6;padding-top:2px}
+@media(max-width:560px){
+  /* Below this, a 190px year column plus a readable body column no longer both fit — stack each
+     entry instead of running them side by side. The spine moves to the left edge of the whole
+     item (a conventional stacked-timeline layout) and the dot moves with it. */
+  .tl-item{grid-template-columns:1fr;column-gap:0;padding-left:22px}
+  .timeline::before{left:4px}
+  .tl-year{text-align:left;padding-right:0;padding-left:20px;margin-bottom:4px}
+  .tl-year::after{left:0}
 }
 
 /* ---------- contact ---------- */
