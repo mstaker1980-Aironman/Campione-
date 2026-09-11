@@ -197,8 +197,12 @@ document.getElementById('bidform').addEventListener('submit', function(e){
   if(f['bot-field'] && f['bot-field'].value){
     return; // honeypot tripped — silently drop
   }
-  if(!f.name.value.trim() || !f.company.value.trim() || !f.email.value.trim()){
-    alert('Please fill in your name, company, and email.');
+  // Phase 8: form has no native validation UI (novalidate on the <form>), so every `required`
+  // field's actual enforcement happens here, not just in the HTML attribute. Added f.need
+  // (the "What do you need?" select) alongside the three fields already checked — it's the
+  // one new required field the rewrite added; phone/location/biddate/msg stay optional.
+  if(!f.name.value.trim() || !f.company.value.trim() || !f.email.value.trim() || !f.need.value){
+    alert('Please fill in your name, company, email, and what you need.');
     return;
   }
 
@@ -208,12 +212,12 @@ document.getElementById('bidform').addEventListener('submit', function(e){
     body: new URLSearchParams(new FormData(f)).toString()
   }).then(function(res){
     if(!res.ok) throw new Error('Form submission failed');
-    msg.innerHTML = 'Thanks — your bid invitation was submitted. We\'ll confirm receipt the same day.';
+    msg.innerHTML = 'Thanks — we received your message. We\'ll confirm receipt the same day.';
     msg.classList.add('show');
     f.reset();
   }).catch(function(){
     msg.innerHTML = 'We couldn\'t submit this automatically. Please call ' +
-      '<a href="tel:+18162564156">(816) 256-4156</a> to send your bid invitation directly.';
+      '<a href="tel:+18162564156">(816) 256-4156</a> to reach us directly.';
     msg.classList.add('show');
   });
 });

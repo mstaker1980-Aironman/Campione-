@@ -822,15 +822,21 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .contact .lead{color:rgba(255,255,255,.66)}
 .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,6vw,76px);align-items:start}
 @media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
-.cinfo{margin-top:34px}
-.cinfo .row{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line-lt);align-items:flex-start}
-.cinfo .row:first-child{border-top:1px solid var(--line-lt)}
-.cinfo .ico{width:20px;height:20px;color:var(--sage);flex-shrink:0;margin-top:3px}
-.cinfo .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:4px}
-.cinfo .v{font-size:16px;font-weight:500}
-.cinfo .v a{text-decoration:none}
-.cinfo .v a:hover{color:var(--sage)}
-.cinfo .note{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
+/* Phase 8: three office cards, same markup as Service Area's (.office-grid/.office-card/
+   .oc-city/.oc-tel — see the HTML comment above them for why this reuses rather than
+   duplicates the component), recolored here for the dark contact section.
+   grid-template-columns:1fr forced explicitly, not left to .office-grid's own 760px breakpoint:
+   that breakpoint checks the VIEWPORT width, but this column is the narrow half of a 2-col
+   .contact-grid — at 1440px the viewport is nowhere near 760px, yet the actual container here
+   is ~490px, which the 3-column base rule doesn't know about. Confirmed by screenshot before
+   this override: "North Kansas City, MO" was wrapping to 3 lines inside a badly cramped card. */
+.contact .office-grid{grid-template-columns:1fr;margin-top:34px}
+.contact .office-card{background:rgba(255,255,255,.04);border-color:var(--line-lt)}
+.contact .oc-city{color:#fff}
+.contact .office-card address{color:rgba(255,255,255,.6)}
+/* --accent (the light-background green) measures 2.30:1 on --ink — fails outright. Same swap
+   to --accent-on-dark used for every other accent-colored text on a dark section. */
+.contact .oc-tel{color:var(--accent-on-dark)}
 form{background:rgba(255,255,255,.04);border:1px solid var(--line-lt);border-radius:6px;padding:clamp(24px,3.4vw,36px)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:560px){.frow{grid-template-columns:1fr}}
@@ -844,9 +850,25 @@ input::placeholder,textarea::placeholder{color:rgba(255,255,255,.48)}
 input:focus,select:focus,textarea:focus{outline:0;border-color:var(--accent-on-dark);background:rgba(255,255,255,.09)}
 select option{background:var(--ink-2);color:#fff}
 textarea{resize:vertical;min-height:104px}
+/* .frow-route (Phase 8): "What do you need?" and "Where's the project?" are the two fields that
+   actually route a submission to one of the three companies — per the brief, prominent, not
+   paired with an unrelated field the way the old Project type/Bid date row was. A bordered band
+   (top and bottom rule, both in --accent-on-dark — the same "give this real weight" language
+   .cred-feature/.contract-block/.lifecycle-item already use elsewhere on the page) plus
+   accent-colored labels set it apart from the plain text-field rows above and below it. */
+.frow-route{border-top:2px solid var(--accent-on-dark);border-bottom:2px solid var(--accent-on-dark);padding:20px 0 4px;margin-bottom:20px}
+.frow-route label{color:var(--accent-on-dark)}
+/* Was a translucent rgba(58,163,108,.45) — measured at 2.13:1 on --ink, fails the 3:1 non-text
+   minimum. This is the same category of element as the input:focus border above (a form field's
+   own visible boundary), already held to that standard elsewhere on this form, so it's not a
+   decorative-divider exemption — solid --accent-on-dark instead. */
+.frow-route select{border-color:var(--accent-on-dark)}
 form .btn{width:100%;justify-content:center;margin-top:8px;border:0;cursor:pointer;font-family:inherit}
 .formnote{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:14px;text-align:center}
-.okmsg{display:none;background:rgba(17,93,53,.14);border:1px solid var(--accent);border-radius:4px;padding:16px;margin-bottom:18px;font-size:15px}
+/* border was var(--accent) — the light-background green, 2.30:1 on --ink, fails even the 3:1
+   non-text minimum. Pre-existing, found while auditing this section for Phase 8, not introduced
+   by it. Same --accent-on-dark swap as every other accent border/text on a dark section. */
+.okmsg{display:none;background:rgba(17,93,53,.14);border:1px solid var(--accent-on-dark);border-radius:4px;padding:16px;margin-bottom:18px;font-size:15px}
 .okmsg.show{display:block}
 .hp-field{position:absolute;left:-9999px;top:auto}
 

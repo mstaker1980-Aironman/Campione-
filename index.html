@@ -971,44 +971,58 @@
         <div class="sec-num" aria-hidden="true">08</div>
         <div>
         <div class="eyebrow">Contact</div>
-        <h2><span class="reveal-text">Invite us to bid</span></h2>
+        <h2><span class="reveal-text">Tell us what you need</span></h2>
         <p class="lead">
-          Send the plans, the bid date, and the scope. We'll confirm receipt the same day
-          and tell you straight if it isn't a fit.
+          Send the plans, the bid date, and the scope — or just tell us what's going on with
+          the floor. We'll confirm receipt the same day and tell you straight if it isn't a fit.
         </p>
-        <div class="cinfo">
-          <div class="row">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>
-            <div>
-              <div class="k">Phone</div>
-              <div class="v"><a href="tel:+18162564156">(816) 256-4156</a></div>
-              <div class="note">Call for bid invitations, plans, or questions.</div>
-            </div>
+        <!--
+          Phase 8 — three office cards replace the old single-company Phone/Office rows. Bill
+          gets everything in one inbox and routes it himself; the visitor doesn't need to know
+          which company handles it, so this is just "here's how to reach a real person," not a
+          per-company directory. Same markup/classes as the office cards in Service Area
+          (.office-card/.oc-city/.oc-tel) — literally the same content, per the brief — recolored
+          here via the .contact ancestor selector for the dark background instead of duplicating
+          the component. No ids: the Service Area map's anchor links already own
+          #office-nkc/#office-maple-hill/#office-wichita, and duplicate ids are invalid HTML.
+        -->
+        <div class="office-grid">
+          <div class="office-card">
+            <div class="oc-city">North Kansas City, MO</div>
+            <address>103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</address>
+            <a class="oc-tel" href="tel:+18162564156">816.256.4156</a>
           </div>
-          <div class="row">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div><div class="k">Office</div><div class="v">103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</div></div>
+          <div class="office-card">
+            <div class="oc-city">Maple Hill, KS</div>
+            <address>14969 Waterman Crossing Rd<br>Maple Hill, KS 66507</address>
+            <a class="oc-tel" href="tel:+17852564800">785.256.4800</a>
+          </div>
+          <div class="office-card">
+            <div class="oc-city">Wichita, KS</div>
+            <address>505 S Broadway, Ste 122<br>Wichita, KS 67202</address>
+            <a class="oc-tel" href="tel:+13169104950">316.910.4950</a>
           </div>
         </div>
-        <!--
-          [[ CONFIRM ]] Email row removed — there's no confirmed bid-invitations inbox yet, and a
-          bracketed placeholder email is worse than showing none. Phone plus the form cover
-          contact for now. Restore once real, right after the Office row above:
-            <div class="row">
-              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
-              <div><div class="k">Bid Invitations</div><div class="v"><a href="mailto:REAL_EMAIL">REAL_EMAIL</a></div></div>
-            </div>
-
-          [[ CONFIRM ]] Hours row removed for the same reason. Restore once real:
-            <div class="row">
-              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-              <div><div class="k">Hours</div><div class="v">Mon–Fri, 7:00am – 4:00pm</div></div>
-            </div>
-        -->
         </div>
       </div>
 
       <div class="rv">
+        <!--
+          Phase 8 — the form's job is to capture enough for Bill to route it, not to collect a
+          full bid package up front. name="bidform" / the netlify attribute / the hidden
+          form-name value / the honeypot are all UNCHANGED from before this rewrite — Netlify
+          Forms identifies a form by its name attribute, so renaming any of these would register
+          this as a brand-new form and orphan every submission that came in under the old one.
+          Checked they still match each other exactly (form name, hidden input value, and the
+          site.js selector) as part of verifying this phase, not just left alone on faith.
+
+          "What do you need?" and "Where's the project?" are the two fields actually doing the
+          routing — which of the three companies this goes to. Pulled out of the ordinary
+          .frow text-field pattern into their own bordered band (.frow-route) with
+          accent-colored labels, per the brief's "prominent, not buried between the text
+          fields," rather than paired with unrelated fields the way the old Project
+          type/Bid date row was.
+        -->
         <form id="bidform" name="bidform" method="POST" netlify netlify-honeypot="bot-field" novalidate>
           <input type="hidden" name="form-name" value="bidform">
           <p class="hp-field" aria-hidden="true">
@@ -1036,33 +1050,38 @@
               <input id="phone" name="phone" type="tel" placeholder="(816) 555-0100">
             </div>
           </div>
-          <div class="frow">
+          <div class="frow frow-route">
             <div class="field">
-              <label for="sector">Project type</label>
-              <select id="sector" name="sector">
-                <option>Healthcare</option>
-                <option>Education</option>
-                <option>Corporate interiors</option>
-                <option>Multifamily</option>
-                <option>Senior living</option>
-                <option>Hospitality</option>
-                <option>Retail / restaurant</option>
-                <option>Industrial</option>
-                <option>Government</option>
-                <option>Other</option>
+              <label for="need">What do you need?</label>
+              <select id="need" name="need" required>
+                <option value="" disabled selected>Choose one</option>
+                <option>Invite us to bid</option>
+                <option>Floor care program</option>
+                <option>Kansas state contract purchase</option>
+                <option>General inquiry</option>
               </select>
             </div>
             <div class="field">
-              <label for="biddate">Bid date</label>
-              <input id="biddate" name="biddate" type="date">
+              <label for="location">Where's the project?</label>
+              <select id="location" name="location">
+                <option value="" disabled selected>Choose one</option>
+                <option>Kansas City metro</option>
+                <option>Topeka / Manhattan / Lawrence</option>
+                <option>Wichita</option>
+                <option>Elsewhere</option>
+              </select>
             </div>
           </div>
           <div class="field">
-            <label for="msg">Scope &amp; details</label>
-            <textarea id="msg" name="msg" placeholder="Project name, location, square footage, flooring scope, and where the plans live."></textarea>
+            <label for="biddate">Bid date</label>
+            <input id="biddate" name="biddate" type="date">
           </div>
-          <button type="submit" class="btn btn-primary">Send Bid Invitation</button>
-          <p class="formnote">Or call <a href="tel:+18162564156">(816) 256-4156</a> to send plans directly.</p>
+          <div class="field">
+            <label for="msg">Details</label>
+            <textarea id="msg" name="msg" placeholder="Project name, location, square footage, scope, and where the plans live."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <p class="formnote">Or call <a href="tel:+18162564156">(816) 256-4156</a> to reach us directly.</p>
         </form>
       </div>
     </div>
