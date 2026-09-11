@@ -678,7 +678,7 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .contract-cta:hover{text-decoration:underline}
 
 /* ---------- credentials ---------- */
-.cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:20px}
 .cred{position:relative;background:var(--paper);padding:28px 24px;transition:transform .2s var(--ease)}
 .cred::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -690,6 +690,39 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .cred .k{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
 .cred .v{font-family:'Inter Tight',sans-serif;font-size:1.28rem;font-weight:600;letter-spacing:-.02em}
 .cred .v small{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
+.cred .v a{color:var(--accent);text-decoration:none}
+.cred .v a:hover{text-decoration:underline}
+/* Claims History (Phase 6): the strongest line in this section — a sworn no-claims,
+   no-failure-to-perform statement, which almost no competitor puts on a website — pulled out
+   of the grid entirely into its own full-width block above it. A grid-column:span-2 tile was
+   tried first, but 8 cards with one spanning 2 doesn't divide evenly at this grid's own
+   measured column counts (4 at 1440px, 3 at 900px, 2 at 700px); it left a conspicuous
+   multi-cell empty gap at the very widths this phase has to verify. Full-width sidesteps that
+   arithmetic and reads as more prominent than a wider grid cell anyway. Left border in --accent
+   (a flag of a different kind than the section's usual neutral cards) plus larger, plain-weight
+   body copy — .v here drops the bold Inter Tight label styling built for short answers like
+   "238330," since this one has to read as two full sentences, not a stat. */
+.cred-feature{
+  margin-top:44px;padding:28px 32px;background:var(--paper);
+  border:1px solid var(--line);border-left:3px solid var(--accent);
+}
+.cred-feature .k{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+.cred-feature .v{font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:500;line-height:1.5;color:var(--ink)}
+/* Entities (Phase 6): three LLCs, each with its own jurisdiction/year — the single bold-value
+   pattern above only fits one fact. Nested divs repeat that name/detail pairing three times
+   instead of trying to cram all three into one run of text. */
+.cred-entities .v > div{margin-top:14px}
+.cred-entities .v > div:first-child{margin-top:0}
+/* License (Phase 6): last card in DOM order, spanning 2 columns — with 7 cards total this is
+   what makes the count divide evenly at the grid's own measured column counts (8 effective
+   cells / 4 cols at 1440px, /2 cols at 700px; still leaves a smaller gap at 3 cols around
+   900px, same class of pre-existing imperfection the 8-card grid already had there before this
+   phase). Also a genuine, non-arbitrary fit: EXAMPLE-LIC-06-02-00003 is the longest value
+   string in the grid and wrapped to 2 lines in a single-width cell. Resets to span:1 below
+   480px, the measured width where the grid itself drops to a single column (checked at 8
+   widths from 500px down to 430px — 480px is exactly the boundary). */
+.cred-license{grid-column:span 2}
+@media(max-width:480px){.cred-license{grid-column:span 1}}
 
 /* ---------- story ---------- */
 .story{background:var(--bone);position:relative}

@@ -78,6 +78,13 @@ page.
   the companies didn't operate as a group until 2022
 - Service area: Kansas City metro, Lawrence, Topeka, Manhattan, Wichita, and
   surrounding communities
+- Fuse Alliance member
+- NAICS 238330 (Flooring Contractors) — the group's classification code, from
+  Bill's Business Profile
+- Claims history, from Bill's Statement of Qualifications: no claims,
+  demands, or pending arbitration; has never failed to perform on a contract.
+  Confirmed, sworn content — a real differentiator, safe to state plainly on
+  the site, not softened to "available on request"
 - Bill Dunn III is publicly the contact of record on the Kansas statewide
   contract (see "Must NOT publish" for what's still off-limits about it)
 - Jon Ross, Mallory Minor, and Jay Marr are named in the History section, in
@@ -98,11 +105,15 @@ page.
 ### Country Carpet Inc
 
 - Founded 1976 — this is the group's "roots since 1976" claim
+- Kansas corporation
 - Commercial install & tenant finish
 - Joined the group January 2022
 - Maple Hill office: 14969 Waterman Crossing Rd, Maple Hill, KS 66507 — 785.256.4800
 - Wichita office: 505 S Broadway, Ste 122, Wichita, KS 67202 — 316.910.4950 (opened
-  September 2022)
+  September 2022) — operates under its own entity, Country Carpet — Wichita LLC,
+  formed 2022
+- Holds Kansas Statewide Contract 56954A (see below) — not Campione, not the
+  group as a whole
 
 ### Floorsmith
 

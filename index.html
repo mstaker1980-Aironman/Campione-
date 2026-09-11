@@ -807,74 +807,88 @@
 </section>
 
 <!-- ============================ CREDENTIALS ============================ -->
+<!--
+  Phase 6 — rewritten for the group, from Bill's Business Profile and Statement of
+  Qualifications rather than placeholders. EMR/General Liability/Workers' Comp are no longer
+  separate cards: no real figures for them came out of that document, and "Available on
+  request" for three cards in a row was the placeholder-heavy version this rewrite replaces —
+  Insurance below covers the same ground honestly, without inventing a number that isn't there.
+  Project Management/Procore is dropped for the same reason: not part of the new content.
+
+  Claims History leads, as its own full-width block above the grid rather than a grid card — a
+  sworn no-claims/no-failure-to-perform statement is exactly what a GC's risk department is
+  scanning for, and almost no competitor's site volunteers it. A grid-column:span-2 tile was
+  the first attempt, but 8 cards with one spanning 2 doesn't divide evenly at this grid's own
+  measured column counts (4 at 1440px, 3 at 900px, 2 at 700px) — it left a conspicuous multi-
+  cell empty gap at the very widths this phase is required to verify. Full-width sidesteps that
+  arithmetic entirely and reads as more prominent than a wider grid cell would have anyway.
+
+  Kansas Statewide Contract here is deliberately a stub, not a repeat: contract number and scope
+  only, with an anchor link back up to the full section (#kansas-contract) for the rest.
+
+  Per the brief: no named GC/client references, no trade references, no team names, no
+  FEIN/DUNS/CAGE — all still either pending permission or on the Must-NOT-publish list.
+-->
 <section id="credentials">
   <div class="wrap">
     <div class="rv rv-num">
       <div class="sec-num" aria-hidden="true">06</div>
       <div>
         <div class="eyebrow">Prequalification</div>
-        <h2><span class="reveal-text">Credentials</span></h2>
+        <h2><span class="reveal-text">What a GC needs before sending a bid invitation</span></h2>
         <p class="lead">
-          The information a GC needs before sending a bid invitation. Full prequal package
-          and certificates of insurance available on request.
+          Full prequalification package and certificates of insurance available on request.
         </p>
       </div>
     </div>
+    <div class="cred-feature rv">
+      <div class="k">Claims History</div>
+      <div class="v">No claims, demands, or pending arbitration. Never failed to perform on a contract.</div>
+    </div>
     <div class="cred-grid stagger">
-      <div class="cred rv-item" style="--i:0">
-        <div class="k">Entity</div>
-        <div class="v">Campione Interior Solutions LLC<small>Missouri LLC, formed April 2008</small></div>
+      <div class="cred cred-entities rv-item" style="--i:0">
+        <div class="k">Entities</div>
+        <div class="v">
+          <div>Campione Interior Solutions LLC</div>
+          <small>Missouri, 2008</small>
+          <div>Country Carpet Inc</div>
+          <small>Kansas, 1976</small>
+          <div>Country Carpet — Wichita LLC</div>
+          <small>2022</small>
+        </div>
       </div>
       <div class="cred rv-item" style="--i:1">
-        <div class="k">Bonding Capacity</div>
-        <div class="v">Available on request<small>Surety details provided during prequalification</small></div>
+        <div class="k">Bonding</div>
+        <div class="v">Sufficient to meet growing market needs<small>Details provided during prequalification</small></div>
       </div>
       <div class="cred rv-item" style="--i:2">
-        <div class="k">EMR</div>
-        <div class="v">Available on request<small>Provided during prequalification</small></div>
+        <div class="k">Insurance</div>
+        <div class="v">Certificates of insurance provided on request</div>
       </div>
       <div class="cred rv-item" style="--i:3">
-        <div class="k">General Liability</div>
-        <div class="v">Available on request<small>Certificate of insurance provided on request</small></div>
+        <div class="k">Kansas Statewide Contract</div>
+        <div class="v">Floor Coverings, Furnish and Install<small>Contract 56954A · <a href="#kansas-contract">Full details above ↑</a></small></div>
       </div>
       <div class="cred rv-item" style="--i:4">
-        <div class="k">Workers' Comp</div>
-        <div class="v">Available on request<small>Certificate of insurance provided on request</small></div>
+        <div class="k">Affiliations</div>
+        <div class="v">Fuse Alliance member</div>
       </div>
       <div class="cred rv-item" style="--i:5">
-        <div class="k">Affiliations</div>
-        <div class="v">Available on request<small>Provided during prequalification</small></div>
+        <div class="k">NAICS</div>
+        <div class="v">238330<small>Flooring Contractors</small></div>
       </div>
-      <div class="cred rv-item" style="--i:6">
+      <div class="cred cred-license rv-item" style="--i:6">
         <div class="k">License</div>
         <!-- PLACEHOLDER: replace with verified license number before this site goes live -->
         <div class="v">EXAMPLE-LIC-06-02-00003<small>Placeholder — pending verification</small></div>
       </div>
-      <div class="cred rv-item" style="--i:7">
-        <div class="k">Project Management</div>
-        <div class="v">Procore</div>
-        <small style="display:block;font-size:13px;color:var(--muted);margin-top:6px">Submittals, RFIs, and closeout in your system</small>
-      </div>
     </div>
     <!--
-      [[ CONFIRM — needed from the owner interview before these can show real numbers ]]
-        - Bonding: single/aggregate limits + surety company name
-        - EMR: current value, year, carrier
-        - General liability: coverage limit
-        - Workers' comp: carrier + limits
-        - Affiliations: union local / association (INSTALL, Fuse Alliance, etc.), if any
-      A GC's prequal form asks for exactly these fields. Get the real numbers on the call —
-      especially the EMR, which is the single figure a GC's risk manager looks for.
-
-      The Certifications box above briefly held a real contractor license number; that number
-      is no longer treated as confirmed and the box now shows an EXAMPLE- placeholder instead
-      (see CLAUDE.md and the top-of-file note above). Manufacturer certifications (e.g. Mohawk,
-      Shaw, Ardex, Mapei) are a separate, still-unconfirmed need with no box of its own right
-      now — add one back if the owner interview turns up real certs worth listing.
-
-      [[ DO NOT PUBLISH — confirmed inactive/expired/unverified, not "available on request" ]]
+      [[ DO NOT PUBLISH — see CLAUDE.md "Must NOT publish" ]]
+        - Named GC/client references, trade references, team names — pending permission
+        - FEIN, DUNS, CAGE codes
         - License 2020-8263 (inactive/cancelled), License 2016-8263 (unverified since Dec 2015),
-          St. Joseph license (expired Dec 2020) — see CLAUDE.md "Must NOT publish"
+          St. Joseph license (expired Dec 2020)
     -->
   </div>
 </section>
