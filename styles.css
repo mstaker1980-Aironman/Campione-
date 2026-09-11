@@ -60,9 +60,9 @@ img{max-width:100%;display:block}
 /* Dark-section eyebrows (hero, why, contact) — --accent fails 4.5:1 on --ink (2.30:1).
    Verified fix, not scattered manually: swap to --accent-on-dark wherever an eyebrow
    sits on a dark background. */
-.hero .eyebrow,.lifecycle .eyebrow,.why .eyebrow,.contact .eyebrow{color:var(--accent-on-dark)}
+.hero .eyebrow,.lifecycle .eyebrow,.why .eyebrow,.community .eyebrow,.contact .eyebrow{color:var(--accent-on-dark)}
 section{padding:clamp(64px,9vw,120px) 0}
-#capabilities,#lifecycle,#service-area,#why,#projects,#kansas-contract,#credentials,#story,#contact{scroll-margin-top:88px}
+#capabilities,#lifecycle,#service-area,#why,#projects,#kansas-contract,#credentials,#story,#community,#contact{scroll-margin-top:88px}
 
 /* ---------- nav ---------- */
 header{
@@ -340,12 +340,12 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:20px}
   line-height:.85;letter-spacing:.02em;margin:0;color:var(--line);
   -webkit-text-stroke:1.5px var(--muted);user-select:none;
 }
-.lifecycle .sec-num,.why .sec-num,.contact .sec-num{color:rgba(255,255,255,.05);-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
+.lifecycle .sec-num,.why .sec-num,.community .sec-num,.contact .sec-num{color:rgba(255,255,255,.05);-webkit-text-stroke:1.5px rgba(255,255,255,.32)}
 /* Fallback above is a faint solid fill for browsers without -webkit-text-stroke support
    (still reads fine, just filled instead of hollow); hollow it out where supported. */
 @supports (-webkit-text-stroke: 1px black){
   .sec-num{color:transparent}
-  .lifecycle .sec-num,.why .sec-num,.contact .sec-num{color:transparent}
+  .lifecycle .sec-num,.why .sec-num,.community .sec-num,.contact .sec-num{color:transparent}
 }
 @media(max-width:700px){
   .rv-num{grid-template-columns:1fr}
@@ -813,6 +813,27 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
   .tl-year::after{left:0}
 }
 
+/* ---------- community (Phase 9) ---------- */
+/* margin-bottom:-1px: Community sits directly on Contact, both flat var(--ink) with no border
+   between them — should be invisible, but at DPR 1.5 the shared boundary itself lands on a
+   fractional device pixel and the compositor antialiases a faint grey hairline there anyway
+   (confirmed it wasn't grain: reproduced with .grain removed from both sections, identical
+   computed background/border/box-shadow on each side). Same root cause as the hero/why torn-
+   edge bars' own bottom:-1px fix, just with no existing pseudo-element here to nudge — a 1px
+   overlap is invisible between two identically-colored sections at any DPR, and it pulls the
+   antialiased edge into solid matching fill instead of landing exactly on the seam. This is the
+   first time two same-background .grain sections have sat back to back on this page; every
+   other boundary either changes color or already has its own seam treatment. */
+.community{background:var(--ink);color:#fff;margin-bottom:-1px}
+.community h2{color:#fff}
+.community .lead{color:rgba(255,255,255,.66)}
+/* The placeholder value itself is the .lead paragraph (bracketed, per the sitewide [[ ]]
+   convention) — .community-flag is the small "still pending" sub-line underneath it, the same
+   role .cred .v small plays for the License card's placeholder in Credentials. Separate class
+   rather than reusing .cred .v small directly: this isn't a .cred card, and the rule is trivial
+   enough not to need sharing. */
+.community-flag{font-size:13px;color:rgba(255,255,255,.5);margin-top:14px}
+
 /* ---------- contact ---------- */
 .contact{background:var(--ink);color:#fff}
 .contact h2{color:#fff}
@@ -822,15 +843,17 @@ h3{font-size:1.22rem;margin-bottom:10px;letter-spacing:-.015em}
 .contact .lead{color:rgba(255,255,255,.66)}
 .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,6vw,76px);align-items:start}
 @media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
-/* Phase 8: three office cards, same markup as Service Area's (.office-grid/.office-card/
-   .oc-city/.oc-tel — see the HTML comment above them for why this reuses rather than
-   duplicates the component), recolored here for the dark contact section.
-   grid-template-columns:1fr forced explicitly, not left to .office-grid's own 760px breakpoint:
-   that breakpoint checks the VIEWPORT width, but this column is the narrow half of a 2-col
-   .contact-grid — at 1440px the viewport is nowhere near 760px, yet the actual container here
-   is ~490px, which the 3-column base rule doesn't know about. Confirmed by screenshot before
-   this override: "North Kansas City, MO" was wrapping to 3 lines inside a badly cramped card. */
-.contact .office-grid{grid-template-columns:1fr;margin-top:34px}
+/* Phase 8/refinement: three office cards, same markup as Service Area's (.office-grid/
+   .office-card/.oc-city/.oc-tel — see the HTML comment above them for why this reuses rather
+   than duplicates the component), recolored here for the dark contact section.
+   .contact-offices sits BELOW .contact-grid now, full section width, not squeezed into the
+   left column beside a much-taller form — that arrangement (Phase 8's original) left a large
+   empty block under the shorter card column and, since .contact-grid's align-items:start meant
+   the section's own height followed the taller form column regardless, excess space before the
+   marquee too. Full width means the default 3-column .office-grid rule just works here exactly
+   as it does in Service Area — the 1fr override that class needed when it lived in the half-
+   width column is gone; nothing here needs it anymore. */
+.contact-offices{margin-top:clamp(40px,5vw,56px)}
 .contact .office-card{background:rgba(255,255,255,.04);border-color:var(--line-lt)}
 .contact .oc-city{color:#fff}
 .contact .office-card address{color:rgba(255,255,255,.6)}
@@ -915,15 +938,29 @@ form .btn{width:100%;justify-content:center;margin-top:8px;border:0;cursor:point
 .marquee-dot{color:var(--sage);font-size:1rem;display:flex;align-items:center}
 @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ---------- footer ---------- */
+/* ---------- footer (Phase 9) ---------- */
 footer{background:#0d0f12;color:rgba(255,255,255,.55);padding:52px 0 30px;font-size:14px}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid var(--line-lt)}
-@media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:28px}}
+/* Logos, small and equal weight — light chips so the white/blue-background logo files don't
+   read as stray rectangles on this dark footer (see the HTML comment above them). Fixed height,
+   not width, so the three very different aspect ratios (wide/near-square/tall — same three
+   files as the brand strip) still land at the same visual weight; width:auto/height:auto plus
+   each image's own native-width inline cap keeps every logo from ever upscaling. */
+.foot-logos{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+.foot-logo-chip{
+  background:var(--paper);border-radius:4px;height:38px;padding:6px 12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.foot-logo-chip img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+/* 4 equal columns now — three offices plus Service Area, replacing the old asymmetric
+   1.4fr/1fr/1fr (brand block / capabilities links / service area) that this rewrite removed. */
+.foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:36px;border-bottom:1px solid var(--line-lt)}
+@media(max-width:900px){.foot-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.foot-grid{grid-template-columns:1fr}}
 footer h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px;font-weight:600}
-footer ul{list-style:none}
-footer li{margin-bottom:9px}
+footer address{font-style:normal;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.55)}
 footer a{text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--sage)}
+.foot-tel{display:inline-block;margin-top:10px;font-weight:600;color:var(--sage)}
 .foot-bot{padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:rgba(255,255,255,.48)}
 .svc-area{font-size:13.5px;line-height:1.9;color:rgba(255,255,255,.45)}
 

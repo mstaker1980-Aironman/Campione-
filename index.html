@@ -963,12 +963,47 @@
   </div>
 </section>
 
+<!-- ============================ COMMUNITY ============================ -->
+<!--
+  Phase 9 — Bill asked for this section; the content isn't confirmed yet. Structure only, with
+  a clearly-marked placeholder for the body copy — the same pattern the License card in
+  Credentials already uses (a placeholder value plus a small "pending" sub-line), not the
+  commented-out-until-ready pattern the old Projects section uses. Bill wants this ON the page
+  now, just without invented copy standing in for it.
+
+  Dark (--ink), not light: this section sits between Story (--bone) and Contact (--ink). Keeping
+  it dark means .story::after's existing gradient bleed (bone -> ink, already tuned for the
+  section directly after Story) still lands on the right color without any change, and the
+  Community -> Contact boundary is dark-to-dark, which needs no seam treatment at all — the
+  simplest, least risky option of the ones available, for a section this short-lived.
+
+  [[ CONFIRM ]] Two or three real sentences plus a short list of organizations, once Bill
+  supplies them. Do not invent names or copy that reads as confirmed — see CLAUDE.md.
+-->
+<section class="community grain" id="community">
+  <div class="wrap">
+    <div class="rv rv-num">
+      <div class="sec-num" aria-hidden="true">08</div>
+      <div>
+        <div class="eyebrow">Community</div>
+        <h2><span class="reveal-text">Where we live</span></h2>
+        <p class="lead">
+          [[ Two or three sentences on the organizations we support, plus a short list of
+          names, once confirmed. ]]
+        </p>
+        <!-- PLACEHOLDER: replace with real copy + organization list once Bill supplies them -->
+        <div class="community-flag">Placeholder — pending confirmation from the owner interview.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ CONTACT ============================ -->
 <section class="contact grain" id="contact">
   <div class="wrap">
     <div class="contact-grid">
       <div class="rv rv-num">
-        <div class="sec-num" aria-hidden="true">08</div>
+        <div class="sec-num" aria-hidden="true">09</div>
         <div>
         <div class="eyebrow">Contact</div>
         <h2><span class="reveal-text">Tell us what you need</span></h2>
@@ -976,33 +1011,6 @@
           Send the plans, the bid date, and the scope — or just tell us what's going on with
           the floor. We'll confirm receipt the same day and tell you straight if it isn't a fit.
         </p>
-        <!--
-          Phase 8 — three office cards replace the old single-company Phone/Office rows. Bill
-          gets everything in one inbox and routes it himself; the visitor doesn't need to know
-          which company handles it, so this is just "here's how to reach a real person," not a
-          per-company directory. Same markup/classes as the office cards in Service Area
-          (.office-card/.oc-city/.oc-tel) — literally the same content, per the brief — recolored
-          here via the .contact ancestor selector for the dark background instead of duplicating
-          the component. No ids: the Service Area map's anchor links already own
-          #office-nkc/#office-maple-hill/#office-wichita, and duplicate ids are invalid HTML.
-        -->
-        <div class="office-grid">
-          <div class="office-card">
-            <div class="oc-city">North Kansas City, MO</div>
-            <address>103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</address>
-            <a class="oc-tel" href="tel:+18162564156">816.256.4156</a>
-          </div>
-          <div class="office-card">
-            <div class="oc-city">Maple Hill, KS</div>
-            <address>14969 Waterman Crossing Rd<br>Maple Hill, KS 66507</address>
-            <a class="oc-tel" href="tel:+17852564800">785.256.4800</a>
-          </div>
-          <div class="office-card">
-            <div class="oc-city">Wichita, KS</div>
-            <address>505 S Broadway, Ste 122<br>Wichita, KS 67202</address>
-            <a class="oc-tel" href="tel:+13169104950">316.910.4950</a>
-          </div>
-        </div>
         </div>
       </div>
 
@@ -1054,7 +1062,7 @@
             <div class="field">
               <label for="need">What do you need?</label>
               <select id="need" name="need" required>
-                <option value="" disabled selected>Choose one</option>
+                <option value="" disabled selected>Select a request type</option>
                 <option>Invite us to bid</option>
                 <option>Floor care program</option>
                 <option>Kansas state contract purchase</option>
@@ -1085,16 +1093,48 @@
         </form>
       </div>
     </div>
+
+    <!--
+      Refinement: office cards were originally inside the left column above, stacked next to a
+      form column that's much taller (8 fields vs 3 cards) — that left a large empty block below
+      the cards and, since .contact-grid's align-items:start meant the SECTION's own height
+      followed the taller form column regardless, extra dead space before the marquee too. Full-
+      width row below both columns instead: same markup/classes as Service Area's office cards
+      (.office-card/.oc-city/.oc-tel — see the original Phase 8 note, moved down from above),
+      just no longer squeezed into a half-width column, so the default 3-column .office-grid rule
+      applies here exactly as it does in Service Area — no override needed this time.
+    -->
+    <div class="office-grid contact-offices stagger">
+      <div class="office-card rv-item" style="--i:0">
+        <div class="oc-city">North Kansas City, MO</div>
+        <address>103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</address>
+        <a class="oc-tel" href="tel:+18162564156">816.256.4156</a>
+      </div>
+      <div class="office-card rv-item" style="--i:1">
+        <div class="oc-city">Maple Hill, KS</div>
+        <address>14969 Waterman Crossing Rd<br>Maple Hill, KS 66507</address>
+        <a class="oc-tel" href="tel:+17852564800">785.256.4800</a>
+      </div>
+      <div class="office-card rv-item" style="--i:2">
+        <div class="oc-city">Wichita, KS</div>
+        <address>505 S Broadway, Ste 122<br>Wichita, KS 67202</address>
+        <a class="oc-tel" href="tel:+13169104950">316.910.4950</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ============================ SERVICE AREA MARQUEE ============================ -->
-<!-- Decorative echo of the real service-area list in the footer just below — aria-hidden so
-     it isn't announced twice. Keep this list of 22 cities in sync with the footer's .svc-area
-     paragraph. (The old "16 metro cities" stat this used to track is gone — the stats bar now
-     counts 6 markets: the KC metro plus Lawrence, Topeka, Manhattan, Junction City, Wichita.)
-     Ordered so the five Kansas markets appear early: the reduced-motion block stops the
-     animation outright, leaving only the cities that fit one viewport width visible. -->
+<!-- Decorative, aria-hidden so it isn't announced twice — the real, accessible service-area
+     facts live in the Service Area section above and the footer just below.
+     No longer "kept in sync" with the footer's .svc-area paragraph (Phase 9 shortened that to
+     the group's five named markets — "Kansas City metro · Lawrence · Topeka · Manhattan ·
+     Wichita and surrounding communities" — matching the brief exactly, rather than this
+     marquee's full 22-suburb list). Left as its own longer list deliberately: it's decorative
+     and aria-hidden either way, and the individual KC-metro suburb names (Overland Park,
+     Olathe, Lenexa, etc.) are real, useful detail that the footer's shorter wording was never
+     meant to carry. Ordered so the five Kansas markets appear early: the reduced-motion block
+     stops the animation outright, leaving only the cities that fit one viewport width visible. -->
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item">North Kansas City</span><span class="marquee-dot">•</span>
@@ -1146,50 +1186,51 @@
 </div>
 
 <!-- ============================ FOOTER ============================ -->
+<!--
+  Phase 9 — rewritten for the group. Removed: the single-company brand block (Campione logo,
+  name, tagline, one phone number), the Capabilities link list, the "Est. 2008" line (Campione's
+  founding year, not the group's), and the footer's own copy of the License placeholder — the
+  Credentials section (Phase 6) already carries that exact placeholder with its own "pending
+  verification" flag, so nothing is lost by not duplicating it here now that this footer is
+  about three companies, not one.
+-->
 <footer>
   <div class="wrap">
+    <!-- Three logos, small, equal weight — same files and never-upscale technique as the brand
+         strip (fixed box, max-width/max-height:100%, width/height:auto, plus each image's real
+         native width as a defensive inline cap), just smaller and each on its own light chip.
+         Campione and Country Carpet have white backgrounds and Floorsmith an opaque blue one —
+         directly on this dark footer they'd read as stray colored rectangles, the same reasoning
+         the brand strip's own light section is built on. -->
+    <div class="foot-logos">
+      <span class="foot-logo-chip"><img src="img/campione-logo.jpg" alt="Campione Interior Solutions" width="334" height="112" style="max-width:334px" loading="lazy"></span>
+      <span class="foot-logo-chip"><img src="img/country-carpet-logo.jpg" alt="Country Carpet" width="206" height="123" style="max-width:206px" loading="lazy"></span>
+      <span class="foot-logo-chip"><img src="img/floorsmith-logo.png" alt="Floorsmith" width="1062" height="1280" style="max-width:1062px" loading="lazy"></span>
+    </div>
     <div class="foot-grid">
       <div>
-        <a href="#top" class="brand" style="margin-bottom:16px">
-          <svg class="mark" viewBox="0 0 1239 430" aria-hidden="true">
-            <use href="#logo-trees-simple" width="1239" height="430"/>
-            <use href="#logo-mountain" width="1239" height="430"/>
-          </svg>
-          <span style="display:block"><b>Campione</b> <span>Interior Solutions</span></span>
-        </a>
-        <p style="max-width:38ch;margin-top:14px">
-          Commercial flooring subcontractor serving the greater Kansas City metro since 2008.
-        </p>
-        <p style="margin-top:18px">
-          <a href="tel:+18162564156" style="font-weight:600;color:#fff">(816) 256-4156</a>
-        </p>
+        <h4>North Kansas City, MO</h4>
+        <address>103 W 26th Ave, Ste 100<br>North Kansas City, MO 64116</address>
+        <a class="foot-tel" href="tel:+18162564156">816.256.4156</a>
       </div>
       <div>
-        <h4>Capabilities</h4>
-        <ul>
-          <li><a href="#capabilities">Carpet &amp; broadloom</a></li>
-          <li><a href="#capabilities">Luxury vinyl &amp; resilient</a></li>
-          <li><a href="#capabilities">Tile &amp; stone</a></li>
-          <li><a href="#capabilities">Polished concrete</a></li>
-          <li><a href="#capabilities">Resinous systems</a></li>
-          <li><a href="#capabilities">Floor prep &amp; demolition</a></li>
-        </ul>
+        <h4>Maple Hill, KS</h4>
+        <address>14969 Waterman Crossing Rd<br>Maple Hill, KS 66507</address>
+        <a class="foot-tel" href="tel:+17852564800">785.256.4800</a>
+      </div>
+      <div>
+        <h4>Wichita, KS</h4>
+        <address>505 S Broadway, Ste 122<br>Wichita, KS 67202</address>
+        <a class="foot-tel" href="tel:+13169104950">316.910.4950</a>
       </div>
       <div>
         <h4>Service Area</h4>
-        <p class="svc-area">
-          North Kansas City · Kansas City, MO · Kansas City, KS · Overland Park · Olathe ·
-          Lawrence · Topeka · Manhattan · Junction City · Wichita · Maple Hill · Lenexa ·
-          Shawnee · Leawood · Liberty · Gladstone · Independence · Lee's Summit ·
-          Blue Springs · Riverside · Parkville · Raytown
-        </p>
+        <p class="svc-area">Kansas City metro · Lawrence · Topeka · Manhattan · Wichita and surrounding communities</p>
       </div>
     </div>
     <div class="foot-bot">
-      <div>© <span id="yr">2026</span> Campione Interior Solutions LLC · 103 W 26th Ave, Ste 100, North Kansas City, MO 64116</div>
-      <!-- PLACEHOLDER: replace with verified license number before this site goes live -->
-      <div>License EXAMPLE-LIC-06-02-00003 — placeholder</div>
-      <div>Est. 2008</div>
+      <div>© <span id="yr">2026</span> Campione Interior Solutions LLC · Country Carpet Inc · Country Carpet — Wichita LLC</div>
+      <div>NAICS 238330</div>
     </div>
   </div>
 </footer>

@@ -176,6 +176,13 @@ The company story, real project names/photos/GC partners, actual self-performed
 scopes, EMR, bonding capacity, insurance limits, certifications, union
 affiliation, hours, and the real email address.
 
+**Community involvement** — Bill asked for a Community section (site
+Structure position 9); he gives to various organizations, but which ones
+and what to say about it is not yet confirmed. The section is live on the
+page with a bracketed `[[ ]]` placeholder and a "Placeholder — pending
+confirmation" sub-line, same pattern as the License placeholder below —
+not hidden until ready, since Bill wants the section visible now.
+
 **Contractor license number** — was previously listed here as confirmed
 (independently reverified active July 2026), but that's no longer trusted as of
 2026-08-17 — flagged as possibly expired, not re-checked. Site currently shows
